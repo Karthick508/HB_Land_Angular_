@@ -47,6 +47,9 @@ export class Addlandver2Component {
   awardInfoFormGroup!: FormGroup;
   expansionPanelsAward : FormArray
 
+  leftInfoFormGroup!: FormGroup;
+  expansionPanelsLeft : FormArray
+
   constructor(private builder: FormBuilder, private formBuilder: FormBuilder) { }
   isLinear = true;
 
@@ -92,11 +95,20 @@ export class Addlandver2Component {
 
    // Award
     this.awardInfoFormGroup = this.formBuilder.group({
-      awardsDet: this.formBuilder.array([]),
+      expansionPanelsAward : this.formBuilder.array([]),
     });
 
-    // this.expansionPanelsAward = this.awardInfoFormGroup.get('expansionPanelsAward') as FormArray;
-    // this.addExpansionPanelAward();
+    this.expansionPanelsAward = this.awardInfoFormGroup.get('expansionPanelsAward') as FormArray;
+    this.addExpansionPanelAward();
+
+    // LeftOver
+    this.leftInfoFormGroup = this.formBuilder.group({
+      expansionPanelsLeft : this.formBuilder.array([]),
+    });
+
+    this.expansionPanelsLeft = this.leftInfoFormGroup.get('expansionPanelsLeft') as FormArray;
+    this.addExpansionPanelLeft();
+
 
 
   }
@@ -139,12 +151,69 @@ export class Addlandver2Component {
     this.expansionPanelsSixDD.push(expansionPanelSix);
   }
 
-  // addExpansionPanelAward() {
-  //   const expansionPanelAward = this.formBuilder.group({
+  addExpansionPanelAward() {
+    const expansionPanelAward = this.formBuilder.group({
+      file: null,
+      v_award_no: [''],
+      d_award_date: [''],
+      v_total_extent: [''],
+      n_total_award_amount: [''],
+      repeatedFields: this.formBuilder.array([]),
+      directpayFields: this.formBuilder.array([]),
+      revenuepayFields: this.formBuilder.array([]),
+      civilpayFields: this.formBuilder.array([]),
+      phoFields: this.formBuilder.array([]),
+      court_v_extent: [''],
+      court_v_legal_proceeding: [''],
+      court_file: null,
+      road_v_extent: [''],
+      road_v_legal_proceeding: [''],
+      road_file: null,
+      enchro_v_extent: [''],
+      enchro_v_legal_proceeding: [''],
+      enchro_file: null,
+      scatt_v_extent: [''],
+      scatt_v_legal_proceeding: [''],
+      scatt_file: null,
+      quash_v_extent: [''],
+      quash_v_legal_proceeding: [''],
+      quash_file: null,
+      recon_v_extent: [''],
+      recon_v_legal_proceeding: [''],
+      recon_file: null,
+      noc_v_extent: [''],
+      noc_v_legal_proceeding: [''],
+      noc_file: null,
+      phoschemeFields: this.formBuilder.array([]),
+      pnhoFields: this.formBuilder.array([]),
+      pnho_court_v_extent: [''],
+      pnho_court_v_legal_proceeding: [''],
+      pnho_court_file: null,
+      pnho_enchro_v_extent: [''],
+      pnho_enchro_v_legal_proceeding: [''],
+      pnho_enchro_file: null,
+      pnho_quash_v_extent: [''],
+      pnho_quash_v_legal_proceeding: [''],
+      pnho_quash_file: null,
+      pnho_encumbr_v_extent: [''],
+      pnho_encumbr_v_legal_proceeding: [''],
+      pnho_encumbr_file: null,
 
-  //   });
-  //   this.expansionPanelsAward.push(expansionPanelAward);
-  // }
+    });
+    this.expansionPanelsAward.push(expansionPanelAward);
+  }
+
+
+  addExpansionPanelLeft() {
+    const expansionPanelLeft = this.formBuilder.group({
+
+      left_lps_4oneFields: this.formBuilder.array([]),
+      left_4one_6ddFields: this.formBuilder.array([]),
+      left_6dd_awardFields: this.formBuilder.array([]),
+
+    });
+    this.expansionPanelsLeft.push(expansionPanelLeft);
+  }
 
 
 
@@ -156,6 +225,9 @@ export class Addlandver2Component {
     }else if(this.expansionPanelsSixDD.length > 0 && type ==='6DD'){
       this.expansionPanelsSixDD.removeAt(this.expansionPanelsSixDD.length - 1);
     }
+    else if(this.expansionPanelsAward.length > 0 && type ==='Award'){
+      this.expansionPanelsAward.removeAt(this.expansionPanelsAward.length - 1);
+    }
   }
 
   addExpansionPanel() {
@@ -164,7 +236,8 @@ export class Addlandver2Component {
       v_ref_no: [''],
       v_total_extent: [''],
       repeatedFields: this.formBuilder.array([]),
-      villageFields: this.formBuilder.array([])
+      villageFields: this.formBuilder.array([]),
+
 
     });
     this.expansionPanelsArray.push(expansionPanel);
@@ -224,6 +297,9 @@ export class Addlandver2Component {
     }else if(type === '6DD'){
       this.expansionPanelsSixDD.removeAt(index)
     }
+    else if(type === 'Award'){
+      this.expansionPanelsAward.removeAt(index)
+    }
   }
 
   addRepeatedField(expansionPanelIndex: number, type) {
@@ -237,6 +313,10 @@ export class Addlandver2Component {
       repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
     }else if(type === '6DD'){
       expansionPanel = this.expansionPanelsSixDD.at(expansionPanelIndex) as FormGroup;
+      repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
+    }
+    else if(type === 'Award'){
+      expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
       repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
     }
     const repeatedField = this.formBuilder.group({
@@ -293,6 +373,115 @@ export class Addlandver2Component {
     sixddFieldsArray.push(sixddField);
   }
 
+  adddirectpay(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const directpayFieldsArray = expansionPanel.get('directpayFields') as FormArray;
+
+    const directpayField = this.formBuilder.group({
+      v_amount: [''],
+      v_notified_person: ['']
+    });
+
+    directpayFieldsArray.push(directpayField);
+  }
+
+  addrevenuepay(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const revenuepayFieldsArray = expansionPanel.get('revenuepayFields') as FormArray;
+
+    const revenuepayField = this.formBuilder.group({
+      v_amount: [''],
+      v_notified_person: ['']
+    });
+
+    revenuepayFieldsArray.push(revenuepayField);
+  }
+
+  addcivilpay(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const civilpayFieldsArray = expansionPanel.get('civilpayFields') as FormArray;
+
+    const civilpayField = this.formBuilder.group({
+      v_amount: [''],
+      v_notified_person: ['']
+    });
+
+    civilpayFieldsArray.push(civilpayField);
+  }
+
+  addpho(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const phoFieldsArray = expansionPanel.get('phoFields') as FormArray;
+
+    const phoField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_total_extent: ['']
+    });
+
+    phoFieldsArray.push(phoField);
+  }
+
+  addphoscheme(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const phoschemeFieldsArray = expansionPanel.get('phoschemeFields') as FormArray;
+
+    const phoschemeField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_total_extent: ['']
+    });
+
+    phoschemeFieldsArray.push(phoschemeField);
+  }
+
+
+  addpnho(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const pnhoFieldsArray = expansionPanel.get('pnhoFields') as FormArray;
+
+    const pnhoField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_total_extent: ['']
+    });
+
+    pnhoFieldsArray.push(pnhoField);
+  }
+
+  leftlpsand4one(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
+    const left_lps_4oneFieldsArray = expansionPanel.get('left_lps_4oneFields') as FormArray;
+
+    const left_lps_4oneField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_extent: ['']
+    });
+
+    left_lps_4oneFieldsArray.push(left_lps_4oneField);
+  }
+
+  left4oneand6dd(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
+    const left_4one_6ddFieldsArray = expansionPanel.get('left_4one_6ddFields') as FormArray;
+
+    const left_4one_6ddField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_extent: ['']
+    });
+
+    left_4one_6ddFieldsArray.push(left_4one_6ddField);
+  }
+
+  left6ddandaward(expansionPanelIndex: number) {
+    const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
+    const left_6dd_awardFieldsArray = expansionPanel.get('left_6dd_awardFields') as FormArray;
+
+    const left_6dd_awardField = this.formBuilder.group({
+      v_survey_no: [''],
+      v_extent: ['']
+    });
+
+    left_6dd_awardFieldsArray.push(left_6dd_awardField);
+  }
+
   removeRepeatedField(expansionPanelIndex: number, repeatedFieldIndex: number, type) {
     let expansionPanel;
     let repeatedFieldsArray;
@@ -304,6 +493,10 @@ export class Addlandver2Component {
       repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
     }else if (type === '6DD') {
       expansionPanel = this.expansionPanelsSixDD.at(expansionPanelIndex) as FormGroup;
+      repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
+    }
+    else if (type === 'Award') {
+      expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
       repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
     }
 
@@ -326,7 +519,6 @@ export class Addlandver2Component {
     const  expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;
     const  ownerFieldsArray = expansionPanel.get('ownerFields') as FormArray;
 
-
     ownerFieldsArray.removeAt(ownerFieldIndex);
   }
 
@@ -337,7 +529,47 @@ export class Addlandver2Component {
     sixddFieldsArray.removeAt(sixddFieldIndex);
   }
 
+  removedirectpay(expansionPanelIndex: number, directpayFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const directpayFieldsArray = expansionPanel.get('directpayFields') as FormArray;
 
+    directpayFieldsArray.removeAt(directpayFieldIndex);
+  }
+
+  removerevenuepay(expansionPanelIndex: number, revenuepayFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const revenuepayFieldsArray = expansionPanel.get('revenuepayFields') as FormArray;
+
+    revenuepayFieldsArray.removeAt(revenuepayFieldIndex);
+  }
+
+  removecivilpay(expansionPanelIndex: number, civilpayFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const civilpayFieldsArray = expansionPanel.get('civilpayFields') as FormArray;
+
+    civilpayFieldsArray.removeAt(civilpayFieldIndex);
+  }
+
+  removepho(expansionPanelIndex: number, phoFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const phoFieldsArray = expansionPanel.get('phoFields') as FormArray;
+
+   phoFieldsArray.removeAt(phoFieldIndex);
+  }
+
+  removephoscheme(expansionPanelIndex: number, phoschemeFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const phoschemeFieldsArray = expansionPanel.get('phoschemeFields') as FormArray;
+
+    phoschemeFieldsArray.removeAt(phoschemeFieldIndex);
+  }
+
+  removepnho(expansionPanelIndex: number, pnhoFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
+    const pnhoFieldsArray = expansionPanel.get('pnhoFields') as FormArray;
+
+   pnhoFieldsArray.removeAt(pnhoFieldIndex);
+  }
 
 
 
