@@ -51,15 +51,12 @@ export class Addlandver2Component {
   isLinear = true;
 
   ngOnInit(): void {
-
-
-
-
+   
     this.personalInfoFormGroup = this.formBuilder.group({
       v_name_of_circle: ['', Validators.required],
       v_name_of_scheme: ['', Validators.required],
       v_name_of_division: ['', Validators.required],
-      v_name_of_geo_tagging: ['', Validators.required],
+      v_name_of_geo_tagging: [''],
       v_name_of_district: ['', Validators.required],
 
     });
@@ -73,6 +70,7 @@ export class Addlandver2Component {
 
     this.expansionPanelsArray = this.LPSFormGroup.get('expansionPanels') as FormArray;
     this.addExpansionPanel();
+    this.addFiles(0,'lps');
 
 // 4one
     this.fourOneFormGroup = this.formBuilder.group({
@@ -160,7 +158,7 @@ export class Addlandver2Component {
 
   addExpansionPanel() {
     const expansionPanel = this.formBuilder.group({
-      file: null,
+      files: this.formBuilder.array([]),
       v_ref_no: [''],
       v_total_extent: [''],
       repeatedFields: this.formBuilder.array([]),
@@ -226,6 +224,20 @@ export class Addlandver2Component {
     }
   }
 
+  addFiles(expansionPanelIndex: number,type){
+    let expansionPanel;
+    let filesArray;
+    if (type === 'lps') {
+      expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
+      filesArray = expansionPanel.get('files') as FormArray;
+    }
+    const repeatedField = this.formBuilder.group({
+      filelps: [''],
+    });
+    filesArray.push(repeatedField);
+
+  }
+
   addRepeatedField(expansionPanelIndex: number, type) {
     let expansionPanel;
     let repeatedFieldsArray;
@@ -256,12 +268,37 @@ export class Addlandver2Component {
     }
     const villageField = this.formBuilder.group({
       v_name_of_village: [''],
+      villageNoFields:this.formBuilder.array([this.createVillageNoField()]),
+     
+    });
+    villageFieldsArray.push(villageField);
+  }
+
+  createVillageNoField(): FormGroup {
+    return this.formBuilder.group({
       v_survey_no: [''],
       v_extent: ['']
     });
-
-    villageFieldsArray.push(villageField);
   }
+
+  addVillageNoField(expansionPanelIndex: number, villageFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
+    const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
+    const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
+    const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
+  
+    villageNoFieldsArray.push(this.createVillageNoField());
+  }
+  
+  removeVillageNoField(expansionPanelIndex: number, villageFieldIndex: number, villageNoFieldIndex: number) {
+    const expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
+    const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
+    const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
+    const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
+  
+    villageNoFieldsArray.removeAt(villageNoFieldIndex);
+  }
+  
 
   addOwner4one(expansionPanelIndex: number) {
     const expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;
@@ -293,6 +330,16 @@ export class Addlandver2Component {
     sixddFieldsArray.push(sixddField);
   }
 
+  removeFiles(expansionPanelIndex: number, repeatedFieldIndex: number, type) {
+    let expansionPanel;
+    let filesArray;
+    if (type === 'lps') {
+      expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
+      filesArray = expansionPanel.get('files') as FormArray;
+    } 
+    filesArray.removeAt(repeatedFieldIndex);
+
+  }
   removeRepeatedField(expansionPanelIndex: number, repeatedFieldIndex: number, type) {
     let expansionPanel;
     let repeatedFieldsArray;
@@ -337,11 +384,6 @@ export class Addlandver2Component {
     sixddFieldsArray.removeAt(sixddFieldIndex);
   }
 
-
-
-
-
-
   panelOpenState = false;   // mat expansion panel in Lps
 
   // Lps input field - start
@@ -379,10 +421,7 @@ export class Addlandver2Component {
 
   adds: any[] = [];
 
-  addsurvey() {
-    const addsurvey = 'Add Survey Field';
-    this.adds.push(addsurvey);
-  }
+ 
 
   removeSurvey(index: number) {
     this.adds.splice(index, 1);

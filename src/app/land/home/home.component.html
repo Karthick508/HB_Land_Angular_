@@ -29,7 +29,7 @@
             <!-- <div style="font-weight: 700;
               font-size: 40px; color:white">20,000</div> -->
             <div style="font-weight: 700;
-              font-size: 40px; color:white">{{ userList.length ?? 0}}</div>
+              font-size: 40px; color:white">{{ userList?.length ?? 0}}</div>
             <h4 class="title" style="font-weight: 400;
               font-size: 24px;"><a class="stretched-link">Digitized Lands</a></h4>
           </div>
@@ -41,7 +41,7 @@
               font-size: 40px; color:white">40,000</div> -->
               <!--  -->
             <div style="font-weight: 700;
-              font-size: 40px; color:white">{{(totalcountsingle ?? 0) - (userList.length ?? 0)}}</div>
+              font-size: 40px; color:white">{{(totalcountsingle ?? 0) - (userList?.length ?? 0)}}</div>
             <h4 class="title" style="font-weight: 400;
               font-size: 24px;"><a class="stretched-link">Yet to be Digitized</a></h4>
           </div>
@@ -126,7 +126,7 @@
 </div>
 <div style="width: 100%;display: flex;justify-content: center;">
   <div style="width:80%;" >
-    <table mat-table [dataSource]="userList" *ngIf="userList && userList?.length">
+    <table mat-table [dataSource]="userList">
 
       <ng-container matColumnDef="uniqueCode">
         <th class="first" mat-header-cell *matHeaderCellDef>

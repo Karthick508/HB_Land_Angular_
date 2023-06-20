@@ -11,7 +11,12 @@ import { LandModule } from './land/land.module';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path:'auth/login',component:LoginComponent},
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {path:'login',component:LoginComponent},
   { path: 'auth', loadChildren: () => (import('./auth/auth.modules')).then((m) => m.AuthModule) },
   { path: 'land', loadChildren: () => (import('./land/land.module')).then((m) => m.LandModule) },
 
@@ -20,12 +25,7 @@ const routes: Routes = [
   {path: 'edit/:id',component: EditlandComponent},
   {path: 'report1LA',component: Report1LAComponent},
   {path: 'report2LP',component: Report2LPComponent},
-  {
-    path: '',
-    redirectTo: 'auth/login',
-    pathMatch: 'full',
-
-  },
+ 
 ];
 
 @NgModule({
