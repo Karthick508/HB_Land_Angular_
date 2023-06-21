@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 
@@ -53,10 +53,12 @@ export interface LpsFileDynamicValuesDetail {
 }
 
 export interface DynamicValuesDetail {
-  n_ID: number
-  n_FILE_ID: number
-  n_UNIQUE_ID: number
-  v_COLUMN_NAME: string
+  n_ID: number;
+  n_FILE_ID: number;
+  n_UNIQUE_ID: number;
+  v_COLUMN_NAME: string;
+  V_VALUE_NAME: string;
+  mode: string
 }
 
 export interface FourOneTabDeatil {
@@ -293,7 +295,7 @@ export class Addlandver2Component {
   landDigitDataEntity : LandDigitDataEntity;
   lpsTabDetails : LpsTabDetail[];
 
-  constructor(private builder: FormBuilder, private formBuilder: FormBuilder) { }
+  constructor(private builder: FormBuilder, private formBuilder: FormBuilder, private changeDetectorRef: ChangeDetectorRef) { }
   isLinear = true;
 
   ngOnInit(): void {
@@ -314,12 +316,21 @@ export class Addlandver2Component {
               "lpsVillageDetails": [
                   {
                       "n_ID": 1,
-                      "v_NAME_OF_VILLAGE": "Thanjavur Neighbourhood scheme",
+                      "v_NAME_OF_VILLAGE": "rama",
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
                       "v_EXTENT": "789",
                       "v_SURVEY_NO": "345",
-                      "mode":null
+                      "mode":null,
+                  },
+                  {
+                      "n_ID": 2,
+                      "v_NAME_OF_VILLAGE": "porur",
+                      "n_FILE_ID": 2,
+                      "n_UNIQUE_ID": 4567,
+                      "v_EXTENT": "987",
+                      "v_SURVEY_NO": "666",
+                      "mode":null,
                   }
               ],
               "lpsFileDynamicValuesDetails": [
@@ -338,6 +349,7 @@ export class Addlandver2Component {
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
                       "v_COLUMN_NAME": "column1",
+                      "V_VALUE_NAME": "value1",
                       "mode":null
                   },
                   {
@@ -345,17 +357,75 @@ export class Addlandver2Component {
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
                       "v_COLUMN_NAME": "column2",
+                      "V_VALUE_NAME": "value2",
                       "mode":null
                   }
               ],
               "n_ID": 1,
               "n_UNIQUE_ID": 1234,
               "v_TOTAL_EXTENT": "789",
-              "v_FILE_PATH": "",
+              "v_FILE_PATH": "c:/desktop",
               "v_FILE_NAME": "lps_1_file",
               "v_REF_NO": "344",
               "mode":null
-          }
+          },
+          {
+            "lpsVillageDetails": [
+                {
+                    "n_ID": 1,
+                    "v_NAME_OF_VILLAGE": "rama",
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_EXTENT": "789",
+                    "v_SURVEY_NO": "345",
+                    "mode":null,
+                },
+                {
+                    "n_ID": 2,
+                    "v_NAME_OF_VILLAGE": "porur",
+                    "n_FILE_ID": 2,
+                    "n_UNIQUE_ID": 4567,
+                    "v_EXTENT": "987",
+                    "v_SURVEY_NO": "666",
+                    "mode":null,
+                }
+            ],
+            "lpsFileDynamicValuesDetails": [
+                {
+                    "n_ID": 1,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_FILE_PATH": "",
+                    "v_FILE_NAME": "",
+                    "mode":null
+                }
+            ],
+            "dynamicValuesDetails": [
+                {
+                    "n_ID": 1,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_COLUMN_NAME": "column1",
+                    "V_VALUE_NAME": "value1",
+                    "mode":null
+                },
+                {
+                    "n_ID": 2,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_COLUMN_NAME": "column2",
+                    "V_VALUE_NAME": "value2",
+                    "mode":null
+                }
+            ],
+            "n_ID": 1,
+            "n_UNIQUE_ID": 1234,
+            "v_TOTAL_EXTENT": "789",
+            "v_FILE_PATH": "c:/desktop",
+            "v_FILE_NAME": "lps_1_file",
+            "v_REF_NO": "999",
+            "mode":null
+        },
       ],
       "fourOneTabDeatils": [
           {
@@ -615,7 +685,7 @@ export class Addlandver2Component {
     });
 
     this.expansionPanelsArray = this.LPSFormGroup.get('expansionPanels') as FormArray;
-    this.addExpansionPanel();
+    this.addExpansionPanel(); //797
     this.addFiles(0,'lps');
 
 // 4one
@@ -661,6 +731,113 @@ export class Addlandver2Component {
       this.lpsTabDetails = rawData.lpsTabDetails;
       console.error("lpsTabDetails",this.lpsTabDetails);
 
+
+      // Second Tab - Index 0
+      this.lpsTabDetails.forEach( (lapDetail, i) => {
+
+        const fileNameFormArrayGroup = new FormGroup({
+          'filelps': new FormControl('')
+        })
+
+        if(!this.expansionPanelsArray.at(i)) {
+          this.expansionPanelsArray.push(new FormGroup({
+            'v_FILE_NAME': new FormArray([fileNameFormArrayGroup]),
+            'v_REF_NO': new FormControl(''),
+            'v_TOTAL_EXTENT': new FormControl(''),
+            'repeatedFields': new FormArray([]),
+            'villageFields': new FormArray([]),
+          }));
+        }
+
+        this.changeDetectorRef.detectChanges();
+
+        const lpsFormGroup = (this.expansionPanelsArray.at(i) as FormGroup);
+        console.log('lpsFormGroup', lpsFormGroup)
+
+        
+        const fileNameFormArray = (lpsFormGroup.controls['v_FILE_NAME'] as FormArray);
+  
+        // Second Tab - Index 0 - field0
+        const fileNameFormGroup = fileNameFormArray.at(0) as FormGroup;
+        console.log('fileNameFormArray_first', fileNameFormGroup)
+        const apiValueFilelps_0 = this.lpsTabDetails[0].v_FILE_NAME;
+        // TO-DO
+        // fileNameFormGroup.controls['filelps'].setValue(apiValueFilelps_0)
+  
+        // Second Tab - Index 0 - field1
+        lpsFormGroup.controls['v_REF_NO'].setValue(this.lpsTabDetails[i].v_REF_NO);
+  
+        // Second Tab - Index 0 - field2
+        lpsFormGroup.controls['v_TOTAL_EXTENT'].setValue(this.lpsTabDetails[i].v_TOTAL_EXTENT);
+  
+        // Second Tab - Index 0 - field3
+        const apiValue_customField: any[] = this.lpsTabDetails[i].dynamicValuesDetails;
+        
+  
+        const customFieldFormArray = (lpsFormGroup.controls['repeatedFields'] as FormArray);
+        for(let i=0; i<apiValue_customField.length; i++){
+          const apiValue_customField_group = apiValue_customField[i];
+          const apiValue_customField_group_first1Value = apiValue_customField_group.v_COLUMN_NAME;
+          const apiValue_customField_group_first2Value = apiValue_customField_group.V_VALUE_NAME;
+          if(customFieldFormArray.at(i)) {
+            const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
+  
+            const field1FormControl = firstCustomFieldFormGroup.get('field1') as FormControl;
+            if(field1FormControl){
+              field1FormControl.setValue(apiValue_customField_group_first1Value)
+            }
+            else{
+              firstCustomFieldFormGroup.addControl('field1', apiValue_customField_group_first1Value)
+            }
+  
+            const field2FormControl = firstCustomFieldFormGroup.get('field2') as FormControl;
+            if(field2FormControl){
+              field2FormControl.setValue(apiValue_customField_group_first2Value)
+            }
+            else{
+              firstCustomFieldFormGroup.addControl('field2', apiValue_customField_group_first2Value)
+            }
+          }
+          else{
+            const newFormGroup = new FormGroup({
+              'field1': new FormControl(apiValue_customField_group_first1Value),
+              'field2': new FormControl(apiValue_customField_group_first2Value),
+            })
+            customFieldFormArray.push(newFormGroup);
+          }
+        }
+  
+        // Second Tab - Index 0 - field4
+        const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;      
+  
+        const villageFieldsFormArray = (lpsFormGroup.controls['villageFields'] as FormArray);
+        let newFormGroup = new FormGroup({
+          'v_name_of_village': new FormControl(apiValue_village[i].v_NAME_OF_VILLAGE),
+          'villageNoFields': new FormArray([]),
+        })
+        
+        for(let i=0; i<apiValue_village.length; i++){
+          const apiValue_village_group = apiValue_village[i];
+          const apiValue_village_group_surveyNo = apiValue_village_group.v_SURVEY_NO;
+          const apiValue_village_group_extent = apiValue_village_group.v_EXTENT
+          if(villageFieldsFormArray.at(i)) {
+  
+          }
+          else{
+            const villageNoFields = new FormGroup({
+              'v_survey_no': new FormControl(apiValue_village_group_surveyNo),
+              'v_extent': new FormControl(apiValue_village_group_extent),
+            })
+            newFormGroup.controls['villageNoFields'].push(villageNoFields)
+          }
+        }
+        villageFieldsFormArray.push(newFormGroup);
+
+      })
+      
+
+
+      // Second Tab - Index 1 to all
 
   }
 
@@ -793,14 +970,19 @@ export class Addlandver2Component {
     }
   }
 
+  // 2nd tab LPS Tab
   addExpansionPanel() {
     const expansionPanel = this.formBuilder.group({
-      files: this.formBuilder.array([]),
-      v_ref_no: [''],
-      v_total_extent: [''],
+      // files: this.formBuilder.array([]),
+      // v_ref_no: [''],
+      // v_total_extent: [''],
       repeatedFields: this.formBuilder.array([]),
       villageFields: this.formBuilder.array([]),
 
+      v_FILE_NAME: this.formBuilder.array([]),
+      v_REF_NO : [''],
+      v_TOTAL_EXTENT : [''],
+      mode :['']
 
     });
     this.expansionPanelsArray.push(expansionPanel);
@@ -870,7 +1052,7 @@ export class Addlandver2Component {
     let filesArray;
     if (type === 'lps') {
       expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
-      filesArray = expansionPanel.get('files') as FormArray;
+      filesArray = expansionPanel.get('v_FILE_NAME') as FormArray;
     }
     const repeatedField = this.formBuilder.group({
       filelps: [''],
