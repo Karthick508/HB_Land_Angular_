@@ -357,6 +357,16 @@ export class Addlandver2Component {
     villageFieldsArray.push(villageField);
   }
 
+  removeVillageLps(expansionPanelIndex: number) {
+    let expansionPanel;
+    let villageFieldsArray;
+     {
+      expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
+      villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
+    }
+    villageFieldsArray.removeAt(expansionPanelIndex);
+
+  }
   createVillageNoField(): FormGroup {
     return this.formBuilder.group({
       v_survey_no: [''],
@@ -553,17 +563,7 @@ export class Addlandver2Component {
     repeatedFieldsArray.removeAt(repeatedFieldIndex);
   }
 
-  removeVillageLps(expansionPanelIndex: number, villageFieldIndex: number) {
-    let expansionPanel;
-    let villageFieldsArray;
-     {
-      expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
-      villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
-    }
-
-    villageFieldsArray.removeAt(villageFieldIndex);
-  }
-
+ 
   removeOwner4one(expansionPanelIndex: number, ownerFieldIndex: number) {
 
     const  expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;

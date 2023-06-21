@@ -1,9 +1,6 @@
 <div class="stepperAlign">
   <mat-card style="width: 80%;">
     <mat-stepper>
-
-
-
       <mat-step [stepControl]="personalInfoFormGroup">
         <form [formGroup]="personalInfoFormGroup">
           <ng-template matStepLabel>Enter Land Details</ng-template>
@@ -88,7 +85,6 @@
             [disabled]="personalInfoFormGroup.invalid">Next</button>
         </form>
       </mat-step>
-
       <mat-step [stepControl]="LPSFormGroup">
         <mat-accordion>
           <form [formGroup]="LPSFormGroup">
@@ -98,7 +94,8 @@
               <mat-expansion-panel [expanded]="true" *ngFor="let panel of expansionPanelsArray.controls; let i = index">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    <label class="col-6 col-form-label" style="font-weight: bold">File {{i + 1}}</label>
+                    <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large">LPS File - {{i +
+                      1}}</label>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
 
@@ -116,9 +113,10 @@
                         </div>
 
                         <div class="col-6">
-                          <mat-icon style="color: #3FB8DE;" (click)="addFiles(i, 'lps')">add_circle</mat-icon>
-                          <mat-icon *ngIf="w!==0" style="color: red;"
-                            (click)="removeFiles(i, w, 'lps')">cancel</mat-icon>&nbsp;&nbsp;
+                          <mat-icon style="color: #3FB8DE;" (click)="addFiles(i, 'lps')"
+                            matTooltip="Add File">add_circle</mat-icon>
+                          <mat-icon *ngIf="w!==0" style="color: red;" (click)="removeFiles(i, w, 'lps')"
+                            matTooltip="Remove File">cancel</mat-icon>&nbsp;&nbsp;
                         </div>
                       </div>
                     </div>
@@ -144,8 +142,8 @@
 
                   <!-- FormArray for repeated fields -->
                   <div formArrayName="repeatedFields">
-                    <label class="col-6 " style="font-weight: bold"
-                      *ngIf="panel.get('repeatedFields').controls.length > 0">Custom Fields </label>
+                    <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
+                      Fields </label>
                     <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
                       <div class="displayFlex">
                         <span>
@@ -161,10 +159,10 @@
                           </mat-form-field>
                         </span>
                         <span>
-                          <mat-icon style="color: #3FB8DE;"
-                            (click)="addRepeatedField(i,'lps')">add_circle</mat-icon>&nbsp;
-                          <mat-icon style="color: red;"
-                            (click)="removeRepeatedField(i, j,'lps')">cancel</mat-icon>&nbsp;&nbsp;
+                          <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'lps')"
+                            matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'lps')"
+                            matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
                         </span>
                       </div>
 
@@ -177,18 +175,22 @@
 
                   <!-- Add button for repeated fields -->
                   <div class="mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
-                    <button (click)="addRepeatedField(i,'lps')" mat-flat-button type="button" class="btn ms-2"
-                      color="primary">Add Custom Fields</button>
+                    <button (click)="addRepeatedField(i,'lps')" mat-flat-button type="button" color="primary">Add Custom
+                      Fields</button>
                   </div>
 
 
 
                   <div formArrayName="villageFields">
-                    <label class="col-6 " style="font-weight: bold"
-                    *ngIf="panel.get('villageFields').controls.length > 0">Village Details</label>
+                    <label class="col-6 sub-header" *ngIf="panel.get('villageFields').controls.length > 0">Village
+                      Details </label>
 
                     <div *ngFor="let field of panel.get('villageFields').controls; let k = index" [formGroupName]="k">
-
+                      <label class="col-6 col-form-label" style="font-weight: bold;font-size:medium">Village - {{k +
+                        1}}&nbsp;&nbsp; <mat-icon style="color: #3FB8DE;" (click)="addVillageLps(i)"
+                        matTooltip="Add Village">add_circle</mat-icon>&nbsp;
+                      <mat-icon style="color: red;" (click)="removeVillageLps(i)"
+                        matTooltip="Remove Village">cancel</mat-icon>&nbsp;&nbsp;</label>
                       <div class="row col-7">
                         <mat-form-field appearance="outline" class="example-full-width">
                           <mat-label>Name of the Village:</mat-label>
@@ -199,38 +201,39 @@
                           </mat-select>
                         </mat-form-field>
                       </div>
-                      
+
                       <div formArrayName="villageNoFields">
-                        <div *ngFor="let villageNoField of field.get('villageNoFields').controls; let h = index" [formGroupName]="h">
-                         
+                        <div *ngFor="let villageNoField of field.get('villageNoFields').controls; let h = index"
+                          [formGroupName]="h">
+
                           <div class="displayFlex">
                             <span>
                               <mat-form-field>
                                 <mat-label>Survey No</mat-label>
-                                <input matInput type="text" formControlName="v_survey_no" >
+                                <input matInput type="text" formControlName="v_survey_no">
                               </mat-form-field>
                             </span>
                             <span>
                               <mat-form-field>
                                 <mat-label>Extend No</mat-label>
-                                <input matInput type="text" formControlName="v_extent" >
+                                <input matInput type="text" formControlName="v_extent">
                               </mat-form-field>
                             </span>
                             <span>
-                              <mat-icon style="color: #3FB8DE;"
-                                (click)="addVillageNoField(i,k, h)">add_circle</mat-icon>&nbsp;
-                              <mat-icon style="color: red;"
-                                (click)="removeVillageNoField(i,k, h)" *ngIf="h!==0">cancel</mat-icon>&nbsp;&nbsp;
+                              <mat-icon style="color: #3FB8DE;" (click)="addVillageNoField(i,k, h)" matTooltip=""
+                                matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                              <mat-icon style="color: red;" (click)="removeVillageNoField(i,k, h)" *ngIf="h!==0"
+                                matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
                             </span>
                           </div>
                         </div>
                       </div>
- 
+
                     </div>
                   </div>
                   <div class="mb-2" *ngIf="panel.get('villageFields').controls.length === 0">
-                    <button (click)="addVillageLps(i)" mat-flat-button type="button" class="btn ms-2"
-                      color="primary">Add Village</button>
+                    <button (click)="addVillageLps(i)" mat-flat-button type="button" 
+                      color="primary">Add Village</button>&nbsp;&nbsp;
                   </div>
 
                 </div>
@@ -248,191 +251,175 @@
 
         </mat-accordion>
       </mat-step>
-
-
-
-
       <mat-step [stepControl]="fourOneFormGroup">
         <form [formGroup]="fourOneFormGroup">
           <ng-template matStepLabel>4(1)</ng-template>
-
           <div formArrayName="expansionPanels4">
-            <mat-expansion-panel *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
+            <mat-expansion-panel [expanded]="true" *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <label class="col-6 col-form-label" style="font-weight: bold">File {{i + 1}}</label>
+                  <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large;">4(1) File - {{i +
+                    1}}</label>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-
               <div [formGroup]="panel">
-
-
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="refno" class="col-4 form-label">Gazette Notification Ref. No. :</label>
-                    <input type="text" class="col-4 form-control" aria-describedby="inputGroupFileAddon04"
-                      formControlName="v_gazette_ref_no">
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Gazette Notification Ref. No</mat-label>
+                    <input matInput type="text" formControlName="v_gazette_ref_no">
+                  </mat-form-field>
+                </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Gazette Notification Ref. No</mat-label>
+                    <input matInput type="text" formControlName="v_4_one_go_ref_no">
+                  </mat-form-field>
+                </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Date of 4(1) G.O</mat-label>
+                    <input matInput [matDatepicker]="dateFour" formControlName="d_date_of_4_one_go">
+                    <mat-datepicker-toggle matIconSuffix [for]="dateFour"></mat-datepicker-toggle>
+                    <mat-datepicker #locality color="dateFour"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Date of Gazette Notification</mat-label>
+                    <input matInput [matDatepicker]="gazette" formControlName="d_date_of_gazette_notification">
+                    <mat-datepicker-toggle matIconSuffix [for]="gazette"></mat-datepicker-toggle>
+                    <mat-datepicker #gazette color="primary"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Date of Locality</mat-label>
+                    <input matInput [matDatepicker]="locality" formControlName="d_date_of_locality">
+                    <mat-datepicker-toggle matIconSuffix [for]="locality"></mat-datepicker-toggle>
+                    <mat-datepicker #locality color="primary"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="row" style="margin:2px 0px 1rem 0px">
+                  <mat-label class="mb-2 sub-header">File Upload 1</mat-label>
+                  <div class="col-6">
+                    <input type="file" class="form-control  alignForms" formControlName="file">
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="refno" class="col-4 col-form-label">4(1) G.O. Ref. No. :</label>
-                    <input type="text" class="col-4 form-control" aria-describedby="inputGroupFileAddon04"
-                      formControlName="v_4_one_go_ref_no">
+                <div class="row" style="margin:2px 0px 1rem 0px">
+                  <mat-label class="mb-2 sub-header">File Upload 2</mat-label>
+                  <div class="col-6">
+                    <input type="file" class="form-control  alignForms" formControlName="file2">
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="refno" class="col-4 col-form-label">Date of 4(1) G.O. :</label>
-
-                    <input type="date" class="col-4 form-control" formControlName="d_date_of_4_one_go">
-
-                  </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Ref. No</mat-label>
+                    <input matInput type="text" formControlName="v_ref_no">
+                  </mat-form-field>
                 </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="refno" class="col-4 form-label">Date of Gazette Notification:</label>
-
-                    <input type="date" class="col-4 form-control" formControlName="d_date_of_gazette_notification">
-
-                  </div>
+                <div class="row col-7">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Total Extent</mat-label>
+                    <input matInput type="text" formControlName="v_total_extent">
+                  </mat-form-field>
                 </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="extent" class="col-4 form-label">Date of Locality:</label>
-
-                    <input type="date" class="col-4 form-control" formControlName="d_date_of_locality">
-
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="extent" class="col-4 form-label">File Upload 1:</label>
-
-                    <input type="file" class="col-4 form-control" formControlName="file">
-
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="extent" class="col-4 form-label">File Upload 2:</label>
-
-                    <input type="file" class="col-4 form-control" formControlName="file2">
-
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="refno" class="col-4 col-form-label">Ref. No. :</label>
-
-                    <input type="text" class="col-4 form-control" formControlName="v_ref_no">
-
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="input-group">
-                    <label for="extent" class="col-4 form-label">Total Extent:</label>
-
-                    <input type="text" class="col-4 form-control" formControlName="v_total_extent">
-
-                  </div>
-                </div>
-
-                <!-- FormArray for repeated fields -->
                 <div formArrayName="repeatedFields">
-                  <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
-                    class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
-                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field1">
-                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field2">
-                    <button (click)="removeRepeatedField(i, j,'4(1)')" class="btn-close" aria-label="Close"
-                      style="background-color: red;"></button>
+                  <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom Fields
+                  </label>
+                  <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
+                    <div class="displayFlex">
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Field name</mat-label>
+                          <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Field Value</mat-label>
+                          <input matInput type="text" formControlName="field2" placeholder="Ex. India">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'4(1)')"
+                          matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
+                        <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'4(1)')"
+                          matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <!-- Add button for repeated fields -->
-                <div class="row col-7 mb-3">
-                  <button (click)="addRepeatedField(i,'4(1)')" type="button" class="btn ms-2"
-                    style="width: auto;background-color: #3FB8DE;color: white;">Add Other fields</button>
+                <div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
+                  <button (click)="addRepeatedField(i,'4(1)')" mat-flat-button type="button" color="primary">Add Custom
+                    Fields</button>
                 </div>
-
-
-
                 <div formArrayName="ownerFields">
-
+                  <mat-label class="col-6 sub-header" *ngIf="panel.get('ownerFields').controls.length > 0">Owner Fields
+                  </mat-label>
                   <div *ngFor="let field of panel.get('ownerFields').controls; let k = index" [formGroupName]="k"
                     class="row mb-3">
-                    <div class="input-group">
+                    <label class="col-6 col-form-label" style="font-weight: bold;font-size:medium;position: relative;left: 17px;">Owner Fields - {{k + 1}}
+                      &nbsp; <mat-icon style="color: #3FB8DE;" (click)="addOwner4one(i)"
+                        matTooltip="Add Owner Field">add_circle</mat-icon>&nbsp;<mat-icon style="color: red;" (click)="removeOwner4one(i, k)"
+                        matTooltip="Remove Owner Field">cancel</mat-icon></label>
+                    <div class="input-group mb-3">
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">Survey No. :</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_survey_no">
-                        </div>
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>Survey No</mat-label>
+                          <input matInput type="text" formControlName="v_survey_no">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">Extent:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_extent">
-                        </div>
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>Extent</mat-label>
+                          <input matInput type="text" formControlName="v_extent">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">Name of the Owner:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_name_of_owner">
-                        </div>
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>Name of the Owner</mat-label>
+                          <input matInput type="text" formControlName="v_name_of_owner">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">East Boundaries:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_east">
-                        </div>
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>East Boundaries</mat-label>
+                          <input matInput type="text" formControlName="v_east">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">West Boundaries:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_west">
-                        </div>
+
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>West Boundaries</mat-label>
+                          <input matInput type="text" formControlName="v_west">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">North Boundaries:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_north">
-                        </div>
+
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>North Boundaries</mat-label>
+                          <input matInput type="text" formControlName="v_north">
+                        </mat-form-field>
                       </div>
                       <div class="col-3">
-                        <label for="surveyno" class="col-12 form-label">South Boundaries:</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="col-12 form-control" formControlName="v_south">
-                        </div>
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>South Boundaries</mat-label>
+                          <input matInput type="text" formControlName="v_south">
+                        </mat-form-field>
                       </div>
-                      <div class="col-2">
-                        <label for="surveyno" class="col-12 form-label">FMB File Upload</label>
-                        <div class="col-sm-9">
+                      <div class="col-3">
+                        <div>
                           <input type="file" class="col-12 form-control">
                         </div>
-
                       </div>
-
+                    
                     </div>
-
-
-                    <button (click)="removeOwner4one(i, k)" class="btn-close" aria-label="Close"
-                      style="background-color: red;"></button>
                   </div>
                 </div>
-
-                <div class="col-1 d-flex align-items-end">
-                  <button (click)="addOwner4one(i)" class="btn bg-success">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-plus-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                      <path
-                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                  </button>
+                <div class="col-6 mb-2" *ngIf="panel.get('ownerFields').controls.length === 0">
+                  <button (click)="addOwner4one(i)" mat-flat-button type="button" color="primary">Add Owner
+                    Fields</button>
                 </div>
-
-
-
               </div>
             </mat-expansion-panel>
           </div>
@@ -444,173 +431,139 @@
           </div>
         </form>
       </mat-step>
-
       <mat-step [stepControl]="sixDDFormGroup">
-        <ng-template matStepLabel>6DD</ng-template>
         <mat-accordion>
-
           <form [formGroup]="sixDDFormGroup">
             <ng-template matStepLabel>6DD</ng-template>
-
             <div formArrayName="expansionPanelsSix">
-              <mat-expansion-panel *ngFor="let panel of expansionPanelsSixDD.controls; let i = index">
+              <mat-expansion-panel [expanded]="true" *ngFor="let panel of expansionPanelsSixDD.controls; let i = index">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    <label class="col-6 col-form-label" style="font-weight: bold">File {{i + 1}}</label>
+                    <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large">6DD - {{i +
+                      1}}</label>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-
                 <div [formGroup]="panel">
-
-
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="refno" class="col-4 form-label">Gazette Notification Ref. No. :</label>
-                      <input type="text" class="col-4 form-control" id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04" formControlName="v_gazette_ref_no">
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Gazette Notification Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_gazette_ref_no">
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>6DD G.O Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_6dd_go_ref_no">
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of 6DD G.O</mat-label>
+                      <input matInput [matDatepicker]="date" formControlName="d_date_of_6dd_go">
+                      <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+                      <mat-datepicker #date color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of Gazette Notification</mat-label>
+                      <input matInput [matDatepicker]="gazette" formControlName="d_date_of_gazette_notification">
+                      <mat-datepicker-toggle matIconSuffix [for]="gazette"></mat-datepicker-toggle>
+                      <mat-datepicker #gazette color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of Locality</mat-label>
+                      <input matInput [matDatepicker]="locality" formControlName="d_date_of_locality">
+                      <mat-datepicker-toggle matIconSuffix [for]="locality"></mat-datepicker-toggle>
+                      <mat-datepicker #locality color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row" style="margin:2px 0px 1rem 0px">
+                    <mat-label class="mb-2 sub-header">File Upload 1</mat-label>
+                    <div class="col-6">
+                      <input type="file" class="form-control  alignForms" formControlName="file">
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="refno" class="col-4 col-form-label">6DD G.O. Ref. No. :</label>
-                      <input type="text" class="col-4 form-control" id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04" formControlName="v_6dd_go_ref_no">
+                  <div class="row" style="margin:2px 0px 1rem 0px">
+                    <mat-label class="mb-2 sub-header">File Upload 2</mat-label>
+                    <div class="col-6">
+                      <input type="file" class="form-control  alignForms" formControlName="file2">
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="refno" class="col-4 col-form-label">Date of 6DD G.O. :</label>
-
-                      <input type="date" class="col-4 form-control" id="refno" formControlName="d_date_of_6dd_go">
-
-                    </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_ref_no">
+                    </mat-form-field>
                   </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="refno" class="col-4 form-label">Date of Gazette Notification:</label>
-
-                      <input type="date" class="col-4 form-control" formControlName="d_date_of_gazette_notification">
-
-                    </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Total Extent</mat-label>
+                      <input matInput type="text" formControlName="v_total_extent">
+                    </mat-form-field>
                   </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="extent" class="col-4 form-label">Date of Locality:</label>
-
-                      <input type="date" class="col-4 form-control" id="extent" formControlName="d_date_of_locality">
-
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="extent" class="col-4 form-label">File Upload 1:</label>
-
-                      <input type="file" class="col-4 form-control" formControlName="file">
-
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="extent" class="col-4 form-label">File Upload 2:</label>
-
-                      <input type="file" class="col-4 form-control" formControlName="file2">
-
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="refno" class="col-4 col-form-label">Ref. No. :</label>
-
-                      <input type="text" class="col-4 form-control" formControlName="v_ref_no">
-
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="input-group">
-                      <label for="extent" class="col-4 form-label">Total Extent:</label>
-
-                      <input type="text" class="col-4 form-control" formControlName="v_total_extent">
-
-                    </div>
-                  </div>
-
-
-                  <!-- FormArray for repeated fields -->
                   <div formArrayName="repeatedFields">
-                    <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
-                      class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
-                      <input placeholder="" type="text" class="form-control" style="width: 45%;"
-                        formControlName="field1">
-                      <input placeholder="" type="text" class="form-control" style="width: 45%;"
-                        formControlName="field2">
-                      <button (click)="removeRepeatedField(i, j,'6DD')" class="btn-close" aria-label="Close"
-                        style="background-color: red;"></button>
+                    <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
+                      Fields </label>
+                    <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field name</mat-label>
+                            <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field Value</mat-label>
+                            <input matInput type="text" formControlName="field2" placeholder="Ex. India">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'6DD')"
+                            matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'6DD')"
+                            matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
+                      </div>
                     </div>
                   </div>
-
-                  <!-- Add button for repeated fields -->
-                  <div class="row col-7 mb-3">
-                    <button (click)="addRepeatedField(i,'6DD')" type="button" class="btn ms-2"
-                      style="width: auto;background-color: #3FB8DE;color: white;">Add</button>
+                  <div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
+                    <button (click)="addRepeatedField(i,'6DD')" mat-flat-button type="button" color="primary">Add Custom
+                      Fields</button>
                   </div>
-
-
                   <div formArrayName="sixddFields">
+                    <label class="col-6 sub-header" *ngIf="panel.get('sixddFields').controls.length > 0">Survey & Extend
+                      Field </label>
                     <div *ngFor="let field of panel.get('sixddFields').controls; let k = index" [formGroupName]="k">
-
-
-                      <div class="row mb-3">
-                        <label for="surveyno" class="col-12 form-label">Survey No. :</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="col-12 form-control" formControlName="v_survey_no">
-                        </div>
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Survey No</mat-label>
+                            <input matInput type="text" formControlName="v_survey_no">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Extent</mat-label>
+                            <input matInput type="text" formControlName="v_extent">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addsixdd(i)"
+                            matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removesixdd(i, k)"
+                            matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
                       </div>
-                      <div class="row mb-3">
-                        <label for="surveyno" class="col-12 form-label">Extent:</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="col-12 form-control" formControlName="v_extent">
-                        </div>
-                      </div>
-
-
-
-                      <div class="row col-7 mb-3 align-items-end" *ngFor="let add of adds; let i=index">
-                        <div class="col-5 ps-0">
-                          <label for="surveyno" class="col col-form-label">Survey No. :</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="surveyno" formControlName="v_survey_no">
-                          </div>
-                        </div>
-                        <div class="col-5">
-                          <label for="surveyno" class="col col-form-label">Extent :</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="surveyno" formControlName="v_extent">
-                          </div>
-                        </div>
-                        <div class="col-2">
-                          <button (click)="removeSurvey(add)" class="btn ms-4 bg-danger text-white"><svg
-                              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                              class="bi bi-x-circle" viewBox="0 0 16 16">
-                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                              <path
-                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                      <button (click)="removesixdd(i, k)" class="btn-close" aria-label="Close"
-                        style="background-color: red;"></button>
-
                     </div>
                   </div>
-
-                  <div class="row col-7 mb-3">
-                    <button (click)="addsixdd(i)" type="button" class="btn ms-2"
-                      style="width: 8rem;background-color: #3FB8DE;color: white;">Add Details</button>
+                  <div class="col-6 mb-2" *ngIf="panel.get('sixddFields').controls.length === 0">
+                    <button (click)="addsixdd(i)" mat-flat-button type="button" color="primary">Add Survey &
+                      Extend</button>
                   </div>
-
-
-
                 </div>
               </mat-expansion-panel>
             </div>
@@ -641,602 +594,618 @@
                 <div [formGroup]="panel">
 
 
-            <div class="row d-flex justify-content-center">
-                <div class="row mb-3 col-6">
-                    <label class="col-sm-9 col-form-label" style="font-weight: bold">Award Number:<span
-                        style="color: red;">*</span></label>
-                    <div class="col-sm-10">
-                      <input matInput type="text" class="form-control" formControlName="v_award_no" />
+                  <div class="row d-flex justify-content-center">
+                    <div class="row mb-3 col-6">
+                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Award Number:<span
+                          style="color: red;">*</span></label>
+                      <div class="col-sm-10">
+                        <input matInput type="text" class="form-control" formControlName="v_award_no" />
+                      </div>
                     </div>
+
+                    <div class="row mb-3 col-6">
+                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Date:<span
+                          style="color: red;">*</span></label>
+                      <div class="col-sm-10">
+                        <input matInput type="date" class="form-control" formControlName="d_award_date" />
+                      </div>
+                    </div>
+
+                    <div class="row col-6 mb-3">
+                      <label class="col-form-label" style="font-weight: bold">Award File:<span
+                          style="color: red;">*</span></label>
+                      <div class="input-group">
+                        <input type="file" class="form-control" id="inputGroupFile04"
+                          aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="file">
+                        <button type="button" class="ms-2 rounded btn"
+                          style="background-color: #3FB8DE;color: white;">Upload</button>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-6">
+                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Total Extent (in acres):<span
+                          style="color: red;">*</span></label>
+                      <div class="col-sm-10">
+                        <input matInput type="text" class="form-control" formControlName="v_total_extent" />
+                      </div>
+                    </div>
+                    <div class="row mb-3 col-6">
+                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Total Award Amount:<span
+                          style="color: red;">*</span></label>
+                      <div class="col-sm-10">
+                        <input matInput type="text" class="form-control" formControlName="n_total_award_amount" />
+                      </div>
+                    </div>
+
+                    <!-- FormArray for repeated fields -->
+                    <div formArrayName="repeatedFields">
+                      <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
+                        class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
+                        <input placeholder="" type="text" class="form-control" style="width: 45%;"
+                          formControlName="field1">
+                        <input placeholder="" type="text" class="form-control" style="width: 45%;"
+                          formControlName="field2">
+                        <button (click)="removeRepeatedField(i, j,'Award')" class="btn-close" aria-label="Close"
+                          style="background-color: red;"></button>
+                      </div>
+                    </div>
+
+                    <!-- Add button for repeated fields -->
+                    <div class="row col-7 mb-3">
+                      <button (click)="addRepeatedField(i,'Award')" type="button" class="btn ms-2"
+                        style="width: auto;background-color: #3FB8DE;color: white;">Add</button>
+                    </div>
+
+
+
+                    <div class="row mb-3 col-12">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Direct
+                        Payment:<span style="color: red;">*</span></label>
+
+                      <div class="col-2 align-self-end">
+                        <button (click)="adddirectpay(i)" class="btn bg-success text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div formArrayName="directpayFields">
+
+                      <div *ngFor="let field of panel.get('directpayFields').controls; let k = index"
+                        [formGroupName]="k" class="row col-12 mb-3">
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_amount" />
+                        </div>
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_notified_person" />
+                        </div>
+                        <div class="col-2 align-self-end">
+                          <button (click)="removedirectpay(i, k)" class="btn bg-danger text-white"
+                            aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                              fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3 col-12">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Revenue
+                        Deposit:<span style="color: red;">*</span></label>
+
+                      <div class="col-2 align-self-end">
+                        <button (click)="addrevenuepay(i)" class="btn bg-success text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div formArrayName="revenuepayFields">
+
+                      <div *ngFor="let field of panel.get('revenuepayFields').controls; let k = index"
+                        [formGroupName]="k" class="row col-12 mb-3">
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_amount" />
+                        </div>
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_notified_person" />
+                        </div>
+                        <div class="col-2 align-self-end">
+                          <button (click)="removerevenuepay(i, k)" class="btn bg-danger text-white"
+                            aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                              fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3 col-12">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Civil
+                        Court Deposit:<span style="color: red;">*</span></label>
+
+                      <div class="col-2 align-self-end">
+                        <button (click)="addcivilpay(i)" class="btn bg-success text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div formArrayName="civilpayFields">
+
+                      <div *ngFor="let field of panel.get('civilpayFields').controls; let k = index" [formGroupName]="k"
+                        class="row col-12 mb-3">
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_amount" />
+                        </div>
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_notified_person" />
+                        </div>
+                        <div class="col-2 align-self-end">
+                          <button (click)="removecivilpay(i, k)" class="btn bg-danger text-white"
+                            aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                              fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
 
                   <div class="row mb-3 col-6">
-                    <label class="col-sm-9 col-form-label" style="font-weight: bold">Date:<span
-                        style="color: red;">*</span></label>
-                    <div class="col-sm-10">
-                      <input matInput type="date" class="form-control" formControlName="d_award_date"  />
+                    <div class="col-sm-10 p-0">
+                      <label class="col-sm-9 col-form-label fs-5 ps-0" style="font-weight: bold;">Possession
+                        Taken Over</label>
                     </div>
                   </div>
 
-                  <div class="row col-6 mb-3">
-                    <label class="col-form-label" style="font-weight: bold">Award File:<span
-                        style="color: red;">*</span></label>
-                    <div class="input-group">
-                      <input type="file" class="form-control" id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="file">
-                      <button type="button" class="ms-2 rounded btn"
-                        style="background-color: #3FB8DE;color: white;">Upload</button>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-6">
-                    <label class="col-sm-9 col-form-label" style="font-weight: bold">Total Extent (in acres):<span
-                        style="color: red;">*</span></label>
-                    <div class="col-sm-10">
-                      <input matInput type="text" class="form-control" formControlName="v_total_extent" />
-                    </div>
-                  </div>
-                   <div class="row mb-3 col-6">
-                    <label class="col-sm-9 col-form-label" style="font-weight: bold">Total Award Amount:<span
-                        style="color: red;">*</span></label>
-                    <div class="col-sm-10">
-                      <input matInput type="text" class="form-control" formControlName="n_total_award_amount" />
-                    </div>
-                  </div>
-
-            <!-- FormArray for repeated fields -->
-              <div formArrayName="repeatedFields">
-              <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
-                     class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
-               <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field1">
-              <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field2">
-            <button (click)="removeRepeatedField(i, j,'Award')" class="btn-close" aria-label="Close"
-             style="background-color: red;"></button>
-            </div>
-           </div>
-
-            <!-- Add button for repeated fields -->
-           <div class="row col-7 mb-3">
-         <button (click)="addRepeatedField(i,'Award')" type="button" class="btn ms-2"
-          style="width: auto;background-color: #3FB8DE;color: white;">Add</button>
-         </div>
-
-
-
-        <div class="row mb-3 col-12">
-            <label class="col-12 col-form-label" style="font-weight: bold">Direct
-              Payment:<span style="color: red;">*</span></label>
-
-            <div class="col-2 align-self-end">
-              <button (click)="adddirectpay(i)" class="btn bg-success text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-plus-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div formArrayName="directpayFields">
-
-          <div  *ngFor="let field of panel.get('directpayFields').controls; let k = index" [formGroupName]="k" class="row col-12 mb-3">
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
-              <input matInput type="text" class="form-control" formControlName="v_amount" />
-            </div>
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
-              <input matInput type="text" class="form-control" formControlName="v_notified_person" />
-            </div>
-            <div class="col-2 align-self-end">
-              <button (click)="removedirectpay(i, k)"  class="btn bg-danger text-white"
-                aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          </div>
-
-
-          <div class="row mb-3 col-12">
-            <label class="col-12 col-form-label" style="font-weight: bold">Revenue
-              Deposit:<span style="color: red;">*</span></label>
-
-            <div class="col-2 align-self-end">
-              <button (click)="addrevenuepay(i)" class="btn bg-success text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-plus-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div formArrayName="revenuepayFields">
-
-          <div  *ngFor="let field of panel.get('revenuepayFields').controls; let k = index" [formGroupName]="k" class="row col-12 mb-3">
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
-              <input matInput type="text" class="form-control" formControlName="v_amount" />
-            </div>
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
-              <input matInput type="text" class="form-control" formControlName="v_notified_person" />
-            </div>
-            <div class="col-2 align-self-end">
-              <button (click)="removerevenuepay(i, k)"  class="btn bg-danger text-white"
-                aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          </div>
-
-
-          <div class="row mb-3 col-12">
-            <label class="col-12 col-form-label" style="font-weight: bold">Civil
-              Court Deposit:<span style="color: red;">*</span></label>
-
-            <div class="col-2 align-self-end">
-              <button (click)="addcivilpay(i)" class="btn bg-success text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-plus-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div formArrayName="civilpayFields">
-
-          <div  *ngFor="let field of panel.get('civilpayFields').controls; let k = index" [formGroupName]="k" class="row col-12 mb-3">
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Amount:</label>
-              <input matInput type="text" class="form-control" formControlName="v_amount" />
-            </div>
-            <div class="col-5">
-              <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Notified Person:</label>
-              <input matInput type="text" class="form-control" formControlName="v_notified_person" />
-            </div>
-            <div class="col-2 align-self-end">
-              <button (click)="removecivilpay(i, k)"  class="btn bg-danger text-white"
-                aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                  fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path
-                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          </div>
-
-        </div>
-
-            <div class="row mb-3 col-6">
-              <div class="col-sm-10 p-0">
-                <label class="col-sm-9 col-form-label fs-5 ps-0" style="font-weight: bold;">Possession
-                  Taken Over</label>
-              </div>
-            </div>
-
-            <div class="row d-flex justify-content-center">
-               <div class="row mb-3">
-                <div class="input-group">
-                  <label for="extent" class="col-4 form-label">Total Extent:</label>
-
-                  <input type="text" class="col-4 form-control" formControlName="pho_v_total_extent">
-
-                </div>
-              </div>
-                <div class="row mb-3 col-12">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Survey No:<span style="color: red;">*</span></label>
-
-                    <div class="col-2 align-self-end">
-                      <button (click)="addpho(i)" class="btn bg-success text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                          class="bi bi-plus-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                          <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div formArrayName="phoFields">
-
-                  <div  *ngFor="let field of panel.get('phoFields').controls; let k = index" [formGroupName]="k" class="row col-12 mb-3">
-                    <div class="col-5">
-                      <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Survey No:</label>
-                      <input matInput type="text" class="form-control" formControlName="v_survey_no" />
-                    </div>
-                    <div class="col-5">
-                      <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Extent:</label>
-                      <input matInput type="text" class="form-control" formControlName="v_total_extent" />
-                    </div>
-                    <div class="col-2 align-self-end">
-                      <button (click)="removepho(i, k)"  class="btn bg-danger text-white"
-                        aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                          fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  </div>
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Court:<span
-                        style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="court_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="court_v_legal_proceeding" />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="court_file" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under want of approach
-                      road:<span style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="road_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="road_v_legal_proceeding"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="road_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under
-                      encroachment:<span style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="enchro_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="enchro_v_legal_proceeding" />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="enchro_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under scattered:<span
-                        style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="scatt_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="scatt_v_legal_proceeding"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="scatt_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under quashed:<span
-                        style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="quash_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="quash_v_legal_proceeding"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="quash_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under reconveyed:<span
-                        style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="recon_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="recon_v_legal_proceeding"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="recon_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3 col-12 px-0">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under NOC issued:<span
-                        style="color: red;">*</span></label>
-                    <div class="row col-12 px-0">
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="noc_v_extent"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                          Status:</label>
-                        <div class="col-sm-10">
-                          <input matInput type="text" class="form-control" formControlName="noc_v_legal_proceeding"  />
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                        <div class="col-sm-10">
-                          <input type="file" class="form-control" formControlName="noc_file"  />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row mb-3 col-12">
-                    <label class="col-12 col-form-label" style="font-weight: bold">Available for Scheme Implementation:<span style="color: red;">*</span></label>
-
+                  <div class="row d-flex justify-content-center">
                     <div class="row mb-3">
                       <div class="input-group">
                         <label for="extent" class="col-4 form-label">Total Extent:</label>
 
-                        <input type="text" class="col-4 form-control" formControlName="phoschme_v_total_extent">
+                        <input type="text" class="col-4 form-control" formControlName="pho_v_total_extent">
 
                       </div>
                     </div>
-                    <div class="col-2 align-self-end">
-                      <button (click)="addphoscheme(i)" class="btn bg-success text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                          class="bi bi-plus-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                          <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                      </button>
+                    <div class="row mb-3 col-12">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Survey No:<span
+                          style="color: red;">*</span></label>
+
+                      <div class="col-2 align-self-end">
+                        <button (click)="addpho(i)" class="btn bg-success text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div formArrayName="phoFields">
+
+                      <div *ngFor="let field of panel.get('phoFields').controls; let k = index" [formGroupName]="k"
+                        class="row col-12 mb-3">
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Survey No:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_survey_no" />
+                        </div>
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Extent:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_total_extent" />
+                        </div>
+                        <div class="col-2 align-self-end">
+                          <button (click)="removepho(i, k)" class="btn bg-danger text-white" aria-label="Close"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Court:<span
+                          style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="court_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="court_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="court_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under want of
+                        approach
+                        road:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="road_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="road_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="road_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under
+                        encroachment:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="enchro_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="enchro_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="enchro_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under
+                        scattered:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="scatt_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="scatt_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="scatt_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under quashed:<span
+                          style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="quash_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="quash_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="quash_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under
+                        reconveyed:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="recon_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control"
+                              formControlName="recon_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="recon_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered under NOC
+                        issued:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="noc_v_extent" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" formControlName="noc_v_legal_proceeding" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" formControlName="noc_file" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3 col-12">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Available for Scheme
+                        Implementation:<span style="color: red;">*</span></label>
+
+                      <div class="row mb-3">
+                        <div class="input-group">
+                          <label for="extent" class="col-4 form-label">Total Extent:</label>
+
+                          <input type="text" class="col-4 form-control" formControlName="phoschme_v_total_extent">
+
+                        </div>
+                      </div>
+                      <div class="col-2 align-self-end">
+                        <button (click)="addphoscheme(i)" class="btn bg-success text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div formArrayName="phoschemeFields">
+
+                      <div *ngFor="let field of panel.get('phoschemeFields').controls; let k = index"
+                        [formGroupName]="k" class="row col-12 mb-3">
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Survey No:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_survey_no" />
+                        </div>
+                        <div class="col-5">
+                          <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Extent:</label>
+                          <input matInput type="text" class="form-control" formControlName="v_total_extent" />
+                        </div>
+                        <div class="col-2 align-self-end">
+                          <button (click)="removephoscheme(i, k)" class="btn bg-danger text-white"
+                            aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                              fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  </div>
+
+
+                  <div class="row mb-3 col-6">
+                    <div class="col-sm-10 p-0">
+                      <label class="col-sm-9 col-form-label fs-5 ps-0" style="font-weight: bold;">Possession Not Handed
+                        Over:</label>
+
                     </div>
                   </div>
 
-                  <div formArrayName="phoschemeFields">
+                  <div class="row d-flex justify-content-center">
 
-                  <div  *ngFor="let field of panel.get('phoschemeFields').controls; let k = index" [formGroupName]="k" class="row col-12 mb-3">
-                    <div class="col-5">
-                      <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Survey No:</label>
-                      <input matInput type="text" class="form-control" formControlName="v_survey_no" />
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Court case:<span
+                          style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" value="" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-5">
-                      <label class="col-sm-9 col-form-label px-0" style="font-weight: bold">Extent:</label>
-                      <input matInput type="text" class="form-control" formControlName="v_total_extent" />
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by
+                        Encroachment:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" value="" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-2 align-self-end">
-                      <button (click)="removephoscheme(i, k)"  class="btn bg-danger text-white"
-                        aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                          fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                      </button>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Quashed:<span
+                          style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" value="" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
+                    <div class="row mb-3 col-12 px-0">
+                      <label class="col-12 col-form-label" style="font-weight: bold">Extent covered without
+                        Encumbrance:<span style="color: red;">*</span></label>
+                      <div class="row col-12 px-0">
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
+                            Status:</label>
+                          <div class="col-sm-10">
+                            <input matInput type="text" class="form-control" value="" />
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
+                          <div class="col-sm-10">
+                            <input type="file" class="form-control" value="" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                  </div>
+                </div>
 
 
-
-
+              </mat-expansion-panel>
             </div>
-
-
-            <div class="row mb-3 col-6">
-              <div class="col-sm-10 p-0">
-                <label class="col-sm-9 col-form-label fs-5 ps-0" style="font-weight: bold;">Possession Not Handed
-                  Over:</label>
-
-                </div>
-              </div>
-
-              <div class="row d-flex justify-content-center">
-
-                <div class="row mb-3 col-12 px-0">
-                  <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Court case:<span
-                      style="color: red;">*</span></label>
-                  <div class="row col-12 px-0">
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                        Status:</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                      <div class="col-sm-10">
-                        <input type="file" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row mb-3 col-12 px-0">
-                  <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Encroachment:<span
-                      style="color: red;">*</span></label>
-                  <div class="row col-12 px-0">
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                        Status:</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                      <div class="col-sm-10">
-                        <input type="file" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row mb-3 col-12 px-0">
-                  <label class="col-12 col-form-label" style="font-weight: bold">Extent covered by Quashed:<span
-                      style="color: red;">*</span></label>
-                  <div class="row col-12 px-0">
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                        Status:</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                      <div class="col-sm-10">
-                        <input type="file" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row mb-3 col-12 px-0">
-                  <label class="col-12 col-form-label" style="font-weight: bold">Extent covered without
-                    Encumbrance:<span style="color: red;">*</span></label>
-                  <div class="row col-12 px-0">
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent (in acres):</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">Legal Proceeding
-                        Status:</label>
-                      <div class="col-sm-10">
-                        <input matInput type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="col-sm-9 col-form-label" style="font-weight: bold">File Upload:</label>
-                      <div class="col-sm-10">
-                        <input type="file" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-</div>
-           
-            
-          </mat-expansion-panel>
-        </div>
-      </form>
+          </form>
         </mat-accordion><br>
         <div class="d-flex justify-content-end">
           <button mat-button matStepperPrevious class="border">Previous</button>

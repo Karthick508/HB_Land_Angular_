@@ -16,7 +16,7 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  {path:'login',component:LoginComponent},
+  {path:'login',component:LoginComponent,pathMatch:'full'},
   { path: 'auth', loadChildren: () => (import('./auth/auth.modules')).then((m) => m.AuthModule) },
   { path: 'land', loadChildren: () => (import('./land/land.module')).then((m) => m.LandModule) },
 

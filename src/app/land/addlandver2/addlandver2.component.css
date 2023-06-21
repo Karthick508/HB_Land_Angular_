@@ -119,13 +119,22 @@
 
 .example-full-width {
   width: 75%;
-  height: 80pxpx;
+  height: 80px;
 }
 
+.example-full-width1 {
+  width: 100%;
+  height: 80px;
+}
 .alignForm {
   width: 82%;
   position: relative;
   left: 15px;
+}
+.alignForms {
+  width: 82%;
+  position: relative;
+  /* left: 15px; */
 }
 .displayFlex {
   display: flex;
@@ -148,4 +157,12 @@
 .line {
   flex-grow: 1;
   border-top: 1px solid #3EB8DE;
+}
+
+mat-icon{
+  cursor: pointer;
+}
+.sub-header{
+  font-size: large;
+  font-weight: bold;
 }
