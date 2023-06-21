@@ -287,19 +287,323 @@ export class Addlandver2Component {
   expansionPanelsAward : FormArray
 
   leftInfoFormGroup!: FormGroup;
-  expansionPanelsLeft : FormArray
+  expansionPanelsLeft : FormArray;
+
+  // Assign Values
+  landDigitDataEntity : LandDigitDataEntity;
+  lpsTabDetails : LpsTabDetail[];
 
   constructor(private builder: FormBuilder, private formBuilder: FormBuilder) { }
   isLinear = true;
 
   ngOnInit(): void {
+
+    const rawData = {
+      "landDigitDataEntity": {
+          "n_ID": 1,
+          "v_NAME_OF_DIVISION": "rural",
+          "v_NAME_OF_DISTRICT": "city",
+          "v_NAME_OF_CIRCLE": "chennai",
+          "v_NAME_OF_GEO_TAGGING": "geo",
+          "v_NAME_OF_SCHEME": "schema",
+          "n_UNIQUE_ID": 1234,
+          "mode":null
+      },
+      "lpsTabDetails": [
+          {
+              "lpsVillageDetails": [
+                  {
+                      "n_ID": 1,
+                      "v_NAME_OF_VILLAGE": "Thanjavur Neighbourhood scheme",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_EXTENT": "789",
+                      "v_SURVEY_NO": "345",
+                      "mode":null
+                  }
+              ],
+              "lpsFileDynamicValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_FILE_PATH": "",
+                      "v_FILE_NAME": "",
+                      "mode":null
+                  }
+              ],
+              "dynamicValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column1",
+                      "mode":null
+                  },
+                  {
+                      "n_ID": 2,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column2",
+                      "mode":null
+                  }
+              ],
+              "n_ID": 1,
+              "n_UNIQUE_ID": 1234,
+              "v_TOTAL_EXTENT": "789",
+              "v_FILE_PATH": "",
+              "v_FILE_NAME": "lps_1_file",
+              "v_REF_NO": "344",
+              "mode":null
+          }
+      ],
+      "fourOneTabDeatils": [
+          {
+              "fourOneDynamicFileEntityDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_FILE_PATH": "",
+                      "v_FILE_NAME": "1",
+                      "v_SURVEY_NO": "GF23456",
+                      "v_SOUTH": "16/06/2022",
+                      "v_WEST": "78900",
+                      "v_NAME_OF_OWNER": "16/06/2021",
+                      "v_NORTH": "16/06/2021",
+                      "v_EAST": "RF-09876"
+                  }
+              ],
+              "dynamicValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column1"
+                  },
+                  {
+                      "n_ID": 2,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column2"
+                  }
+              ],
+              "n_ID": 1,
+              "d_DATE_OF_4_ONE_GO": "16/06/2021",
+              "v_FILE_1_FILENAME": "",
+              "v_FILE_1_FILEPATH": "",
+              "d_DATE_OF_LOCALITY": "16/06/2022",
+              "v_FILE_2_FILEPATH": "",
+              "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+              "v_FILE_2_FILENAME": "",
+              "v_4_ONE_GO_REF_NO": "RF-908",
+              "v_GAZETTE_REF_NO": "GF23456",
+              "n_UNIQUE_ID": 1234,
+              "v_TOTAL_EXTENT": "78900",
+              "v_REF_NO": "RF-09876"
+          }
+      ],
+      "sixDdTabDeatils": [
+          {
+              "sixDdDynamicFileEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_EXTENT": null,
+                      "v_SURVEY_NO": "GF23456",
+                      "v_NAME_OF_OWNER": ""
+                  }
+              ],
+              "dynamicValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column1"
+                  },
+                  {
+                      "n_ID": 2,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column2"
+                  }
+              ],
+              "n_ID": 1,
+              "v_FILE_1_FILENAME": "",
+              "v_FILE_1_FILEPATH": "",
+              "d_DATE_OF_LOCALITY": "16/06/2022",
+              "v_FILE_2_FILEPATH": "",
+              "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+              "v_FILE_2_FILENAME": "",
+              "v_GAZETTE_REF_NO": "GF23456",
+              "d_DATE_OF_6DD_GO": "16/06/2021",
+              "n_UNIQUE_ID": 1234,
+              "v_TOTAL_EXTENT": "78900",
+              "v_REF_NO": "RF-09876",
+              "v_6DD_GO_REF_NO": "RF-908"
+          }
+      ],
+      "awardTabDeatils": [
+          {
+              "awardOtherFileEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "v_LEGAL_PROCEEDING": "yes",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_FILE_PATH": "",
+                      "v_FILE_NAME": "",
+                      "v_EXTENT": "1"
+                  }
+              ],
+              "dynamicValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column1"
+                  },
+                  {
+                      "n_ID": 2,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_COLUMN_NAME": "column2"
+                  }
+              ],
+              "awardDirectPaymentEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "v_NOTIFIED_PERSON": "Yaz",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  },
+                  {
+                      "n_ID": 2,
+                      "v_NOTIFIED_PERSON": "gokul",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  }
+              ],
+              "awardRevenuePaymentEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "v_NOTIFIED_PERSON": "Yaz",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  },
+                  {
+                      "n_ID": 2,
+                      "v_NOTIFIED_PERSON": "gokul",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  }
+              ],
+              "awardCourtDepositPaymentEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "v_NOTIFIED_PERSON": "Yaz",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  },
+                  {
+                      "n_ID": 2,
+                      "v_NOTIFIED_PERSON": "gokul",
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_AMOUNT": 1000.0
+                  }
+              ],
+              "awardPossessionTakenOverEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_TOTAL_EXTENT": "KISHORE",
+                      "v_SURVEY_NO": "5678"
+                  }
+              ],
+              "awardPossessionNotTakenOverEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_TOTAL_EXTENT": "KISHORE",
+                      "v_SURVEY_NO": "5678"
+                  }
+              ],
+              "awardPossessionExtentAvailableEntityValuesDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_FILE_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_TOTAL_EXTENT": "KISHORE",
+                      "v_SURVEY_NO": "5678"
+                  }
+              ],
+              "n_ID": 1,
+              "v_PHO_SCHEME_TOTAL_EXTENT": "987",
+              "v_PHO_TOTAL_EXTENT": "123",
+              "v_PNHO_TOTAL_EXTENT": "768",
+              "n_TOTAL_AWARD_AMOUNT": 45678.0,
+              "n_UNIQUE_ID": 1234,
+              "v_TOTAL_EXTENT": "7890",
+              "v_FILE_PATH": "",
+              "v_AWARD_NO": "7890",
+              "v_FILE_NAME": "",
+              "d_AWARD_DATE": "16/06/2018"
+          }
+      ],
+      "leftoverTabDeatils": [
+          {
+              "left4One6DDEntityDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_EXTENT": "5678",
+                      "v_SURVEY_NO": "5678"
+                  }
+              ],
+              "left6DDAwardRepoEntityDetails": [
+                  {
+                      "n_ID": 1,
+                      "n_UNIQUE_ID": 1234,
+                      "v_EXTENT": "146665",
+                      "v_SURVEY_NO": "4567"
+                  }
+              ],
+              "n_ID": 1,
+              "n_UNIQUE_ID": 1234,
+              "v_EXTENT": "4567",
+              "v_SURVEY_NO": "45678"
+          }
+      ]
+  
+    }
+
+    
+    console.warn("rawdata",rawData);
    
     this.personalInfoFormGroup = this.formBuilder.group({
-      v_name_of_circle: ['', Validators.required],
-      v_name_of_scheme: ['', Validators.required],
-      v_name_of_division: ['', Validators.required],
-      v_name_of_geo_tagging: [''],
-      v_name_of_district: ['', Validators.required],
+      // v_name_of_circle: ['', Validators.required],
+      // v_name_of_scheme: ['', Validators.required],
+      // v_name_of_division: ['', Validators.required],
+      // v_name_of_geo_tagging: [''],
+      // v_name_of_district: ['', Validators.required],
+
+      n_ID: ['', Validators.required],
+      n_UNIQUE_ID: ['', Validators.required],
+      v_NAME_OF_CIRCLE: ['', Validators.required],
+      v_NAME_OF_DISTRICT: [''],
+      v_NAME_OF_DIVISION: ['', Validators.required],
+      v_NAME_OF_GEO_TAGGING: ['', Validators.required],
+      v_NAME_OF_SCHEME: ['', Validators.required],
+      mode: ['', null],
 
     });
 
@@ -347,8 +651,27 @@ export class Addlandver2Component {
     this.addExpansionPanelLeft();
 
 
+     // !!!!!! Set First Tab Values
+
+     this.landDigitDataEntity = rawData.landDigitDataEntity;
+     console.log("first tab entity",this.landDigitDataEntity);
+     this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
+
+    //  !!!!!! Set Second tab Values
+      this.lpsTabDetails = rawData.lpsTabDetails;
+      console.error("lpsTabDetails",this.lpsTabDetails);
+
 
   }
+
+  checkFirstTab(){
+    console.warn("First-Tab",this.personalInfoFormGroup.value);
+   // if FormGroupValueChanges mode = 'edit'
+   }
+ 
+   checkSecondTab(){
+ 
+   }
 
 
 

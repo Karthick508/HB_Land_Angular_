@@ -2,7 +2,7 @@
   <mat-card style="width: 80%;">
     <mat-stepper>
 
-
+      <!-- First Tab Rendering Done - Edit - Update Todo -->
 
       <mat-step [stepControl]="personalInfoFormGroup">
         <form [formGroup]="personalInfoFormGroup">
@@ -13,12 +13,12 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the Circle:</mat-label>
-                  <mat-select formControlName="v_name_of_circle">
+                  <mat-select formControlName="v_NAME_OF_CIRCLE">
                     <mat-option value="chennai">Chennai</mat-option>
                     <mat-option value="trichy">Trichy</mat-option>
                     <mat-option value="madurai">Madurai</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="personalInfoFormGroup.controls['v_name_of_circle'].errors?.required">
+                  <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_CIRCLE'].errors?.required">
                     Circle is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -28,8 +28,8 @@
 
                 <mat-form-field class="example-full-width">
                   <mat-label>Name of the Scheme:</mat-label>
-                  <input matInput type="text" formControlName="v_name_of_scheme" placeholder="">
-                  <mat-error *ngIf="personalInfoFormGroup.controls['v_name_of_scheme'].errors?.required">
+                  <input matInput type="text" formControlName="v_NAME_OF_SCHEME" placeholder="">
+                  <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_SCHEME'].errors?.required">
                     Scheme is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -39,12 +39,12 @@
               <div class=" col-6">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the Division:</mat-label>
-                  <mat-select formControlName="v_name_of_division">
+                  <mat-select formControlName="v_NAME_OF_DIVISION">
                     <mat-option value="city">Anna Nagar</mat-option>
                     <mat-option value="rural">JJ Nagar</mat-option>
                     <mat-option value="rural">Besant Nagar</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="personalInfoFormGroup.controls['v_name_of_division'].errors?.required">
+                  <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_DIVISION'].errors?.required">
                     Division is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -55,7 +55,7 @@
                     </div> -->
                 <mat-form-field class="example-full-width">
                   <mat-label>Geo Tagging:</mat-label>
-                  <input matInput type="text" formControlName="v_name_of_geo_tagging">
+                  <input matInput type="text" formControlName="v_NAME_OF_GEO_TAGGING">
                 </mat-form-field>
               </div>
             </div>
@@ -63,12 +63,12 @@
               <div class=" col-6">
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the District:</mat-label>
-                  <mat-select formControlName="v_name_of_district">
+                  <mat-select formControlName="v_NAME_OF_DISTRICT">
                     <mat-option value="city">Ramapuram</mat-option>
                     <mat-option value="rural">Porur</mat-option>
                     <mat-option value="rural">Valasaravakkam</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="personalInfoFormGroup.controls['v_name_of_district'].errors?.required">
+                  <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_DISTRICT'].errors?.required">
                     District is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
@@ -84,10 +84,34 @@
 
 
           </div>
+          <button  mat-button style="background-color: #f81033;color: white;" class="float-end" (click)="checkFirstTab()"
+            [disabled]="personalInfoFormGroup.invalid">Value</button>
           <button matStepperNext mat-button style="background-color: #3FB8DE;color: white;" class="float-end"
             [disabled]="personalInfoFormGroup.invalid">Next</button>
         </form>
       </mat-step>
+
+
+
+
+
+
+
+
+      <!-- Second Tab -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <mat-step [stepControl]="LPSFormGroup">
         <mat-accordion>
