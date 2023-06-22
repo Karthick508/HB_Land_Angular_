@@ -1,11 +1,12 @@
 <div class="stepperAlign">
   <mat-card style="width: 80%;">
+    <button mat-button style="background-color: #f81033;color: white;" class="float-end"
+        (click)="saveApi()">SaveApi</button>
     <mat-stepper>
 
       <!-- First Tab Rendering Done - Edit - Update Todo -->
 
-      <button mat-button style="background-color: #f81033;color: white;" class="float-end"
-        (click)="saveApi()">SaveApi</button>
+      
 
       <mat-step [stepControl]="personalInfoFormGroup">
         <form [formGroup]="personalInfoFormGroup">
@@ -235,13 +236,13 @@
                             <span>
                               <mat-form-field>
                                 <mat-label>Survey No</mat-label>
-                                <input matInput type="text" formControlName="v_survey_no">
+                                <input matInput type="text" formControlName="v_SURVEY_NO">
                               </mat-form-field>
                             </span>
                             <span>
                               <mat-form-field>
                                 <mat-label>Extend No</mat-label>
-                                <input matInput type="text" formControlName="v_extent">
+                                <input matInput type="text" formControlName="v_EXTENT">
                               </mat-form-field>
                             </span>
                             <span>

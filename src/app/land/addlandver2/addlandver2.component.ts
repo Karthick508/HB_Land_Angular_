@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { CommonService } from 'src/app/services/common.service';
+import { SaveLandApiModel } from '../home/home.component';
 
 
 export interface Root {
@@ -26,6 +27,7 @@ export interface LandDigitDataEntity {
 }
 
 export interface LpsTabDetail {
+  n_FILE_ID: any;
   mode: string;
   lpsVillageDetails: LpsVillageDetail[]
   lpsFileDynamicValuesDetails: LpsFileDynamicValuesDetail[]
@@ -296,6 +298,71 @@ export class Addlandver2Component {
   constructor(private builder: FormBuilder, private formBuilder: FormBuilder, 
     private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService) { }
   isLinear = true;
+
+
+
+  saveApi() {
+
+    const firstTabApiPost: LandDigitDataEntity = this.personalInfoFormGroup.value;
+
+    const secondFormArray = (this.LPSFormGroup.value);
+    console.log("expansionPanels second tab",secondFormArray);
+
+    
+    if (this.firstTabMode === 'create') {
+      firstTabApiPost.mode = 'create';
+      firstTabApiPost.n_UNIQUE_ID = null;
+    } else if (this.firstTabMode === 'edit') {
+      firstTabApiPost.mode = 'edit';
+    }
+
+    let secondTabPostData : any[]= secondFormArray.expansionPanels;
+    console.log("secondTabPostData",secondTabPostData);
+
+    const modifiedSecondPostData =secondTabPostData.map(( secondtab  =>{
+      secondtab.mode = this.secondTabMode;
+      debugger
+
+      const fileName = secondtab.v_FILE_NAME[0].filelps;
+
+      // customFields 
+     const customFields : any[] = secondtab.repeatedFields
+      const modifiedCustomValues = customFields.map((custom)=>{
+        custom.v_COLUMN_NAME = custom.field1;
+        custom.v_VALUE_NAME = custom.field2;
+        custom.n_UNIQUE_ID = 'create';
+        custom.v_FILE_NAME =fileName;
+        custom.n_UNIQUE_ID = this.n_UNIQUE_ID;
+        return custom;
+      })
+      secondtab.repeatedFields = modifiedCustomValues
+
+      secondtab.dynamicValuesDetails = secondtab.repeatedFields;
+      secondtab.v_FILE_NAME =fileName;
+      secondtab.lpsVillageDetails= secondtab.villageFields;
+      return secondtab;
+    }))
+
+
+    console.warn("restructuredSecondtab",modifiedSecondPostData);
+
+    // console.warn("firstTabApiPost", firstTabApiPost)
+
+    const saveApiBody: SaveLandApiModel = {
+      landDigitDataEntity: this.personalInfoFormGroup.value,
+      lpsTabDetails:modifiedSecondPostData,
+      fouroneTabDetails: [],
+      sixddTabDetails: [],
+      awardTabDetails: [],
+    }
+
+    // console.error("saveApiBody", saveApiBody)
+
+    // return;
+    this.commonService.apiPostCall(saveApiBody, 'saveUpdateLandData').subscribe((saveResponse) => {
+      console.log("Save Response", saveResponse);
+    })
+  }
 
   ngOnInit(): void {
 
@@ -832,112 +899,112 @@ export class Addlandver2Component {
      this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
 
     //  !!!!!! Set Second tab Values
-      this.lpsTabDetails = rawData.lpsTabDetails;
+      // this.lpsTabDetails = rawData.lpsTabDetails;
       // console.error("lpsTabDetails",this.lpsTabDetails);
 
 
-      // Second Tab
-      this.lpsTabDetails.forEach( (lapDetail, i) => {
+      // // Second Tab
+      // this.lpsTabDetails.forEach( (lapDetail, i) => {
 
-        const fileNameFormArrayGroup = new FormGroup({
-          'filelps': new FormControl('')
-        })
+      //   const fileNameFormArrayGroup = new FormGroup({
+      //     'filelps': new FormControl('')
+      //   })
 
-        if(!this.expansionPanelsArray.at(i)) {
-          this.expansionPanelsArray.push(new FormGroup({
-            'v_FILE_NAME': new FormArray([fileNameFormArrayGroup]),
-            'v_REF_NO': new FormControl(''),
-            'v_TOTAL_EXTENT': new FormControl(''),
-            'repeatedFields': new FormArray([]),
-            'villageFields': new FormArray([]),
-          }));
-        }
+      //   if(!this.expansionPanelsArray.at(i)) {
+      //     this.expansionPanelsArray.push(new FormGroup({
+      //       'v_FILE_NAME': new FormArray([fileNameFormArrayGroup]),
+      //       'v_REF_NO': new FormControl(''),
+      //       'v_TOTAL_EXTENT': new FormControl(''),
+      //       'repeatedFields': new FormArray([]),
+      //       'villageFields': new FormArray([]),
+      //     }));
+      //   }
 
-        this.changeDetectorRef.detectChanges();
+      //   this.changeDetectorRef.detectChanges();
 
-        const lpsFormGroup = (this.expansionPanelsArray.at(i) as FormGroup);
-        console.log('lpsFormGroup', lpsFormGroup)
+      //   const lpsFormGroup = (this.expansionPanelsArray.at(i) as FormGroup);
+      //   console.log('lpsFormGroup', lpsFormGroup)
 
         
-        const fileNameFormArray = (lpsFormGroup.controls['v_FILE_NAME'] as FormArray);
+      //   const fileNameFormArray = (lpsFormGroup.controls['v_FILE_NAME'] as FormArray);
   
-        // Second Tab - Index 0 - field0
-        const fileNameFormGroup = fileNameFormArray.at(0) as FormGroup;
-        console.log('fileNameFormArray_first', fileNameFormGroup)
-        const apiValueFilelps_0 = this.lpsTabDetails[0].v_FILE_NAME;
-        // TO-DO
-        // fileNameFormGroup.controls['filelps'].setValue(apiValueFilelps_0)
+      //   // Second Tab - Index 0 - field0
+      //   const fileNameFormGroup = fileNameFormArray.at(0) as FormGroup;
+      //   console.log('fileNameFormArray_first', fileNameFormGroup)
+      //   const apiValueFilelps_0 = this.lpsTabDetails[0].v_FILE_NAME;
+      //   // TO-DO
+      //   // fileNameFormGroup.controls['filelps'].setValue(apiValueFilelps_0)
   
-        // Second Tab - Index 0 - field1
-        lpsFormGroup.controls['v_REF_NO'].setValue(this.lpsTabDetails[i].v_REF_NO);
+      //   // Second Tab - Index 0 - field1
+      //   lpsFormGroup.controls['v_REF_NO'].setValue(this.lpsTabDetails[i].v_REF_NO);
   
-        // Second Tab - Index 0 - field2
-        lpsFormGroup.controls['v_TOTAL_EXTENT'].setValue(this.lpsTabDetails[i].v_TOTAL_EXTENT);
+      //   // Second Tab - Index 0 - field2
+      //   lpsFormGroup.controls['v_TOTAL_EXTENT'].setValue(this.lpsTabDetails[i].v_TOTAL_EXTENT);
   
-        // Second Tab - Index 0 - field3
-        const apiValue_customField: any[] = this.lpsTabDetails[i].dynamicValuesDetails;
+      //   // Second Tab - Index 0 - field3
+      //   const apiValue_customField: any[] = this.lpsTabDetails[i].dynamicValuesDetails;
         
   
-        const customFieldFormArray = (lpsFormGroup.controls['repeatedFields'] as FormArray);
-        for(let i=0; i<apiValue_customField.length; i++){
-          const apiValue_customField_group = apiValue_customField[i];
-          const apiValue_customField_group_first1Value = apiValue_customField_group.v_COLUMN_NAME;
-          const apiValue_customField_group_first2Value = apiValue_customField_group.V_VALUE_NAME;
-          if(customFieldFormArray.at(i)) {
-            const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
+      //   const customFieldFormArray = (lpsFormGroup.controls['repeatedFields'] as FormArray);
+      //   for(let i=0; i<apiValue_customField.length; i++){
+      //     const apiValue_customField_group = apiValue_customField[i];
+      //     const apiValue_customField_group_first1Value = apiValue_customField_group.v_COLUMN_NAME;
+      //     const apiValue_customField_group_first2Value = apiValue_customField_group.V_VALUE_NAME;
+      //     if(customFieldFormArray.at(i)) {
+      //       const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
   
-            const field1FormControl = firstCustomFieldFormGroup.get('field1') as FormControl;
-            if(field1FormControl){
-              field1FormControl.setValue(apiValue_customField_group_first1Value)
-            }
-            else{
-              firstCustomFieldFormGroup.addControl('field1', apiValue_customField_group_first1Value)
-            }
+      //       const field1FormControl = firstCustomFieldFormGroup.get('field1') as FormControl;
+      //       if(field1FormControl){
+      //         field1FormControl.setValue(apiValue_customField_group_first1Value)
+      //       }
+      //       else{
+      //         firstCustomFieldFormGroup.addControl('field1', apiValue_customField_group_first1Value)
+      //       }
   
-            const field2FormControl = firstCustomFieldFormGroup.get('field2') as FormControl;
-            if(field2FormControl){
-              field2FormControl.setValue(apiValue_customField_group_first2Value)
-            }
-            else{
-              firstCustomFieldFormGroup.addControl('field2', apiValue_customField_group_first2Value)
-            }
-          }
-          else{
-            const newFormGroup = new FormGroup({
-              'field1': new FormControl(apiValue_customField_group_first1Value),
-              'field2': new FormControl(apiValue_customField_group_first2Value),
-            })
-            customFieldFormArray.push(newFormGroup);
-          }
-        }
+      //       const field2FormControl = firstCustomFieldFormGroup.get('field2') as FormControl;
+      //       if(field2FormControl){
+      //         field2FormControl.setValue(apiValue_customField_group_first2Value)
+      //       }
+      //       else{
+      //         firstCustomFieldFormGroup.addControl('field2', apiValue_customField_group_first2Value)
+      //       }
+      //     }
+      //     else{
+      //       const newFormGroup = new FormGroup({
+      //         'field1': new FormControl(apiValue_customField_group_first1Value),
+      //         'field2': new FormControl(apiValue_customField_group_first2Value),
+      //       })
+      //       customFieldFormArray.push(newFormGroup);
+      //     }
+      //   }
   
-        // Second Tab - Index 0 - field4
-        const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;      
+      //   // Second Tab - Index 0 - field4
+      //   const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;      
   
-        const villageFieldsFormArray = (lpsFormGroup.controls['villageFields'] as FormArray);
-        let newFormGroup = new FormGroup({
-          'v_name_of_village': new FormControl(apiValue_village[i].v_NAME_OF_VILLAGE),
-          'villageNoFields': new FormArray([]),
-        })
+      //   const villageFieldsFormArray = (lpsFormGroup.controls['villageFields'] as FormArray);
+      //   let newFormGroup = new FormGroup({
+      //     'v_name_of_village': new FormControl(apiValue_village[i].v_NAME_OF_VILLAGE),
+      //     'villageNoFields': new FormArray([]),
+      //   })
         
-        for(let i=0; i<apiValue_village.length; i++){
-          const apiValue_village_group = apiValue_village[i];
-          const apiValue_village_group_surveyNo = apiValue_village_group.v_SURVEY_NO;
-          const apiValue_village_group_extent = apiValue_village_group.v_EXTENT
-          if(villageFieldsFormArray.at(i)) {
+      //   for(let i=0; i<apiValue_village.length; i++){
+      //     const apiValue_village_group = apiValue_village[i];
+      //     const apiValue_village_group_surveyNo = apiValue_village_group.v_SURVEY_NO;
+      //     const apiValue_village_group_extent = apiValue_village_group.v_EXTENT
+      //     if(villageFieldsFormArray.at(i)) {
   
-          }
-          else{
-            const villageNoFields = new FormGroup({
-              'v_survey_no': new FormControl(apiValue_village_group_surveyNo),
-              'v_extent': new FormControl(apiValue_village_group_extent),
-            })
-            newFormGroup.controls['villageNoFields'].push(villageNoFields)
-          }
-        }
-        villageFieldsFormArray.push(newFormGroup);
+      //     }
+      //     else{
+      //       const villageNoFields = new FormGroup({
+      //         'v_survey_no': new FormControl(apiValue_village_group_surveyNo),
+      //         'v_extent': new FormControl(apiValue_village_group_extent),
+      //       })
+      //       newFormGroup.controls['villageNoFields'].push(villageNoFields)
+      //     }
+      //   }
+      //   villageFieldsFormArray.push(newFormGroup);
 
-      })
+      // })
       
 
       // Third tab
@@ -1121,34 +1188,145 @@ export class Addlandver2Component {
         console.log("Api First Tab Data", this.landDigitDataEntity);
         this.n_UNIQUE_ID = this.landDigitDataEntity.n_UNIQUE_ID;
         this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
+
+
+        // lps data 
+        this.lpsTabDetails = mainApiData.data.lpsTabDetails;
+        console.error("secondTab Api data",mainApiData.data.lpsTabDetails)
+        // Second Tab - Index 0
+    this.lpsTabDetails.forEach((lapDetail, i) => {
+
+      const fileNameFormArrayGroup = new FormGroup({
+        'filelps': new FormControl(''),
+        'n_FILE_ID' : new FormControl('')
+      })
+
+      if (!this.expansionPanelsArray.at(i)) {
+        this.expansionPanelsArray.push(new FormGroup({
+          'v_FILE_NAME': new FormArray([fileNameFormArrayGroup]),
+          'v_REF_NO': new FormControl(''),
+          'v_TOTAL_EXTENT': new FormControl(''),
+          'repeatedFields': new FormArray([]),
+          'villageFields': new FormArray([]),
+        }));
+      }
+
+      this.changeDetectorRef.detectChanges();
+
+      const lpsFormGroup = (this.expansionPanelsArray.at(i) as FormGroup);
+      console.log('lpsFormGroup', lpsFormGroup)
+
+
+      const fileNameFormArray = (lpsFormGroup.controls['v_FILE_NAME'] as FormArray);
+
+      // Second Tab - Index 0 - field0
+      const fileNameFormGroup = fileNameFormArray.at(0) as FormGroup;
+      console.log('fileNameFormArray_first', fileNameFormGroup)
+      const apiValueFilelps_0 = this.lpsTabDetails[0].v_FILE_NAME;
+      const apiValueFilelpsId_0 = this.lpsTabDetails[0].n_FILE_ID;
+      // TO-DO
+      // fileNameFormGroup.controls['filelps'].setValue(apiValueFilelps_0)
+
+      // Second Tab - Index 0 - field1
+      lpsFormGroup.controls['v_REF_NO'].setValue(this.lpsTabDetails[i].v_REF_NO);
+
+      // Second Tab - Index 0 - field2
+      lpsFormGroup.controls['v_TOTAL_EXTENT'].setValue(this.lpsTabDetails[i].v_TOTAL_EXTENT);
+
+      // Second Tab - Index 0 - field3
+      const apiValue_customField: any[] = this.lpsTabDetails[i].dynamicValuesDetails;
+
+
+      const customFieldFormArray = (lpsFormGroup.controls['repeatedFields'] as FormArray);
+      for (let i = 0; i < apiValue_customField.length; i++) {
+
+        const apiValue_customField_group = apiValue_customField[i];
+        const apiValue_customField_group_first1Value = apiValue_customField_group.v_COLUMN_NAME;
+        const apiValue_customField_group_first2Value = apiValue_customField_group.v_VALUE_NAME;
+        this.changeDetectorRef.detectChanges();
+        if (customFieldFormArray.at(i)) {
+          const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
+
+          const field1FormControl = firstCustomFieldFormGroup.get('field1') as FormControl;
+          if (field1FormControl) {
+            field1FormControl.setValue(apiValue_customField_group_first1Value)
+          }
+          else {
+            firstCustomFieldFormGroup.addControl('field1', apiValue_customField_group_first1Value)
+          }
+
+          const field2FormControl = firstCustomFieldFormGroup.get('field2') as FormControl;
+          if (field2FormControl) {
+            field2FormControl.setValue(apiValue_customField_group_first2Value)
+          }
+          else {
+            firstCustomFieldFormGroup.addControl('field2', apiValue_customField_group_first2Value)
+          }
+        }
+        else {
+          const newFormGroup = new FormGroup({
+            'field1': new FormControl(apiValue_customField_group_first1Value),
+            'field2': new FormControl(apiValue_customField_group_first2Value),
+          })
+          customFieldFormArray.push(newFormGroup);
+        }
+      }
+
+      // Second Tab - Index 0 - field4
+      const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;
+
+      const villageFieldsFormArray = (lpsFormGroup.controls['villageFields'] as FormArray);
+      let newFormGroup = new FormGroup({
+        'v_name_of_village': new FormControl(apiValue_village[i]?.v_NAME_OF_VILLAGE),
+        'villageNoFields': new FormArray([]),
+      })
+
+      for (let i = 0; i < apiValue_village.length; i++) {
+        const apiValue_village_group = apiValue_village[i];
+        const apiValue_village_group_surveyNo = apiValue_village_group.v_SURVEY_NO;
+        const apiValue_village_group_extent = apiValue_village_group.v_EXTENT
+        if (villageFieldsFormArray.at(i)) {
+
+        }
+        else {
+          const villageNoFields = new FormGroup({
+            'v_SURVEY_NO': new FormControl(apiValue_village_group_surveyNo),
+            'v_EXTENT': new FormControl(apiValue_village_group_extent),
+          })
+          newFormGroup.controls['villageNoFields'].push(villageNoFields)
+        }
+      }
+      villageFieldsFormArray.push(newFormGroup);
+
+    })
       }
     });
   }
 
-  saveApi() {
+  // saveApi() {
 
-    const firstTabApiPost: LandDigitDataEntity = this.personalInfoFormGroup.value;
+  //   const firstTabApiPost: LandDigitDataEntity = this.personalInfoFormGroup.value;
 
-    const secondFormArray = (this.LPSFormGroup.value);
-    console.log("expansionPanels second tab",secondFormArray);
+  //   const secondFormArray = (this.LPSFormGroup.value);
+  //   console.log("expansionPanels second tab",secondFormArray);
 
     
-    if (this.firstTabMode === 'create') {
-      firstTabApiPost.mode = 'create';
-      firstTabApiPost.n_UNIQUE_ID = null;
-    } else if (this.firstTabMode === 'edit') {
-      firstTabApiPost.mode = 'edit';
-    }
+  //   if (this.firstTabMode === 'create') {
+  //     firstTabApiPost.mode = 'create';
+  //     firstTabApiPost.n_UNIQUE_ID = null;
+  //   } else if (this.firstTabMode === 'edit') {
+  //     firstTabApiPost.mode = 'edit';
+  //   }
 
-    let secondTabPostData : any[]= secondFormArray.expansionPanels;
-    console.log("secondTabPostData",secondTabPostData);
+  //   let secondTabPostData : any[]= secondFormArray.expansionPanels;
+  //   console.log("secondTabPostData",secondTabPostData);
 
-    const modifiedSecondPostData =secondTabPostData.map(( secondtab  =>{
-      secondtab.mode = this.secondTabMode;
-      secondtab.dynamicValuesDetails = secondtab.repeatedFields;
-      return secondtab;
-    }))
-  }
+  //   const modifiedSecondPostData =secondTabPostData.map(( secondtab  =>{
+  //     secondtab.mode = this.secondTabMode;
+  //     secondtab.dynamicValuesDetails = secondtab.repeatedFields;
+  //     return secondtab;
+  //   }))
+  // }
 
   getFormattedStringForDateInput(inputDate: string) {
     let resp = ''
