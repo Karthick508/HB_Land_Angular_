@@ -4,6 +4,9 @@
 
       <!-- First Tab Rendering Done - Edit - Update Todo -->
 
+      <button mat-button style="background-color: #f81033;color: white;" class="float-end"
+        (click)="saveApi()">SaveApi</button>
+
       <mat-step [stepControl]="personalInfoFormGroup">
         <form [formGroup]="personalInfoFormGroup">
           <ng-template matStepLabel>Enter Land Details</ng-template>

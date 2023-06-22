@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { CommonService } from 'src/app/services/common.service';
 
 
 export interface Root {
@@ -24,6 +26,7 @@ export interface LandDigitDataEntity {
 }
 
 export interface LpsTabDetail {
+  mode: string;
   lpsVillageDetails: LpsVillageDetail[]
   lpsFileDynamicValuesDetails: LpsFileDynamicValuesDetail[]
   dynamicValuesDetails: DynamicValuesDetail[]
@@ -63,7 +66,7 @@ export interface DynamicValuesDetail {
 
 export interface FourOneTabDeatil {
   fourOneDynamicFileEntityDetails: FourOneDynamicFileEntityDetail[]
-  dynamicValuesDetails: DynamicValuesDetail2[]
+  dynamicValuesDetails: DynamicValuesDetail[]
   n_ID: number
   d_DATE_OF_4_ONE_GO: string
   v_FILE_1_FILENAME: string
@@ -90,19 +93,13 @@ export interface FourOneDynamicFileEntityDetail {
   v_WEST: string
   v_NAME_OF_OWNER: string
   v_NORTH: string
-  v_EAST: string
-}
-
-export interface DynamicValuesDetail2 {
-  n_ID: number
-  n_FILE_ID: number
-  n_UNIQUE_ID: number
-  v_COLUMN_NAME: string
+  v_EAST: string;
+  v_EXTENT_NO: string;
 }
 
 export interface SixDdTabDeatil {
   sixDdDynamicFileEntityValuesDetails: SixDdDynamicFileEntityValuesDetail[]
-  dynamicValuesDetails: DynamicValuesDetail3[]
+  dynamicValuesDetails: DynamicValuesDetail[]
   n_ID: number
   v_FILE_1_FILENAME: string
   v_FILE_1_FILEPATH: string
@@ -127,12 +124,6 @@ export interface SixDdDynamicFileEntityValuesDetail {
   v_NAME_OF_OWNER: string
 }
 
-export interface DynamicValuesDetail3 {
-  n_ID: number
-  n_FILE_ID: number
-  n_UNIQUE_ID: number
-  v_COLUMN_NAME: string
-}
 
 export interface AwardTabDeatil {
   awardOtherFileEntityValuesDetails: AwardOtherFileEntityValuesDetail[]
@@ -294,11 +285,23 @@ export class Addlandver2Component {
   // Assign Values
   landDigitDataEntity : LandDigitDataEntity;
   lpsTabDetails : LpsTabDetail[];
+  fourOneTabDeatils : FourOneTabDeatil[]
+  sixDDDeatils : SixDdTabDeatil[]
 
-  constructor(private builder: FormBuilder, private formBuilder: FormBuilder, private changeDetectorRef: ChangeDetectorRef) { }
+  allLandData: Root;
+  n_UNIQUE_ID: number;
+  firstTabMode = 'create' || 'edit' || 'delete';
+  secondTabMode = 'create' || 'edit' || 'delete';
+
+  constructor(private builder: FormBuilder, private formBuilder: FormBuilder, 
+    private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService) { }
   isLinear = true;
 
   ngOnInit(): void {
+
+    this.callApi();
+    this.firstTabMode = 'edit';
+    this.secondTabMode = 'create';
 
     const rawData = {
       "landDigitDataEntity": {
@@ -437,11 +440,12 @@ export class Addlandver2Component {
                       "v_FILE_PATH": "",
                       "v_FILE_NAME": "1",
                       "v_SURVEY_NO": "GF23456",
-                      "v_SOUTH": "16/06/2022",
-                      "v_WEST": "78900",
-                      "v_NAME_OF_OWNER": "16/06/2021",
-                      "v_NORTH": "16/06/2021",
-                      "v_EAST": "RF-09876"
+                      "v_SOUTH": "78901",
+                      "v_WEST": "78902",
+                      "v_NAME_OF_OWNER": "RF-09876",
+                      "v_NORTH": "78903",
+                      "v_EAST": "78904",
+                      "v_EXTENT_NO": "1234",
                   }
               ],
               "dynamicValuesDetails": [
@@ -449,13 +453,17 @@ export class Addlandver2Component {
                       "n_ID": 1,
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1"
+                      "v_COLUMN_NAME": "column1",
+                      "V_VALUE_NAME": "value1",
+                      "mode":null,
                   },
                   {
                       "n_ID": 2,
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2"
+                      "v_COLUMN_NAME": "column2",
+                      "V_VALUE_NAME": "value2",
+                      "mode":null,
                   }
               ],
               "n_ID": 1,
@@ -471,7 +479,56 @@ export class Addlandver2Component {
               "n_UNIQUE_ID": 1234,
               "v_TOTAL_EXTENT": "78900",
               "v_REF_NO": "RF-09876"
-          }
+          },
+          {
+            "fourOneDynamicFileEntityDetails": [
+                {
+                  "n_ID": 1,
+                  "n_FILE_ID": 1,
+                  "n_UNIQUE_ID": 1234,
+                  "v_FILE_PATH": "",
+                  "v_FILE_NAME": "1",
+                  "v_SURVEY_NO": "GF23456",
+                  "v_SOUTH": "88901",
+                  "v_WEST": "88902",
+                  "v_NAME_OF_OWNER": "RF-09876",
+                  "v_NORTH": "88903",
+                  "v_EAST": "88904",
+                  "v_EXTENT_NO": "1234",
+              }
+            ],
+            "dynamicValuesDetails": [
+              {
+                  "n_ID": 1,
+                  "n_FILE_ID": 1,
+                  "n_UNIQUE_ID": 1234,
+                  "v_COLUMN_NAME": "column1",
+                  "V_VALUE_NAME": "value1",
+                  "mode":null,
+              },
+              {
+                  "n_ID": 2,
+                  "n_FILE_ID": 1,
+                  "n_UNIQUE_ID": 1234,
+                  "v_COLUMN_NAME": "column2",
+                  "V_VALUE_NAME": "value2",
+                  "mode":null,
+              }
+            ],
+            "n_ID": 1,
+            "d_DATE_OF_4_ONE_GO": "16/06/2021",
+            "v_FILE_1_FILENAME": "",
+            "v_FILE_1_FILEPATH": "",
+            "d_DATE_OF_LOCALITY": "16/06/2022",
+            "v_FILE_2_FILEPATH": "",
+            "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+            "v_FILE_2_FILENAME": "",
+            "v_4_ONE_GO_REF_NO": "RF-908",
+            "v_GAZETTE_REF_NO": "GF23456",
+            "n_UNIQUE_ID": 1234,
+            "v_TOTAL_EXTENT": "78900",
+            "v_REF_NO": "RF-09876"
+        },
       ],
       "sixDdTabDeatils": [
           {
@@ -490,13 +547,17 @@ export class Addlandver2Component {
                       "n_ID": 1,
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1"
+                      "v_COLUMN_NAME": "column1",
+                      "V_VALUE_NAME": "value1",
+                      "mode":null,
                   },
                   {
                       "n_ID": 2,
                       "n_FILE_ID": 1,
                       "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2"
+                      "v_COLUMN_NAME": "column2",
+                      "V_VALUE_NAME": "value2",
+                      "mode":null,
                   }
               ],
               "n_ID": 1,
@@ -512,7 +573,50 @@ export class Addlandver2Component {
               "v_TOTAL_EXTENT": "78900",
               "v_REF_NO": "RF-09876",
               "v_6DD_GO_REF_NO": "RF-908"
-          }
+          },
+          {
+            "sixDdDynamicFileEntityValuesDetails": [
+                {
+                    "n_ID": 1,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_EXTENT": '1234',
+                    "v_SURVEY_NO": "GF23456",
+                    "v_NAME_OF_OWNER": ""
+                }
+            ],
+            "dynamicValuesDetails": [
+                {
+                    "n_ID": 1,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_COLUMN_NAME": "column1",
+                    "V_VALUE_NAME": "value1",
+                    "mode":null,
+                },
+                {
+                    "n_ID": 2,
+                    "n_FILE_ID": 1,
+                    "n_UNIQUE_ID": 1234,
+                    "v_COLUMN_NAME": "column2",
+                    "V_VALUE_NAME": "value2",
+                    "mode":null,
+                }
+            ],
+            "n_ID": 1,
+            "v_FILE_1_FILENAME": "",
+            "v_FILE_1_FILEPATH": "",
+            "d_DATE_OF_LOCALITY": "16/06/2022",
+            "v_FILE_2_FILEPATH": "",
+            "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+            "v_FILE_2_FILENAME": "",
+            "v_GAZETTE_REF_NO": "GF23456",
+            "d_DATE_OF_6DD_GO": "16/06/2021",
+            "n_UNIQUE_ID": 1234,
+            "v_TOTAL_EXTENT": "78900",
+            "v_REF_NO": "RF-09876",
+            "v_6DD_GO_REF_NO": "RF-908"
+        }
       ],
       "awardTabDeatils": [
           {
@@ -666,8 +770,8 @@ export class Addlandver2Component {
       // v_name_of_geo_tagging: [''],
       // v_name_of_district: ['', Validators.required],
 
-      n_ID: ['', Validators.required],
-      n_UNIQUE_ID: ['', Validators.required],
+      n_ID: ['',],
+      n_UNIQUE_ID: ['',],
       v_NAME_OF_CIRCLE: ['', Validators.required],
       v_NAME_OF_DISTRICT: [''],
       v_NAME_OF_DIVISION: ['', Validators.required],
@@ -729,10 +833,10 @@ export class Addlandver2Component {
 
     //  !!!!!! Set Second tab Values
       this.lpsTabDetails = rawData.lpsTabDetails;
-      console.error("lpsTabDetails",this.lpsTabDetails);
+      // console.error("lpsTabDetails",this.lpsTabDetails);
 
 
-      // Second Tab - Index 0
+      // Second Tab
       this.lpsTabDetails.forEach( (lapDetail, i) => {
 
         const fileNameFormArrayGroup = new FormGroup({
@@ -836,8 +940,160 @@ export class Addlandver2Component {
       })
       
 
+      // Third tab
+      this.fourOneTabDeatils = rawData.fourOneTabDeatils;
+      console.error("fourOneTabDeatils",this.fourOneTabDeatils);
+      this.fourOneTabDeatils.forEach((thirdDetail, i) => {
 
-      // Second Tab - Index 1 to all
+        if (!this.expansionPanelsArray4.at(i)) {
+          this.expansionPanelsArray4.push(new FormGroup({
+            'v_gazette_ref_no': new FormControl(''),
+            'v_4_one_go_ref_no': new FormControl(''),
+            'd_date_of_4_one_go': new FormControl(''),
+            'd_date_of_gazette_notification': new FormControl(''),
+            'd_date_of_locality': new FormControl(''),
+            'file': new FormControl(''),
+            'file2': new FormControl(''),
+            'v_ref_no': new FormControl(''),
+            'v_total_extent': new FormControl(''),
+            'repeatedFields': new FormArray([]),
+            'ownerFields': new FormArray([]),
+          }));
+        }
+
+        this.changeDetectorRef.detectChanges();
+
+        const fourOneFormGroup = (this.expansionPanelsArray4.at(i) as FormGroup);
+        console.log('fourOneFormGroup', fourOneFormGroup)
+
+        fourOneFormGroup.controls['v_gazette_ref_no'].setValue(this.fourOneTabDeatils[i].v_GAZETTE_REF_NO);
+        fourOneFormGroup.controls['v_4_one_go_ref_no'].setValue(this.fourOneTabDeatils[i].v_4_ONE_GO_REF_NO);
+        const d_DATE_OF_4_ONE_GO_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_4_ONE_GO)
+        const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+        const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_LOCALITY)
+        fourOneFormGroup.controls['d_date_of_4_one_go'].setValue(d_DATE_OF_4_ONE_GO_format);
+        fourOneFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+        fourOneFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+        // fourOneFormGroup.controls['file'].setValue(this.fourOneTabDeatils[i].v_FILE_1_FILENAME);
+        // fourOneFormGroup.controls['file2'].setValue(this.fourOneTabDeatils[i].v_FILE_2_FILENAME);
+        fourOneFormGroup.controls['v_ref_no'].setValue(this.fourOneTabDeatils[i].v_REF_NO);
+        fourOneFormGroup.controls['v_total_extent'].setValue(this.fourOneTabDeatils[i].v_TOTAL_EXTENT);
+
+        const apiValue_dynamicValuesDetails = this.fourOneTabDeatils[i].dynamicValuesDetails;      
+        const repeatedFieldsFormArray = (fourOneFormGroup.controls['repeatedFields'] as FormArray);
+        for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+          const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+          const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+          if(!repeatedFieldsFormArray.at(i)) {
+            repeatedFieldsFormArray.push(new FormGroup({
+              'field1': new FormControl(''),
+              'field2': new FormControl(''),
+            }))
+          }
+          const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+          repeatedField.controls['field1'].setValue(apiValue_dynamicValues_group_field1);
+          repeatedField.controls['field2'].setValue(apiValue_dynamicValues_group_field2);
+        }
+
+        const apiValue_fourOneDynamicFileEntity = this.fourOneTabDeatils[i].fourOneDynamicFileEntityDetails;      
+        const ownerFieldsFormArray = (fourOneFormGroup.controls['ownerFields'] as FormArray);
+        for(let i=0; i<apiValue_fourOneDynamicFileEntity.length; i++){
+          const apiValue_fourOneDynamicFileEntity_group = apiValue_fourOneDynamicFileEntity[i];
+          if(!ownerFieldsFormArray.at(i)) {
+            ownerFieldsFormArray.push(new FormGroup({
+              'v_survey_no': new FormControl(''),
+              'v_extent': new FormControl(''),
+              'v_name_of_owner': new FormControl(''),
+              'v_east': new FormControl(''),
+              'v_west': new FormControl(''),
+              'v_north': new FormControl(''),
+              'v_south': new FormControl(''),
+            }))
+          }
+          const ownerField = ownerFieldsFormArray.at(i) as FormGroup;
+          ownerField.controls['v_survey_no'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SURVEY_NO);
+          ownerField.controls['v_extent'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EXTENT_NO);
+          ownerField.controls['v_name_of_owner'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NAME_OF_OWNER);
+          ownerField.controls['v_east'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EAST);
+          ownerField.controls['v_west'].setValue(apiValue_fourOneDynamicFileEntity_group.v_WEST);
+          ownerField.controls['v_north'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NORTH);
+          ownerField.controls['v_south'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SOUTH);
+        }
+      })
+
+
+      // Fourth tab
+      this.sixDDDeatils = rawData.sixDdTabDeatils;
+      console.error("sixDDDeatils",this.sixDDDeatils);
+      this.sixDDDeatils.forEach((fourthDetail, i) => {
+        if (!this.expansionPanelsSixDD.at(i)) {
+          this.expansionPanelsSixDD.push(new FormGroup({
+            'v_gazette_ref_no': new FormControl(''),
+            'v_6dd_go_ref_no': new FormControl(''),
+            'd_date_of_6dd_go': new FormControl(''),
+            'd_date_of_gazette_notification': new FormControl(''),
+            'd_date_of_locality': new FormControl(''),
+            'file': new FormControl(''),
+            'file2': new FormControl(''),
+            'v_ref_no': new FormControl(''),
+            'v_total_extent': new FormControl(''),
+            'repeatedFields': new FormArray([]),
+            'sixddFields': new FormArray([]),
+          }));
+        }
+
+        this.changeDetectorRef.detectChanges();
+
+        const sixDDFormGroup = (this.expansionPanelsSixDD.at(i) as FormGroup);
+        console.log('sixDDFormGroup', sixDDFormGroup)
+
+        sixDDFormGroup.controls['v_gazette_ref_no'].setValue(this.sixDDDeatils[i].v_GAZETTE_REF_NO);
+        sixDDFormGroup.controls['v_6dd_go_ref_no'].setValue(this.sixDDDeatils[i].v_6DD_GO_REF_NO);
+        const d_DATE_OF_6DD_GO_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_6DD_GO)
+        const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+        const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_LOCALITY)
+        sixDDFormGroup.controls['d_date_of_6dd_go'].setValue(d_DATE_OF_6DD_GO_format);
+        sixDDFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+        sixDDFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+        // sixDDFormGroup.controls['file'].setValue(this.sixDDDeatils[i].v_FILE_1_FILENAME);
+        // sixDDFormGroup.controls['file2'].setValue(this.sixDDDeatils[i].v_FILE_2_FILENAME);
+        sixDDFormGroup.controls['v_ref_no'].setValue(this.sixDDDeatils[i].v_REF_NO);
+        sixDDFormGroup.controls['v_total_extent'].setValue(this.sixDDDeatils[i].v_TOTAL_EXTENT);
+
+        const apiValue_dynamicValuesDetails = this.sixDDDeatils[i].dynamicValuesDetails;      
+        const repeatedFieldsFormArray = (sixDDFormGroup.controls['repeatedFields'] as FormArray);
+        for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+          const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+          const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+          if(!repeatedFieldsFormArray.at(i)) {
+            repeatedFieldsFormArray.push(new FormGroup({
+              'field1': new FormControl(''),
+              'field2': new FormControl(''),
+            }))
+          }
+          const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+          repeatedField.controls['field1'].setValue(apiValue_dynamicValues_group_field1);
+          repeatedField.controls['field2'].setValue(apiValue_dynamicValues_group_field2);
+        }
+
+        const apiValue_sixDDynamicFileEntity = this.sixDDDeatils[i].sixDdDynamicFileEntityValuesDetails;      
+        const sixddFieldsFormArray = (sixDDFormGroup.controls['sixddFields'] as FormArray);
+        for(let i=0; i<apiValue_sixDDynamicFileEntity.length; i++){
+          const apiValue_sixDDynamicFileEntity_group = apiValue_sixDDynamicFileEntity[i];
+          if(!sixddFieldsFormArray.at(i)) {
+            sixddFieldsFormArray.push(new FormGroup({
+              'v_survey_no': new FormControl(''),
+              'v_extent': new FormControl(''),
+            }))
+          }
+          const sixddField = sixddFieldsFormArray.at(i) as FormGroup;
+          sixddField.controls['v_survey_no'].setValue(apiValue_sixDDynamicFileEntity_group.v_SURVEY_NO);
+          sixddField.controls['v_extent'].setValue(apiValue_sixDDynamicFileEntity_group.v_EXTENT);
+        }
+
+      });
 
   }
 
@@ -849,6 +1105,69 @@ export class Addlandver2Component {
    checkSecondTab(){
  
    }
+
+   callApi() {
+
+    const apiBodyMain = {
+      "id": Number(1234)
+    }
+    this.commonService.apiPostCall(apiBodyMain, 'getAllLandDigitDatas').subscribe((mainApiData) => {
+      console.log("MainData", mainApiData);
+      this.allLandData = mainApiData.data;
+      console.warn("this.allLandData", this.allLandData)
+      if (this.allLandData) {
+        // api data 
+        this.landDigitDataEntity = mainApiData.data.landDigitDataEntity;
+        console.log("Api First Tab Data", this.landDigitDataEntity);
+        this.n_UNIQUE_ID = this.landDigitDataEntity.n_UNIQUE_ID;
+        this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
+      }
+    });
+  }
+
+  saveApi() {
+
+    const firstTabApiPost: LandDigitDataEntity = this.personalInfoFormGroup.value;
+
+    const secondFormArray = (this.LPSFormGroup.value);
+    console.log("expansionPanels second tab",secondFormArray);
+
+    
+    if (this.firstTabMode === 'create') {
+      firstTabApiPost.mode = 'create';
+      firstTabApiPost.n_UNIQUE_ID = null;
+    } else if (this.firstTabMode === 'edit') {
+      firstTabApiPost.mode = 'edit';
+    }
+
+    let secondTabPostData : any[]= secondFormArray.expansionPanels;
+    console.log("secondTabPostData",secondTabPostData);
+
+    const modifiedSecondPostData =secondTabPostData.map(( secondtab  =>{
+      secondtab.mode = this.secondTabMode;
+      secondtab.dynamicValuesDetails = secondtab.repeatedFields;
+      return secondtab;
+    }))
+  }
+
+  getFormattedStringForDateInput(inputDate: string) {
+    let resp = ''
+    if(inputDate){
+      const splitArray = inputDate.toString().split('/');
+      if(splitArray.length >= 3){
+        const date = splitArray[0];
+        const month = splitArray[1];
+        const year = splitArray[2];
+        let date1 = new Date();
+        date1.setDate(+date);
+        date1.setMonth(+month);
+        date1.setFullYear(+year);
+        const formattedDate = formatDate(date1, 'yyyy-MM-dd', 'en-IN')
+        resp = formattedDate;
+      }
+    }
+    return resp;
+  }
 
 
 
