@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
     })
     this.commonService.apiPostCall(body, 'GetDataCount').subscribe((data) => {
       this.countdata = data;
-      this.totalcountsingle = reduce(this.countdata, (sum, obj) => sum + parseInt(obj.totalcount, 10), 0);
+      this.totalcountsingle = reduce(this.countdata, (sum, obj) => sum + parseInt(obj.v_TOTAL_COUNT, 10), 0);
     })
   }
 
