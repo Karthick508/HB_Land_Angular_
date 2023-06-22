@@ -103,15 +103,15 @@
           </mat-form-field>
 
           <!-- <div class="dropdown">
-    
+
               <select class="select" [(ngModel)]="statusFilter" name="status" required>
                 <option value='' disabled>Land Status</option>
                 <option value="">All</option>
                 <option >Registering the land details in Asset Management</option>
                 <option >Handover the land for Project Management</option>
-    
+
               </select>
-    
+
               </div> -->
         </div>
 
@@ -128,36 +128,56 @@
   <div style="width:80%;" >
     <table mat-table [dataSource]="userList">
 
-      <ng-container matColumnDef="uniqueCode">
+      <ng-container matColumnDef="n_UNIQUE_ID">
         <th class="first" mat-header-cell *matHeaderCellDef>
           <span>UNI.ID</span>
         </th>
-        <td mat-cell *matCellDef="let request">{{request?.uniqueCode }}</td>
+        <td mat-cell *matCellDef="let request">{{request?.n_UNIQUE_ID }}</td>
       </ng-container>
-     <ng-container matColumnDef="landName">
+      <ng-container matColumnDef="v_NAME_OF_SCHEME">
         <th class="first" mat-header-cell *matHeaderCellDef>
-          <span>Land Name</span>
+          <span>Scheme Name</span>
         </th>
-        <td mat-cell *matCellDef="let request">{{request?.landName | titlecase}}</td>
+        <td mat-cell *matCellDef="let request">{{request?.v_NAME_OF_SCHEME | titlecase}}</td>
       </ng-container>
-      <ng-container matColumnDef="cityrural">
+     <ng-container matColumnDef="v_NAME_OF_CIRCLE">
         <th class="first" mat-header-cell *matHeaderCellDef>
-          <span>Type of Division</span>
+          <span>Circle</span>
         </th>
-        <td mat-cell *matCellDef="let request">{{request?.citynrural | titlecase }}</td>
+        <td mat-cell *matCellDef="let request">{{request?.v_NAME_OF_CIRCLE | titlecase}}</td>
       </ng-container>
-     <ng-container matColumnDef="divisions">
+
+     <ng-container matColumnDef="v_NAME_OF_DIVISION">
         <th class="first" mat-header-cell *matHeaderCellDef>
           <span>Division</span>
         </th>
-        <td mat-cell *matCellDef="let request">{{request?.division | titlecase}}</td>
+        <td mat-cell *matCellDef="let request">{{request?.v_NAME_OF_DIVISION | titlecase}}</td>
       </ng-container>
-     <ng-container matColumnDef="villages">
+
+      <ng-container matColumnDef="v_TOTAL_EXTENT">
         <th class="first" mat-header-cell *matHeaderCellDef>
-          <span>Village</span>
+          <span>Total Extent of Land Acquired</span>
         </th>
-        <td mat-cell *matCellDef="let request">{{request?.village | titlecase}}</td>
-      </ng-container> 
+        <td mat-cell *matCellDef="let request">{{request?.v_TOTAL_EXTENT | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="v_PHO_TOTAL_EXTENT">
+        <th class="first" mat-header-cell *matHeaderCellDef>
+          <span>Possession Handed over</span>
+        </th>
+        <td mat-cell *matCellDef="let request">{{request?.v_PHO_TOTAL_EXTENT | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="v_PNHO_TOTAL_EXTENT">
+        <th class="first" mat-header-cell *matHeaderCellDef>
+          <span>Possession Not Handed over</span>
+        </th>
+        <td mat-cell *matCellDef="let request">{{request?.v_PNHO_TOTAL_EXTENT | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="v_PHO_SCHEME_TOTAL_EXTENT">
+        <th class="first" mat-header-cell *matHeaderCellDef>
+          <span>Available for Scheme development</span>
+        </th>
+        <td mat-cell *matCellDef="let request">{{request?.v_PHO_SCHEME_TOTAL_EXTENT | titlecase}}</td>
+      </ng-container>
       <ng-container matColumnDef="actions">
         <th class="first" mat-header-cell *matHeaderCellDef>
           <span>Action</span>
