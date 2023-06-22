@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
-  columnsToDisplay = ['uniqueCode', 'landName', 'cityrural', 'divisions', 'villages', 'actions'];
+  columnsToDisplay = ['n_UNIQUE_ID','v_NAME_OF_SCHEME', 'v_NAME_OF_CIRCLE','v_NAME_OF_DIVISION','v_TOTAL_EXTENT','v_PHO_TOTAL_EXTENT','v_PNHO_TOTAL_EXTENT','v_PHO_SCHEME_TOTAL_EXTENT',  'actions'];
 
   alldata: any[] = [];
   countdata: any[] = [];
