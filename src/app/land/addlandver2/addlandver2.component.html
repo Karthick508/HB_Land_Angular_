@@ -1067,7 +1067,46 @@
                   <div class="row col-10" style="margin: 1rem 0 2px 0;">
                     <mat-label class="mb-3 sub-header1">Possession
                       Not Handed Over</mat-label>
-
+                      <div class="col-7 mb-2">
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>Total Extent</mat-label>
+                          <input matInput type="text" formControlName="pnho_v_total_extent">
+                        </mat-form-field>
+                      </div>
+                      <div class="row col-6">
+                        <div formArrayName="pnhoFields">
+                          <label class="col-6 sub-header" *ngIf="panel.get('pnhoFields').controls.length > 0">Survey &
+                            Extend
+                            Field </label>
+                          <div *ngFor="let field of panel.get('pnhoFields').controls; let k = index" [formGroupName]="k">
+                            <div class="displayFlex">
+                              <span>
+                                <mat-form-field>
+                                  <mat-label>Survey No</mat-label>
+                                  <input matInput type="text" formControlName="v_survey_no">
+                                </mat-form-field>
+                              </span>
+                              <span>
+                                <mat-form-field>
+                                  <mat-label>Extent</mat-label>
+                                  <input matInput type="text" formControlName="v_total_extent">
+                                </mat-form-field>
+                              </span>
+                              <span>
+                                <mat-icon style="color: #3FB8DE;" (click)="addpnho(i)"
+                                  matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                                <mat-icon style="color: red;" (click)="removepnho(i, k)"
+                                  matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-6 mb-2" *ngIf="panel.get('phoFields').controls.length === 0">
+                            <button (click)="addpnho(i)" mat-flat-button type="button" color="primary">Add Survey &
+                              Extend</button>
+                          </div>
+                        </div>
+  
+                      </div>
                     <div class="row">
                       <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
                         <label class="col-12 sub-header">Extent covered by Court case:</label>
@@ -1075,20 +1114,20 @@
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Extent (in acres)</mat-label>
-                              <input matInput type="text" formControlName="court_v_extent">
+                              <input matInput type="text" formControlName="pnho_court_v_extent">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Legal Proceeding
                                 Status</mat-label>
-                              <input matInput type="text" formControlName="court_v_legal_proceeding">
+                              <input matInput type="text" formControlName="pnho_court_v_legal_proceeding">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <div>
                               <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-                              <input type="file" class="col-12 form-control" formControlName="court_file">
+                              <input type="file" class="col-12 form-control" formControlName="pnho_court_file">
 
                             </div>
                           </div>
@@ -1104,20 +1143,20 @@
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Extent (in acres)</mat-label>
-                              <input matInput type="text" formControlName="enchro_v_extent">
+                              <input matInput type="text" formControlName="pnho_enchro_v_extent">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Legal Proceeding
                                 Status</mat-label>
-                              <input matInput type="text" formControlName="enchro_v_legal_proceeding">
+                              <input matInput type="text" formControlName="pnho_enchro_v_legal_proceeding">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <div>
                               <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-                              <input type="file" class="col-12 form-control" formControlName="enchro_file">
+                              <input type="file" class="col-12 form-control" formControlName="pnho_enchro_file">
 
                             </div>
                           </div>
@@ -1134,20 +1173,20 @@
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Extent (in acres)</mat-label>
-                              <input matInput type="text" formControlName="quash_v_extent">
+                              <input matInput type="text" formControlName="pnho_quash_v_extent">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Legal Proceeding
                                 Status</mat-label>
-                              <input matInput type="text" formControlName="quash_v_legal_proceeding">
+                              <input matInput type="text" formControlName="pnho_quash_v_legal_proceeding">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <div>
                               <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-                              <input type="file" class="col-12 form-control" formControlName="quash_file">
+                              <input type="file" class="col-12 form-control" formControlName="pnho_quash_file">
 
                             </div>
                           </div>
@@ -1162,20 +1201,20 @@
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Extent (in acres)</mat-label>
-                              <input matInput type="text" formControlName="recon_v_extent">
+                              <input matInput type="text" formControlName="pnho_encumbr_v_extent">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <mat-form-field class="example-full-width1">
                               <mat-label>Legal Proceeding
                                 Status</mat-label>
-                              <input matInput type="text" formControlName="recon_v_legal_proceeding">
+                              <input matInput type="text" formControlName="pnho_encumbr_v_legal_proceeding">
                             </mat-form-field>
                           </div>
                           <div class="col-4">
                             <div>
                               <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-                              <input type="file" class="col-12 form-control" formControlName="recon_file">
+                              <input type="file" class="col-12 form-control" formControlName="pnho_encumbr_file">
 
                             </div>
                           </div>
