@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   @Input()
   error!: string | null;
-
+  hide = true;
 
   constructor(private router: Router, private loginservice: AuthenticationService, private fb: FormBuilder) { }
 
