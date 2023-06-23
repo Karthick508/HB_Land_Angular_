@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatStepper } from '@angular/material/stepper';
 import { CommonService } from 'src/app/services/common.service';
 import { SaveLandApiModel } from '../home/home.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 export interface Root {
@@ -62,7 +63,7 @@ export interface DynamicValuesDetail {
   n_FILE_ID: number;
   n_UNIQUE_ID: number;
   v_COLUMN_NAME: string;
-  V_VALUE_NAME: string;
+  v_VALUE_NAME: string;
   mode: string
 }
 
@@ -164,7 +165,7 @@ export interface DynamicValuesDetail4 {
   n_FILE_ID: number
   n_UNIQUE_ID: number
   v_COLUMN_NAME: string
-  V_VALUE_NAME: string;
+  v_VALUE_NAME: string;
 }
 
 export interface AwardDirectPaymentEntityValuesDetail {
@@ -256,6 +257,12 @@ export class Addlandver2Component {
   @ViewChild('stepper') stepper: MatStepper;
 
   index = 0;
+  panelOneForm: FormGroup;
+  panelTwoForm: FormGroup;
+  panelThreeForm: FormGroup;
+  landId: string;
+  edit=false;
+  view=false;
 
   togglePanel1() {
     this.isPanel1Expanded = !this.isPanel1Expanded;
@@ -271,7 +278,7 @@ export class Addlandver2Component {
     this.isPanel2Expanded = !this.isPanel2Expanded;
   }
 
-  personalInfoFormGroup!: FormGroup;
+  personalInfoFormGroup: FormGroup;
 
   fourOneFormGroup: FormGroup;
   expansionPanelsArray4: FormArray;
@@ -279,10 +286,10 @@ export class Addlandver2Component {
   sixDDFormGroup:FormGroup;
   expansionPanelsSixDD:FormArray;
 
-  awardInfoFormGroup!: FormGroup;
+  awardInfoFormGroup: FormGroup;
   expansionPanelsAward : FormArray
 
-  leftInfoFormGroup!: FormGroup;
+  leftInfoFormGroup: FormGroup;
   expansionPanelsLeft : FormArray;
 
   // Assign Values
@@ -298,7 +305,19 @@ export class Addlandver2Component {
   secondTabMode = 'create' || 'edit' || 'delete';
 
   constructor(private builder: FormBuilder, private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService) { }
+    private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService,private activeRoute: ActivatedRoute, private router: Router) { 
+      this.activeRoute.paramMap.subscribe(params => {
+        this.landId = params.get('id');
+        if (this.landId && this.router.url.includes('edit')) {
+          this.callApi();
+          this.edit = true;
+        } else if (this.router.url.includes('view')) {
+          this.callApi();
+          this.view = true;
+        }
+
+      })
+    }
   isLinear = true;
 
 
@@ -363,12 +382,17 @@ export class Addlandver2Component {
     // return;
     this.commonService.apiPostCall(saveApiBody, 'saveUpdateLandData').subscribe((saveResponse) => {
       console.log("Save Response", saveResponse);
-    })
+      this.back()
+    });
   }
 
+  back(){
+    this.router.navigate(['/land/home']);
+
+  }
   ngOnInit(): void {
 
-    this.callApi();
+    // this.callApi();
     this.firstTabMode = 'edit';
     this.secondTabMode = 'create';
 
@@ -421,7 +445,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column1",
-    //                   "V_VALUE_NAME": "value1",
+    //                   "v_VALUE_NAME": "value1",
     //                   "mode":null
     //               },
     //               {
@@ -429,7 +453,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column2",
-    //                   "V_VALUE_NAME": "value2",
+    //                   "v_VALUE_NAME": "value2",
     //                   "mode":null
     //               }
     //           ],
@@ -478,7 +502,7 @@ export class Addlandver2Component {
     //                 "n_FILE_ID": 1,
     //                 "n_UNIQUE_ID": 1234,
     //                 "v_COLUMN_NAME": "column1",
-    //                 "V_VALUE_NAME": "value1",
+    //                 "v_VALUE_NAME": "value1",
     //                 "mode":null
     //             },
     //             {
@@ -486,7 +510,7 @@ export class Addlandver2Component {
     //                 "n_FILE_ID": 1,
     //                 "n_UNIQUE_ID": 1234,
     //                 "v_COLUMN_NAME": "column2",
-    //                 "V_VALUE_NAME": "value2",
+    //                 "v_VALUE_NAME": "value2",
     //                 "mode":null
     //             }
     //         ],
@@ -523,7 +547,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column1",
-    //                   "V_VALUE_NAME": "value1",
+    //                   "v_VALUE_NAME": "value1",
     //                   "mode":null,
     //               },
     //               {
@@ -531,7 +555,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column2",
-    //                   "V_VALUE_NAME": "value2",
+    //                   "v_VALUE_NAME": "value2",
     //                   "mode":null,
     //               }
     //           ],
@@ -572,7 +596,7 @@ export class Addlandver2Component {
     //               "n_FILE_ID": 1,
     //               "n_UNIQUE_ID": 1234,
     //               "v_COLUMN_NAME": "column1",
-    //               "V_VALUE_NAME": "3rd ",
+    //               "v_VALUE_NAME": "3rd ",
     //               "mode":null,
     //           },
     //           {
@@ -580,7 +604,7 @@ export class Addlandver2Component {
     //               "n_FILE_ID": 1,
     //               "n_UNIQUE_ID": 1234,
     //               "v_COLUMN_NAME": "column2",
-    //               "V_VALUE_NAME": "value2",
+    //               "v_VALUE_NAME": "value2",
     //               "mode":null,
     //           }
     //         ],
@@ -617,7 +641,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column1",
-    //                   "V_VALUE_NAME": "value1",
+    //                   "v_VALUE_NAME": "value1",
     //                   "mode":null,
     //               },
     //               {
@@ -625,7 +649,7 @@ export class Addlandver2Component {
     //                   "n_FILE_ID": 1,
     //                   "n_UNIQUE_ID": 1234,
     //                   "v_COLUMN_NAME": "column2",
-    //                   "V_VALUE_NAME": "value2",
+    //                   "v_VALUE_NAME": "value2",
     //                   "mode":null,
     //               }
     //           ],
@@ -660,7 +684,7 @@ export class Addlandver2Component {
     //                 "n_FILE_ID": 1,
     //                 "n_UNIQUE_ID": 1234,
     //                 "v_COLUMN_NAME": "column1",
-    //                 "V_VALUE_NAME": "value1",
+    //                 "v_VALUE_NAME": "value1",
     //                 "mode":null,
     //             },
     //             {
@@ -668,7 +692,7 @@ export class Addlandver2Component {
     //                 "n_FILE_ID": 1,
     //                 "n_UNIQUE_ID": 1234,
     //                 "v_COLUMN_NAME": "column2",
-    //                 "V_VALUE_NAME": "4th tab",
+    //                 "v_VALUE_NAME": "4th tab",
     //                 "mode":null,
     //             }
     //         ],
@@ -889,11 +913,40 @@ const rawData =[];
     this.leftInfoFormGroup = this.formBuilder.group({
       expansionPanelsLeft : this.formBuilder.array([]),
     });
+// Left Over
+this.panelOneForm = this.formBuilder.group({
+  lpsand4oneleft: this.formBuilder.array([
+    this.createItemLeft()
+  ])
+});
 
+this.panelTwoForm = this.formBuilder.group({
+  fouroneand6ddleft: this.formBuilder.array([
+    this.createItemLeft()
+  ])
+});
+
+this.panelThreeForm = this.formBuilder.group({
+  sixdandawardleft: this.formBuilder.array([
+    this.createItemLeft()
+  ])
+});
     this.expansionPanelsLeft = this.leftInfoFormGroup.get('expansionPanelsLeft') as FormArray;
     this.addExpansionPanelLeft();
 
-
+if(this.view){
+  this.personalInfoFormGroup.disable();
+  this.LPSFormGroup.disable();
+  this.panelOneItems.disable();
+  this.panelThreeItems.disable();
+  this.panelTwoItems.disable();
+  this.fourOneFormGroup.disable();
+  this.sixDDFormGroup.disable();
+  this.expansionPanelsArray.disable();
+  this.expansionPanelsArray4.disable();
+  this.expansionPanelsSixDD.disable();
+  this.expansionPanelsAward.disable();
+}
      // !!!!!! Set First Tab Values
 
     //  this.landDigitDataEntity = rawData.landDigitDataEntity;
@@ -951,7 +1004,7 @@ const rawData =[];
       //   for(let i=0; i<apiValue_customField.length; i++){
       //     const apiValue_customField_group = apiValue_customField[i];
       //     const apiValue_customField_group_first1Value = apiValue_customField_group.v_COLUMN_NAME;
-      //     const apiValue_customField_group_first2Value = apiValue_customField_group.V_VALUE_NAME;
+      //     const apiValue_customField_group_first2Value = apiValue_customField_group.v_VALUE_NAME;
       //     if(customFieldFormArray.at(i)) {
       //       const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
 
@@ -1053,7 +1106,7 @@ const rawData =[];
       //   for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
       //     const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
       //     const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.v_VALUE_NAME;
       //     if(!repeatedFieldsFormArray.at(i)) {
       //       repeatedFieldsFormArray.push(new FormGroup({
       //         'v_COLUMN_NAME': new FormControl(''),
@@ -1135,7 +1188,7 @@ const rawData =[];
       //   for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
       //     const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
       //     const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.v_VALUE_NAME;
       //     if(!repeatedFieldsFormArray.at(i)) {
       //       repeatedFieldsFormArray.push(new FormGroup({
       //         'v_COLUMN_NAME': new FormControl(''),
@@ -1166,6 +1219,37 @@ const rawData =[];
 
   }
 
+  createItemLeft(): FormGroup {
+    return this.formBuilder.group({
+      v_survey_no: '',
+      v_total_extent: ''
+    });
+  }
+
+  get panelOneItems() {
+    return this.panelOneForm.get('lpsand4oneleft') as FormArray;
+  }
+
+  get panelTwoItems() {
+    return this.panelTwoForm.get('fouroneand6ddleft') as FormArray;
+  }
+
+  get panelThreeItems() {
+    return this.panelThreeForm.get('sixdandawardleft') as FormArray;
+  }
+ 
+  addFields(formArray: FormArray) {
+    if(!this.view){
+      formArray.push(this.createItemLeft());
+    }
+  }
+
+  removeFieldss(formArray: FormArray, index: number) {
+    if(!this.view){
+    formArray.removeAt(index);
+    }
+  }
+
   checkFirstTab(){
     console.warn("First-Tab",this.personalInfoFormGroup.value);
    // if FormGroupValueChanges mode = 'edit'
@@ -1178,7 +1262,7 @@ const rawData =[];
    callApi() {
 
     const apiBodyMain = {
-      "id": Number(5678)
+      "id": Number(this.landId)
     }
     this.commonService.apiPostCall(apiBodyMain, 'getAllLandDigitDatas').subscribe((mainApiData) => {
       console.log("MainData", mainApiData);
@@ -1351,7 +1435,7 @@ const rawData =[];
         for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
           const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
           const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.v_VALUE_NAME;
           if(!repeatedFieldsFormArray.at(i)) {
             repeatedFieldsFormArray.push(new FormGroup({
               'v_COLUMN_NAME': new FormControl(''),
@@ -1433,7 +1517,7 @@ const rawData =[];
           for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
             const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
             const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-            const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+            const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.v_VALUE_NAME;
             if(!repeatedFieldsFormArray.at(i)) {
               repeatedFieldsFormArray.push(new FormGroup({
                 'v_COLUMN_NAME': new FormControl(''),
@@ -1529,7 +1613,7 @@ const rawData =[];
               for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
                 const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
                 const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-                const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+                const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.v_VALUE_NAME;
                 if(!repeatedFieldsFormArray.at(i)) {
                   repeatedFieldsFormArray.push(new FormGroup({
                     'v_COLUMN_NAME': new FormControl(''),
@@ -1766,6 +1850,8 @@ const rawData =[];
 
 
   addExpansionPanel4One() {
+    if(!this.view){
+
     const expansionPanel4One = this.formBuilder.group({
       file: null,
       file2: null,
@@ -1783,8 +1869,11 @@ const rawData =[];
 
     this.expansionPanelsArray4.push(expansionPanel4One);
   }
+}
 
   addExpansionPanelSixDD() {
+    if(!this.view){
+
     const expansionPanelSix = this.formBuilder.group({
       file: null,
       file2: null,
@@ -1799,9 +1888,11 @@ const rawData =[];
       sixddFields: this.formBuilder.array([])
     });
     this.expansionPanelsSixDD.push(expansionPanelSix);
-  }
+  }}
 
   addExpansionPanelAward() {
+    if(!this.view){
+
     const expansionPanelAward = this.formBuilder.group({
       file: null,
       v_award_no: [''],
@@ -1855,7 +1946,7 @@ const rawData =[];
     });
     this.expansionPanelsAward.push(expansionPanelAward);
   }
-
+  }
 
   addExpansionPanelLeft() {
     const expansionPanelLeft = this.formBuilder.group({
@@ -1871,6 +1962,8 @@ const rawData =[];
 
 
   removeLastRepeatedField(type) {
+    if(!this.view){
+
     if (this.expansionPanelsArray.length > 0 && type === 'lps') {
       this.expansionPanelsArray.removeAt(this.expansionPanelsArray.length - 1);
     }  else if (this.expansionPanelsArray4.length > 0 && type === '4(1)') {
@@ -1882,9 +1975,12 @@ const rawData =[];
       this.expansionPanelsAward.removeAt(this.expansionPanelsAward.length - 1);
     }
   }
+}
 
   // 2nd tab LPS Tab
   addExpansionPanel() {
+    if(!this.view){
+
     const expansionPanel = this.formBuilder.group({
       // files: this.formBuilder.array([]),
       // v_ref_no: [''],
@@ -1900,6 +1996,7 @@ const rawData =[];
     });
     this.expansionPanelsArray.push(expansionPanel);
   }
+}
 
   onFileChange(event: any, panelIndex: number, type) {
     const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null;
@@ -1948,6 +2045,8 @@ const rawData =[];
      console.log(this.sixDDFormGroup.value)
   }
   removeExpansionPanel(index: number, type) {
+    if(!this.view){
+
     if (type === 'lps') {
       this.expansionPanelsArray.removeAt(index);
     } else if(type === '4(1)'){
@@ -1959,8 +2058,12 @@ const rawData =[];
       this.expansionPanelsAward.removeAt(index)
     }
   }
+}
 
   addFiles(expansionPanelIndex: number,type){
+    if(!this.view){
+
+    
     let expansionPanel;
     let filesArray;
     if (type === 'lps') {
@@ -1971,10 +2074,11 @@ const rawData =[];
       filelps: [''],
     });
     filesArray.push(repeatedField);
-
+  }
   }
 
   addRepeatedField(expansionPanelIndex: number, type) {
+    if(!this.view){
     let expansionPanel;
     let repeatedFieldsArray;
     if (type === 'lps') {
@@ -1992,14 +2096,16 @@ const rawData =[];
       repeatedFieldsArray = expansionPanel.get('repeatedFields') as FormArray;
     }
     const repeatedField = this.formBuilder.group({
-      field1: [''],
-      field2: ['']
+      v_COLUMN_NAME: [''],
+      v_VALUE_NAME: ['']
     });
 
     repeatedFieldsArray.push(repeatedField);
   }
+  }
 
   addVillageLps(expansionPanelIndex: number) {
+    if(!this.view){
     let expansionPanel;
     let villageFieldsArray;
      {
@@ -2013,7 +2119,7 @@ const rawData =[];
     });
     villageFieldsArray.push(villageField);
   }
-
+  }
   createVillageNoField(): FormGroup {
     return this.formBuilder.group({
       v_survey_no: [''],
@@ -2022,25 +2128,31 @@ const rawData =[];
   }
 
   addVillageNoField(expansionPanelIndex: number, villageFieldIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
     const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
     const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
     const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
 
     villageNoFieldsArray.push(this.createVillageNoField());
+    }
   }
 
   removeVillageNoField(expansionPanelIndex: number, villageFieldIndex: number, villageNoFieldIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
     const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
     const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
     const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
 
     villageNoFieldsArray.removeAt(villageNoFieldIndex);
+    }
   }
 
 
   addOwner4one(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;
     const ownerFieldsArray = expansionPanel.get('ownerFields') as FormArray;
     const ownerField = this.formBuilder.group({
@@ -2055,10 +2167,13 @@ const rawData =[];
 
     ownerFieldsArray.push(ownerField);
   }
+}
 
 
 
   addsixdd(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsSixDD.at(expansionPanelIndex) as FormGroup;
     const sixddFieldsArray = expansionPanel.get('sixddFields') as FormArray;
 
@@ -2069,18 +2184,22 @@ const rawData =[];
 
     sixddFieldsArray.push(sixddField);
   }
+}
 
   removeFiles(expansionPanelIndex: number, repeatedFieldIndex: number, type) {
+    if(!this.view){
     let expansionPanel;
     let filesArray;
     if (type === 'lps') {
       expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
-      filesArray = expansionPanel.get('files') as FormArray;
+      filesArray = expansionPanel.get('v_FILE_NAME') as FormArray;
     }
     filesArray.removeAt(repeatedFieldIndex);
-
   }
+  }
+
   adddirectpay(expansionPanelIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const directpayFieldsArray = expansionPanel.get('directpayFields') as FormArray;
 
@@ -2091,8 +2210,11 @@ const rawData =[];
 
     directpayFieldsArray.push(directpayField);
   }
+}
 
   addrevenuepay(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const revenuepayFieldsArray = expansionPanel.get('revenuepayFields') as FormArray;
 
@@ -2103,8 +2225,11 @@ const rawData =[];
 
     revenuepayFieldsArray.push(revenuepayField);
   }
+}
 
   addcivilpay(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const civilpayFieldsArray = expansionPanel.get('civilpayFields') as FormArray;
 
@@ -2115,8 +2240,11 @@ const rawData =[];
 
     civilpayFieldsArray.push(civilpayField);
   }
+}
 
   addpho(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const phoFieldsArray = expansionPanel.get('phoFields') as FormArray;
 
@@ -2127,8 +2255,11 @@ const rawData =[];
 
     phoFieldsArray.push(phoField);
   }
+}
 
   addphoscheme(expansionPanelIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const phoschemeFieldsArray = expansionPanel.get('phoschemeFields') as FormArray;
 
@@ -2139,9 +2270,10 @@ const rawData =[];
 
     phoschemeFieldsArray.push(phoschemeField);
   }
-
+  }
 
   addpnho(expansionPanelIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const pnhoFieldsArray = expansionPanel.get('pnhoFields') as FormArray;
 
@@ -2152,8 +2284,10 @@ const rawData =[];
 
     pnhoFieldsArray.push(pnhoField);
   }
+}
 
   leftlpsand4one(expansionPanelIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
     const left_lps_4oneFieldsArray = expansionPanel.get('left_lps_4oneFields') as FormArray;
 
@@ -2164,8 +2298,10 @@ const rawData =[];
 
     left_lps_4oneFieldsArray.push(left_lps_4oneField);
   }
+}
 
   left4oneand6dd(expansionPanelIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
     const left_4one_6ddFieldsArray = expansionPanel.get('left_4one_6ddFields') as FormArray;
 
@@ -2176,8 +2312,9 @@ const rawData =[];
 
     left_4one_6ddFieldsArray.push(left_4one_6ddField);
   }
-
+  }
   left6ddandaward(expansionPanelIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsLeft.at(expansionPanelIndex) as FormGroup;
     const left_6dd_awardFieldsArray = expansionPanel.get('left_6dd_awardFields') as FormArray;
 
@@ -2188,8 +2325,9 @@ const rawData =[];
 
     left_6dd_awardFieldsArray.push(left_6dd_awardField);
   }
-
+  }
   removeRepeatedField(expansionPanelIndex: number, repeatedFieldIndex: number, type) {
+    if(!this.view){
     let expansionPanel;
     let repeatedFieldsArray;
     if (type === 'lps') {
@@ -2209,8 +2347,10 @@ const rawData =[];
 
     repeatedFieldsArray.removeAt(repeatedFieldIndex);
   }
+  }
 
   removeVillageLps(expansionPanelIndex: number, villageFieldIndex: number) {
+    if(!this.view){
     let expansionPanel;
     let villageFieldsArray;
      {
@@ -2220,64 +2360,85 @@ const rawData =[];
 
     villageFieldsArray.removeAt(villageFieldIndex);
   }
+  }
 
   removeOwner4one(expansionPanelIndex: number, ownerFieldIndex: number) {
+    if(!this.view){
 
     const  expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;
     const  ownerFieldsArray = expansionPanel.get('ownerFields') as FormArray;
 
     ownerFieldsArray.removeAt(ownerFieldIndex);
+    }
   }
 
   removesixdd(expansionPanelIndex: number, sixddFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsSixDD.at(expansionPanelIndex) as FormGroup;
     const sixddFieldsArray = expansionPanel.get('sixddFields') as FormArray;
 
     sixddFieldsArray.removeAt(sixddFieldIndex);
+    }
   }
 
   removedirectpay(expansionPanelIndex: number, directpayFieldIndex: number) {
+    if(!this.view){
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const directpayFieldsArray = expansionPanel.get('directpayFields') as FormArray;
 
     directpayFieldsArray.removeAt(directpayFieldIndex);
   }
+}
 
   removerevenuepay(expansionPanelIndex: number, revenuepayFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const revenuepayFieldsArray = expansionPanel.get('revenuepayFields') as FormArray;
 
     revenuepayFieldsArray.removeAt(revenuepayFieldIndex);
   }
-
+  }
   removecivilpay(expansionPanelIndex: number, civilpayFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const civilpayFieldsArray = expansionPanel.get('civilpayFields') as FormArray;
 
     civilpayFieldsArray.removeAt(civilpayFieldIndex);
   }
+}
 
   removepho(expansionPanelIndex: number, phoFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const phoFieldsArray = expansionPanel.get('phoFields') as FormArray;
 
    phoFieldsArray.removeAt(phoFieldIndex);
   }
+}
 
   removephoscheme(expansionPanelIndex: number, phoschemeFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const phoschemeFieldsArray = expansionPanel.get('phoschemeFields') as FormArray;
 
     phoschemeFieldsArray.removeAt(phoschemeFieldIndex);
   }
+}
 
   removepnho(expansionPanelIndex: number, pnhoFieldIndex: number) {
+    if(!this.view){
+
     const expansionPanel = this.expansionPanelsAward.at(expansionPanelIndex) as FormGroup;
     const pnhoFieldsArray = expansionPanel.get('pnhoFields') as FormArray;
 
    pnhoFieldsArray.removeAt(pnhoFieldIndex);
   }
-
+  }
 
 
 

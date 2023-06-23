@@ -23,9 +23,12 @@ const routes: Routes = [
                 redirectTo: 'home',
                 pathMatch: 'full',
 
-              },            { path: 'view/:id', component: ViewlandComponent },
+              },           
             { path: 'home', component: HomeComponent },
             { path: 'addver2', component: Addlandver2Component },
+            { path: 'edit/:id', component: Addlandver2Component },
+            { path: 'view/:id', component: Addlandver2Component },
+
         ],
     },
 ];

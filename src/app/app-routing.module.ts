@@ -20,9 +20,6 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => (import('./auth/auth.modules')).then((m) => m.AuthModule) },
   { path: 'land', loadChildren: () => (import('./land/land.module')).then((m) => m.LandModule) },
 
-  {path: 'add',component: AddlandComponent},
-  {path: 'view/:id',component: ViewlandComponent},
-  {path: 'edit/:id',component: EditlandComponent},
   {path: 'report1LA',component: Report1LAComponent},
   {path: 'report2LP',component: Report2LPComponent},
  

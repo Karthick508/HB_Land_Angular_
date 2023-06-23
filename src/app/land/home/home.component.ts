@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from 'src/app/shared-module/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from 'src/app/shared-module/snackbar/snackbar.component';
 
 
 export interface SaveLandApiModel {
@@ -315,11 +316,32 @@ export class HomeComponent implements OnInit {
     const endIndex = startIndex + itemsPerPage;
     return items.slice(startIndex, endIndex);
   }
-
-
+  searchFilter='';
   constructor(private landdataService: LanddataService, private commonService: CommonService, private router: Router, public dialog: MatDialog, private snackbar: MatSnackBar,) { }
 
   ngOnInit(): void {
+   this.getLandCount()
+  }
+  applyFilter() {
+    console.log(this.dataSource.data)
+    const filterValue = this.searchFilter ? this.searchFilter?.toLowerCase() : '';
+    const filteredData = this.dataSource.data.filter((item) => {
+      console.log(filterValue)
+      const legalProceedingsMatch = !this.legalProceedingsFilter || item?.legalProceedings?.toLowerCase() === this.legalProceedingsFilter.toLowerCase();
+      const statusMatch = !this.statusFilter || item?.status?.toLowerCase() === this.statusFilter?.toLowerCase();
+      const searchMatch = item['n_UNIQUE_ID']?.toString().toLowerCase().includes(filterValue) || item['v_NAME_OF_SCHEME']?.toLowerCase().includes(filterValue) || item['v_NAME_OF_CIRCLE']?.toLowerCase().includes(filterValue) || item['v_NAME_OF_DIVISION']?.toLowerCase().includes(filterValue) || item['v_TOTAL_EXTENT']?.includes(filterValue) || item['v_PHO_TOTAL_EXTENT']?.includes(filterValue) || item['v_PNHO_TOTAL_EXTENT']?.includes(filterValue) || item['v_PHO_SCHEME_TOTAL_EXTENT']?.includes(filterValue);
+      return legalProceedingsMatch && statusMatch && searchMatch;
+    });
+    if(filterValue.trim() && filteredData){
+      console.log(filteredData)
+      this.dataSource.data = filteredData;
+    }else{
+      this.dataSource.data = this.userList;
+
+    }
+  }
+  
+  getLandCount(){
     const body = {
       types: null,
       values: null
@@ -327,6 +349,8 @@ export class HomeComponent implements OnInit {
     this.commonService.apiPostCall(body, 'GetData').subscribe((data) => {
       this.userList = data;
       this.dataSource.data = data;
+      this.dataSource = new MatTableDataSource(data);
+
     })
     this.commonService.apiPostCall(body, 'GetDataCount').subscribe((data) => {
       this.countdata = data;
@@ -343,15 +367,18 @@ export class HomeComponent implements OnInit {
     });
     dialog.afterClosed().subscribe(data => {
       if (data) {
+        const delLoad={
+          "id":Number(id)
+        }
+        this.commonService.apiPostCall(delLoad, 'deleteV2LandData').subscribe(response => {
+          // if (response.message.includes('Successfully')) {
+            this.snackbar.openFromComponent(SnackbarComponent, {
+              data:'Land data deleted Successfully',
+            });
+            this.getLandCount();
+          // }
+        })
 
-        // this.api.apiDeleteCall(id, 'Coupon/deleteCoupon').subscribe(response => {
-        //   if (response.message.includes('Successfully')) {
-        //     this.snackbar.openFromComponent(SnackbarComponent, {
-        //       data: response.message,
-        //     });
-        //     this.getCouponsList();
-        //   }
-        // })
       }
     })
   }
@@ -398,7 +425,7 @@ export class HomeComponent implements OnInit {
 
 
   edit(type, id) {
-    console.log(id)
+    console.log(type,id)
     this.router.navigate(['/land/' + type, id]);
   }
 
