@@ -188,9 +188,9 @@
                     <div *ngFor="let field of panel.get('villageFields').controls; let k = index" [formGroupName]="k">
                       <label class="col-6 col-form-label" style="font-weight: bold;font-size:medium">Village - {{k +
                         1}}&nbsp;&nbsp; <mat-icon style="color: #3FB8DE;" (click)="addVillageLps(i)"
-                        matTooltip="Add Village">add_circle</mat-icon>&nbsp;
-                      <mat-icon style="color: red;" (click)="removeVillageLps(i)"
-                        matTooltip="Remove Village">cancel</mat-icon>&nbsp;&nbsp;</label>
+                          matTooltip="Add Village">add_circle</mat-icon>&nbsp;
+                        <mat-icon style="color: red;" (click)="removeVillageLps(i)"
+                          matTooltip="Remove Village">cancel</mat-icon>&nbsp;&nbsp;</label>
                       <div class="row col-7">
                         <mat-form-field appearance="outline" class="example-full-width">
                           <mat-label>Name of the Village:</mat-label>
@@ -232,8 +232,8 @@
                     </div>
                   </div>
                   <div class="mb-2" *ngIf="panel.get('villageFields').controls.length === 0">
-                    <button (click)="addVillageLps(i)" mat-flat-button type="button" 
-                      color="primary">Add Village</button>&nbsp;&nbsp;
+                    <button (click)="addVillageLps(i)" mat-flat-button type="button" color="primary">Add
+                      Village</button>&nbsp;&nbsp;
                   </div>
 
                 </div>
@@ -259,184 +259,190 @@
       </mat-step>
       <mat-step [stepControl]="fourOneFormGroup">
         <mat-accordion>
-        <form [formGroup]="fourOneFormGroup">
-          <ng-template matStepLabel>4(1)</ng-template>
-          <div formArrayName="expansionPanels4">
-            <mat-expansion-panel [expanded]="true" *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large;">4(1) File - {{i +
-                    1}}</label>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div [formGroup]="panel">
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Gazette Notification Ref. No</mat-label>
-                    <input matInput type="text" formControlName="v_gazette_ref_no">
-                  </mat-form-field>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Gazette Notification Ref. No</mat-label>
-                    <input matInput type="text" formControlName="v_4_one_go_ref_no">
-                  </mat-form-field>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Date of 4(1) G.O</mat-label>
-                    <input matInput [matDatepicker]="dateFour" formControlName="d_date_of_4_one_go">
-                    <mat-datepicker-toggle matIconSuffix [for]="dateFour"></mat-datepicker-toggle>
-                    <mat-datepicker #locality color="dateFour"></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Date of Gazette Notification</mat-label>
-                    <input matInput [matDatepicker]="gazette" formControlName="d_date_of_gazette_notification">
-                    <mat-datepicker-toggle matIconSuffix [for]="gazette"></mat-datepicker-toggle>
-                    <mat-datepicker #gazette color="primary"></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Date of Locality</mat-label>
-                    <input matInput [matDatepicker]="locality" formControlName="d_date_of_locality">
-                    <mat-datepicker-toggle matIconSuffix [for]="locality"></mat-datepicker-toggle>
-                    <mat-datepicker #locality color="primary"></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="row" style="margin:2px 0px 1rem 0px">
-                  <mat-label class="mb-2 sub-header">File Upload 1</mat-label>
-                  <div class="col-6">
-                    <input type="file" class="form-control  alignForms" formControlName="file">
+          <form [formGroup]="fourOneFormGroup">
+            <ng-template matStepLabel>4(1)</ng-template>
+            <div formArrayName="expansionPanels4">
+              <mat-expansion-panel [expanded]="true"
+                *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large;">4(1) File - {{i +
+                      1}}</label>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div [formGroup]="panel">
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Gazette Notification Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_gazette_ref_no">
+                    </mat-form-field>
                   </div>
-                </div>
-                <div class="row" style="margin:2px 0px 1rem 0px">
-                  <mat-label class="mb-2 sub-header">File Upload 2</mat-label>
-                  <div class="col-6">
-                    <input type="file" class="form-control  alignForms" formControlName="file2">
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Gazette Notification Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_4_one_go_ref_no">
+                    </mat-form-field>
                   </div>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Ref. No</mat-label>
-                    <input matInput type="text" formControlName="v_ref_no">
-                  </mat-form-field>
-                </div>
-                <div class="row col-7">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Total Extent</mat-label>
-                    <input matInput type="text" formControlName="v_total_extent">
-                  </mat-form-field>
-                </div>
-                <div formArrayName="repeatedFields">
-                  <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom Fields
-                  </label>
-                  <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
-                    <div class="displayFlex">
-                      <span>
-                        <mat-form-field>
-                          <mat-label>Field name</mat-label>
-                          <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
-                        </mat-form-field>
-                      </span>
-                      <span>
-                        <mat-form-field>
-                          <mat-label>Field Value</mat-label>
-                          <input matInput type="text" formControlName="field2" placeholder="Ex. India">
-                        </mat-form-field>
-                      </span>
-                      <span>
-                        <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'4(1)')"
-                          matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
-                        <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'4(1)')"
-                          matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
-                      </span>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of 4(1) G.O</mat-label>
+                      <input matInput [matDatepicker]="dateFour" formControlName="d_date_of_4_one_go">
+                      <mat-datepicker-toggle matIconSuffix [for]="dateFour"></mat-datepicker-toggle>
+                      <mat-datepicker #locality color="dateFour"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of Gazette Notification</mat-label>
+                      <input matInput [matDatepicker]="gazette" formControlName="d_date_of_gazette_notification">
+                      <mat-datepicker-toggle matIconSuffix [for]="gazette"></mat-datepicker-toggle>
+                      <mat-datepicker #gazette color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Date of Locality</mat-label>
+                      <input matInput [matDatepicker]="locality" formControlName="d_date_of_locality">
+                      <mat-datepicker-toggle matIconSuffix [for]="locality"></mat-datepicker-toggle>
+                      <mat-datepicker #locality color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="row" style="margin:2px 0px 1rem 0px">
+                    <mat-label class="mb-2 sub-header">File Upload 1</mat-label>
+                    <div class="col-6">
+                      <input type="file" class="form-control  alignForms" formControlName="file">
                     </div>
                   </div>
-                </div>
-                <div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
-                  <button (click)="addRepeatedField(i,'4(1)')" mat-flat-button type="button" color="primary">Add Custom
-                    Fields</button>
-                </div>
-                <div formArrayName="ownerFields">
-                  <mat-label class="col-6 sub-header" *ngIf="panel.get('ownerFields').controls.length > 0">Owner Fields
-                  </mat-label>
-                  <div *ngFor="let field of panel.get('ownerFields').controls; let k = index" [formGroupName]="k"
-                    class="row mb-3">
-                    <label class="col-6 col-form-label" style="font-weight: bold;font-size:medium;position: relative;left: 17px;">Owner Fields - {{k + 1}}
-                      &nbsp; <mat-icon style="color: #3FB8DE;" (click)="addOwner4one(i)"
-                        matTooltip="Add Owner Field">add_circle</mat-icon>&nbsp;<mat-icon style="color: red;" (click)="removeOwner4one(i, k)"
-                        matTooltip="Remove Owner Field">cancel</mat-icon></label>
-                    <div class="input-group mb-3">
-                      <div class="col-3">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>Survey No</mat-label>
-                          <input matInput type="text" formControlName="v_survey_no">
-                        </mat-form-field>
+                  <div class="row" style="margin:2px 0px 1rem 0px">
+                    <mat-label class="mb-2 sub-header">File Upload 2</mat-label>
+                    <div class="col-6">
+                      <input type="file" class="form-control  alignForms" formControlName="file2">
+                    </div>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Ref. No</mat-label>
+                      <input matInput type="text" formControlName="v_ref_no">
+                    </mat-form-field>
+                  </div>
+                  <div class="row col-7">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Total Extent</mat-label>
+                      <input matInput type="text" formControlName="v_total_extent">
+                    </mat-form-field>
+                  </div>
+                  <div formArrayName="repeatedFields">
+                    <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
+                      Fields
+                    </label>
+                    <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field name</mat-label>
+                            <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field Value</mat-label>
+                            <input matInput type="text" formControlName="field2" placeholder="Ex. India">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'4(1)')"
+                            matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'4(1)')"
+                            matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
                       </div>
-                      <div class="col-3">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>Extent</mat-label>
-                          <input matInput type="text" formControlName="v_extent">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>Name of the Owner</mat-label>
-                          <input matInput type="text" formControlName="v_name_of_owner">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>East Boundaries</mat-label>
-                          <input matInput type="text" formControlName="v_east">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>West Boundaries</mat-label>
-                          <input matInput type="text" formControlName="v_west">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>North Boundaries</mat-label>
-                          <input matInput type="text" formControlName="v_north">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>South Boundaries</mat-label>
-                          <input matInput type="text" formControlName="v_south">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-3">
-                        <div>
-                          <input type="file" class="col-12 form-control">
+                    </div>
+                  </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
+                    <button (click)="addRepeatedField(i,'4(1)')" mat-flat-button type="button" color="primary">Add
+                      Custom
+                      Fields</button>
+                  </div>
+                  <div formArrayName="ownerFields">
+                    <mat-label class="col-6 sub-header" *ngIf="panel.get('ownerFields').controls.length > 0">Owner
+                      Fields
+                    </mat-label>
+                    <div *ngFor="let field of panel.get('ownerFields').controls; let k = index" [formGroupName]="k"
+                      class="row mb-3">
+                      <label class="col-6 col-form-label"
+                        style="font-weight: bold;font-size:medium;position: relative;left: 17px;">Owner Fields - {{k +
+                        1}}
+                        &nbsp; <mat-icon style="color: #3FB8DE;" (click)="addOwner4one(i)"
+                          matTooltip="Add Owner Field">add_circle</mat-icon>&nbsp;<mat-icon style="color: red;"
+                          (click)="removeOwner4one(i, k)" matTooltip="Remove Owner Field">cancel</mat-icon></label>
+                      <div class="input-group mb-3">
+                        <div class="col-3">
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>Survey No</mat-label>
+                            <input matInput type="text" formControlName="v_survey_no">
+                          </mat-form-field>
                         </div>
+                        <div class="col-3">
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>Extent</mat-label>
+                            <input matInput type="text" formControlName="v_extent">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>Name of the Owner</mat-label>
+                            <input matInput type="text" formControlName="v_name_of_owner">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>East Boundaries</mat-label>
+                            <input matInput type="text" formControlName="v_east">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>West Boundaries</mat-label>
+                            <input matInput type="text" formControlName="v_west">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>North Boundaries</mat-label>
+                            <input matInput type="text" formControlName="v_north">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                          <mat-form-field class="example-full-width1">
+                            <mat-label>South Boundaries</mat-label>
+                            <input matInput type="text" formControlName="v_south">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                          <div>
+                            <input type="file" class="col-12 form-control">
+                          </div>
+                        </div>
+
                       </div>
-                    
                     </div>
                   </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('ownerFields').controls.length === 0">
+                    <button (click)="addOwner4one(i)" mat-flat-button type="button" color="primary">Add Owner
+                      Fields</button>
+                  </div>
                 </div>
-                <div class="col-6 mb-2" *ngIf="panel.get('ownerFields').controls.length === 0">
-                  <button (click)="addOwner4one(i)" mat-flat-button type="button" color="primary">Add Owner
-                    Fields</button>
-                </div>
-              </div>
-            </mat-expansion-panel>
-          </div>
-          <div class="row col-7" style="margin-top: 5px;">
-            <button (click)="addExpansionPanel4One()" type="button" class="btn ms-2"
-              style="width: auto;background-color: #3FB8DE;color: white;">Add </button>
-            <button *ngIf="expansionPanelsArray4.length > 1" (click)="removeLastRepeatedField('4(1)')" type="button"
-              class="btn ms-2" style="width: auto;background-color: red;color: white;">Remove</button>
-          </div>
-        </form>
+              </mat-expansion-panel>
+            </div>
+            <div class="row col-7" style="margin-top: 5px;">
+              <button (click)="addExpansionPanel4One()" type="button" class="btn ms-2"
+                style="width: auto;background-color: #3FB8DE;color: white;">Add </button>
+              <button *ngIf="expansionPanelsArray4.length > 1" (click)="removeLastRepeatedField('4(1)')" type="button"
+                class="btn ms-2" style="width: auto;background-color: red;color: white;">Remove</button>
+            </div>
+          </form>
         </mat-accordion>
         <div class="d-flex justify-content-end">
           <button mat-button matStepperPrevious class="border">Previous</button>
@@ -607,575 +613,577 @@
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large">Award File - {{i +
-                      1}}</label>               
-                       </mat-panel-title>
+                      1}}</label>
+                  </mat-panel-title>
                 </mat-expansion-panel-header>
 
                 <div [formGroup]="panel">
-<div class="row col-10">
-  <div class="col-6">
-    <mat-form-field class="example-full-width1">
-      <mat-label>Award Number</mat-label>
-      <input matInput type="text" formControlName="v_award_no">
-    </mat-form-field>
-  </div>
-  <div class="col-6">
-    <mat-form-field class="example-full-width1">
-      <mat-label>Date</mat-label>
-      <input matInput [matDatepicker]="awardDate" formControlName="d_award_date">
-      <mat-datepicker-toggle matIconSuffix [for]="awardDate"></mat-datepicker-toggle>
-      <mat-datepicker #awardDate color="primary"></mat-datepicker>
-    </mat-form-field>
-  </div>
-</div>
-<div class="row col-10">
-  <div class="col-6">
-    <mat-form-field class="example-full-width1">
-      <mat-label>Total Extent (in acres)</mat-label>
-      <input matInput type="text" formControlName="v_total_extent">
-    </mat-form-field>
-  </div>
-  <div class="col-6">
-    <mat-form-field class="example-full-width1">
-      <mat-label>Total Award Amount</mat-label>
-      <input matInput type="text" formControlName="n_total_award_amount">
-    </mat-form-field>
-  </div>
-</div>
-<div class="row col-10">
-  <mat-label class="mb-2 sub-header">Award File</mat-label>
-  <div class="col-7">
-    <input type="file" class="form-control alignForms" id="inputGroupFile04"
-    aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="file">
-  </div>
-</div>
-<div formArrayName="repeatedFields" style="margin: 1rem 0 2px 0;">
-  <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
-    Fields </label>
-  <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
-    <div class="displayFlex">
-      <span>
-        <mat-form-field>
-          <mat-label>Field name</mat-label>
-          <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-form-field>
-          <mat-label>Field Value</mat-label>
-          <input matInput type="text" formControlName="field2" placeholder="Ex. India">
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'Award')"
-          matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
-        <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'Award')"
-          matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
-      </span>
-    </div>
-  </div>
-</div>
-<div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
-  <button (click)="addRepeatedField(i,'Award')" mat-flat-button type="button" color="primary">Add Custom
-    Fields</button>
-</div>
-<div formArrayName="directpayFields" style="margin: 1rem 0 2px 0;">
-  <label class="col-6 sub-header" *ngIf="panel.get('directpayFields').controls.length > 0">Direct
-    payment </label>
-  <div *ngFor="let field of panel.get('directpayFields').controls; let j = index" [formGroupName]="j">
-    <div class="displayFlex">
-      <span>
-        <mat-form-field>
-          <mat-label>Amount</mat-label>
-          <input matInput type="text" formControlName="v_amount" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-form-field>
-          <mat-label>Notified Person</mat-label>
-          <input matInput type="text" formControlName="v_notified_person" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-icon style="color: #3FB8DE;" (click)="adddirectpay(i)"
-          matTooltip="Add Direct Payment">add_circle</mat-icon>&nbsp;
-        <mat-icon style="color: red;" (click)="removedirectpay(i, k)"
-          matTooltip="Remove Direct Payment">cancel</mat-icon>&nbsp;&nbsp;
-      </span>
-    </div>
-  </div>
-</div>
-<div class="col-6 mb-2" *ngIf="panel.get('directpayFields').controls.length === 0">
-  <button (click)="adddirectpay(i)" mat-flat-button type="button" color="primary">Add Direct Payment
-    </button>
-</div>
-<div formArrayName="revenuepayFields" style="margin: 1rem 0 2px 0;">
-  <label class="col-6 sub-header" *ngIf="panel.get('revenuepayFields').controls.length > 0">Revenue deposit </label>
-  <div *ngFor="let field of panel.get('revenuepayFields').controls; let k = index" [formGroupName]="k">
-    <div class="displayFlex">
-      <span>
-        <mat-form-field>
-          <mat-label>Amount</mat-label>
-          <input matInput type="text" formControlName="v_amount" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-form-field>
-          <mat-label>Notified Person</mat-label>
-          <input matInput type="text" formControlName="v_notified_person" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-icon style="color: #3FB8DE;" (click)="addrevenuepay(i)"
-          matTooltip="Add Revenue Deposit">add_circle</mat-icon>&nbsp;
-        <mat-icon style="color: red;" (click)="removerevenuepay(i, k)"
-          matTooltip="Remove Revenue Deposit">cancel</mat-icon>&nbsp;&nbsp;
-      </span>
-    </div>
-  </div>
-</div>
-<div class="col-6 mb-2" *ngIf="panel.get('revenuepayFields').controls.length === 0">
-  <button (click)="addrevenuepay(i)" mat-flat-button type="button" color="primary">Add Revenue Deposit
-    </button>
-</div>
+                  <div class="row col-10">
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Award Number</mat-label>
+                        <input matInput type="text" formControlName="v_award_no">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Date</mat-label>
+                        <input matInput [matDatepicker]="awardDate" formControlName="d_award_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="awardDate"></mat-datepicker-toggle>
+                        <mat-datepicker #awardDate color="primary"></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row col-10">
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Total Extent (in acres)</mat-label>
+                        <input matInput type="text" formControlName="v_total_extent">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Total Award Amount</mat-label>
+                        <input matInput type="text" formControlName="n_total_award_amount">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row col-10">
+                    <mat-label class="mb-2 sub-header">Award File</mat-label>
+                    <div class="col-7">
+                      <input type="file" class="form-control alignForms" id="inputGroupFile04"
+                        aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="file">
+                    </div>
+                  </div>
+                  <div formArrayName="repeatedFields" style="margin: 1rem 0 2px 0;">
+                    <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
+                      Fields </label>
+                    <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field name</mat-label>
+                            <input matInput type="text" formControlName="field1" placeholder="Ex. Country">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Field Value</mat-label>
+                            <input matInput type="text" formControlName="field2" placeholder="Ex. India">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'Award')"
+                            matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'Award')"
+                            matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
+                    <button (click)="addRepeatedField(i,'Award')" mat-flat-button type="button" color="primary">Add
+                      Custom
+                      Fields</button>
+                  </div>
+                  <div formArrayName="directpayFields" style="margin: 1rem 0 2px 0;">
+                    <label class="col-6 sub-header" *ngIf="panel.get('directpayFields').controls.length > 0">Direct
+                      payment </label>
+                    <div *ngFor="let field of panel.get('directpayFields').controls; let j = index" [formGroupName]="j">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput type="text" formControlName="v_amount">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Notified Person</mat-label>
+                            <input matInput type="text" formControlName="v_notified_person">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="adddirectpay(i)"
+                            matTooltip="Add Direct Payment">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removedirectpay(i, k)"
+                            matTooltip="Remove Direct Payment">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('directpayFields').controls.length === 0">
+                    <button (click)="adddirectpay(i)" mat-flat-button type="button" color="primary">Add Direct Payment
+                    </button>
+                  </div>
+                  <div formArrayName="revenuepayFields" style="margin: 1rem 0 2px 0;">
+                    <label class="col-6 sub-header" *ngIf="panel.get('revenuepayFields').controls.length > 0">Revenue
+                      deposit </label>
+                    <div *ngFor="let field of panel.get('revenuepayFields').controls; let k = index"
+                      [formGroupName]="k">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput type="text" formControlName="v_amount">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Notified Person</mat-label>
+                            <input matInput type="text" formControlName="v_notified_person">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addrevenuepay(i)"
+                            matTooltip="Add Revenue Deposit">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removerevenuepay(i, k)"
+                            matTooltip="Remove Revenue Deposit">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('revenuepayFields').controls.length === 0">
+                    <button (click)="addrevenuepay(i)" mat-flat-button type="button" color="primary">Add Revenue Deposit
+                    </button>
+                  </div>
 
-<div formArrayName="civilpayFields" style="margin: 1rem 0 2px 0;">
-  <label class="col-6 sub-header" *ngIf="panel.get('civilpayFields').controls.length > 0">Civil
-    Court Deposit </label>
-  <div *ngFor="let field of panel.get('civilpayFields').controls; let k = index" [formGroupName]="k">
-    <div class="displayFlex">
-      <span>
-        <mat-form-field>
-          <mat-label>Amount</mat-label>
-          <input matInput type="text" formControlName="v_amount" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-form-field>
-          <mat-label>Notified Person</mat-label>
-          <input matInput type="text" formControlName="v_notified_person" >
-        </mat-form-field>
-      </span>
-      <span>
-        <mat-icon style="color: #3FB8DE;" (click)="addcivilpay(i)"
-          matTooltip="Add Civil Deposit">add_circle</mat-icon>&nbsp;
-        <mat-icon style="color: red;" (click)="removecivilpay(i, k)"
-          matTooltip="Remove Civil Deposit">cancel</mat-icon>&nbsp;&nbsp;
-      </span>
-    </div>
-  </div>
-</div>
-<div class="col-6 mb-2" *ngIf="panel.get('civilpayFields').controls.length === 0">
-  <button (click)="addcivilpay(i)" mat-flat-button type="button" color="primary">Add Civil Deposit
-    </button>
-</div>
-<div class="row col-10" style="margin: 1rem 0 2px 0;">
-  <mat-label class="mb-3 sub-header1">Possession
-    Taken Over</mat-label>
-  <div class="col-7 mb-2">
-    <mat-form-field class="example-full-width1">
-      <mat-label>Total Extent</mat-label>
-      <input matInput type="text" formControlName="pho_v_total_extent">
-    </mat-form-field>
-  </div>
-  <div class="row col-6">
-    <div formArrayName="phoFields">
-      <label class="col-6 sub-header" *ngIf="panel.get('phoFields').controls.length > 0">Survey & Extend
-        Field </label>
-      <div *ngFor="let field of panel.get('phoFields').controls; let k = index" [formGroupName]="k">
-        <div class="displayFlex">
-          <span>
-            <mat-form-field>
-              <mat-label>Survey No</mat-label>
-              <input matInput type="text" formControlName="v_survey_no">
-            </mat-form-field>
-          </span>
-          <span>
-            <mat-form-field>
-              <mat-label>Extent</mat-label>
-              <input matInput type="text" formControlName="v_total_extent">
-            </mat-form-field>
-          </span>
-          <span>
-            <mat-icon style="color: #3FB8DE;" (click)="addpho(i)"
-              matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
-            <mat-icon style="color: red;" (click)="removepho(i, k)"
-              matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
-          </span>
-        </div>
-      </div>
-      <div class="col-6 mb-2" *ngIf="panel.get('phoFields').controls.length === 0">
-        <button (click)="addpho(i)" mat-flat-button type="button" color="primary">Add Survey &
-          Extend</button>
-      </div>
-    </div>
-   
-  </div>
-  <div class="row">
-    <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
-      <label class="col-12 sub-header">Extent covered by Court :</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="court_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="court_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="court_file">
+                  <div formArrayName="civilpayFields" style="margin: 1rem 0 2px 0;">
+                    <label class="col-6 sub-header" *ngIf="panel.get('civilpayFields').controls.length > 0">Civil
+                      Court Deposit </label>
+                    <div *ngFor="let field of panel.get('civilpayFields').controls; let k = index" [formGroupName]="k">
+                      <div class="displayFlex">
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput type="text" formControlName="v_amount">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-form-field>
+                            <mat-label>Notified Person</mat-label>
+                            <input matInput type="text" formControlName="v_notified_person">
+                          </mat-form-field>
+                        </span>
+                        <span>
+                          <mat-icon style="color: #3FB8DE;" (click)="addcivilpay(i)"
+                            matTooltip="Add Civil Deposit">add_circle</mat-icon>&nbsp;
+                          <mat-icon style="color: red;" (click)="removecivilpay(i, k)"
+                            matTooltip="Remove Civil Deposit">cancel</mat-icon>&nbsp;&nbsp;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-2" *ngIf="panel.get('civilpayFields').controls.length === 0">
+                    <button (click)="addcivilpay(i)" mat-flat-button type="button" color="primary">Add Civil Deposit
+                    </button>
+                  </div>
+                  <div class="row col-10" style="margin: 1rem 0 2px 0;">
+                    <mat-label class="mb-3 sub-header1">Possession
+                      Taken Over</mat-label>
+                    <div class="col-7 mb-2">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Total Extent</mat-label>
+                        <input matInput type="text" formControlName="pho_v_total_extent">
+                      </mat-form-field>
+                    </div>
+                    <div class="row col-6">
+                      <div formArrayName="phoFields">
+                        <label class="col-6 sub-header" *ngIf="panel.get('phoFields').controls.length > 0">Survey &
+                          Extend
+                          Field </label>
+                        <div *ngFor="let field of panel.get('phoFields').controls; let k = index" [formGroupName]="k">
+                          <div class="displayFlex">
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Survey No</mat-label>
+                                <input matInput type="text" formControlName="v_survey_no">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Extent</mat-label>
+                                <input matInput type="text" formControlName="v_total_extent">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-icon style="color: #3FB8DE;" (click)="addpho(i)"
+                                matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                              <mat-icon style="color: red;" (click)="removepho(i, k)"
+                                matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-6 mb-2" *ngIf="panel.get('phoFields').controls.length === 0">
+                          <button (click)="addpho(i)" mat-flat-button type="button" color="primary">Add Survey &
+                            Extend</button>
+                        </div>
+                      </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under want of approach road :</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="road_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="road_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="road_file">
+                    </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
+                        <label class="col-12 sub-header">Extent covered by Court :</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="court_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="court_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="court_file">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under encroachment:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="enchro_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="enchro_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="enchro_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under want of approach road :</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="road_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="road_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="road_file">
 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under scattered:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="scatt_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="scatt_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="scatt_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under encroachment:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="enchro_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="enchro_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="enchro_file">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under quashed:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="quash_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="quash_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="quash_file">
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under scattered:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="scatt_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="scatt_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="scatt_file">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under reconveyed:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="recon_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="recon_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="recon_file">
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under quashed:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="quash_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="quash_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="quash_file">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under NOC
-        issued:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="noc_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="noc_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="noc_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Available for Scheme Implementation:</label>
-        </div>
-        <div class="col-6">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Total Extent</mat-label>
-            <input matInput type="text" formControlName="phoschme_v_total_extent">
-          </mat-form-field>
-        </div>
-       
-        </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under reconveyed:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="recon_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="recon_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="recon_file">
 
-        <div class="row col-6">
-          <div formArrayName="phoschemeFields">
-            <label class="col-6 sub-header" *ngIf="panel.get('phoschemeFields').controls.length > 0">Survey & Extend
-              Field </label>
-            <div *ngFor="let field of panel.get('phoschemeFields').controls; let k = index" [formGroupName]="k">
-              <div class="displayFlex">
-                <span>
-                  <mat-form-field>
-                    <mat-label>Survey No</mat-label>
-                    <input matInput type="text" formControlName="v_survey_no">
-                  </mat-form-field>
-                </span>
-                <span>
-                  <mat-form-field>
-                    <mat-label>Extent</mat-label>
-                    <input matInput type="text" formControlName="v_total_extent">
-                  </mat-form-field>
-                </span>
-                <span>
-                  <mat-icon style="color: #3FB8DE;" (click)="addphoscheme(i)"
-                    matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
-                  <mat-icon style="color: red;" (click)="removephoscheme(i, k)"
-                    matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
-                </span>
-              </div>
-            </div>
-            <div class="col-6 mb-2" *ngIf="panel.get('phoschemeFields').controls.length === 0">
-              <button (click)="addphoscheme(i)" mat-flat-button type="button" color="primary">Add Survey &
-                Extend</button>
-            </div>
-          </div>
-         
-        </div>
-</div>
-<div class="row col-10" style="margin: 1rem 0 2px 0;">
-  <mat-label class="mb-3 sub-header1">Possession
-    Not Handed Over</mat-label>
- 
-  <div class="row">
-    <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
-      <label class="col-12 sub-header">Extent covered by Court case:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="court_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="court_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="court_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under NOC
+                          issued:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="noc_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="noc_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="noc_file">
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
- 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under encroachment:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="enchro_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="enchro_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="enchro_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Available for Scheme Implementation:</label>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field class="example-full-width1">
+                          <mat-label>Total Extent</mat-label>
+                          <input matInput type="text" formControlName="phoschme_v_total_extent">
+                        </mat-form-field>
+                      </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                    </div>
 
- 
+                    <div class="row col-6">
+                      <div formArrayName="phoschemeFields">
+                        <label class="col-6 sub-header" *ngIf="panel.get('phoschemeFields').controls.length > 0">Survey
+                          & Extend
+                          Field </label>
+                        <div *ngFor="let field of panel.get('phoschemeFields').controls; let k = index"
+                          [formGroupName]="k">
+                          <div class="displayFlex">
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Survey No</mat-label>
+                                <input matInput type="text" formControlName="v_survey_no">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Extent</mat-label>
+                                <input matInput type="text" formControlName="v_total_extent">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-icon style="color: #3FB8DE;" (click)="addphoscheme(i)"
+                                matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                              <mat-icon style="color: red;" (click)="removephoscheme(i, k)"
+                                matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-6 mb-2" *ngIf="panel.get('phoschemeFields').controls.length === 0">
+                          <button (click)="addphoscheme(i)" mat-flat-button type="button" color="primary">Add Survey &
+                            Extend</button>
+                        </div>
+                      </div>
 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered under quashed:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="quash_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="quash_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="quash_file">
+                    </div>
+                  </div>
+                  <div class="row col-10" style="margin: 1rem 0 2px 0;">
+                    <mat-label class="mb-3 sub-header1">Possession
+                      Not Handed Over</mat-label>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                    <div class="row">
+                      <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
+                        <label class="col-12 sub-header">Extent covered by Court case:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="court_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="court_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="court_file">
 
-  <div class="row">
-    <div class=" col-12 mb-2" >
-      <label class="col-12 sub-header">Extent covered without Encumbrance:</label>
-      <div class="row col-12 px-0">
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Extent (in acres)</mat-label>
-            <input matInput type="text" formControlName="recon_v_extent">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <mat-form-field class="example-full-width1">
-            <mat-label>Legal Proceeding
-              Status</mat-label>
-            <input matInput type="text" formControlName="recon_v_legal_proceeding">
-          </mat-form-field>
-        </div>
-        <div class="col-4">
-          <div >
-            <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
-            <input type="file" class="col-12 form-control" formControlName="recon_file">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- 
-</div>
 
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under encroachment:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="enchro_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="enchro_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="enchro_file">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered under quashed:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="quash_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="quash_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="quash_file">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class=" col-12 mb-2">
+                        <label class="col-12 sub-header">Extent covered without Encumbrance:</label>
+                        <div class="row col-12 px-0">
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Extent (in acres)</mat-label>
+                              <input matInput type="text" formControlName="recon_v_extent">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <mat-form-field class="example-full-width1">
+                              <mat-label>Legal Proceeding
+                                Status</mat-label>
+                              <input matInput type="text" formControlName="recon_v_legal_proceeding">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-4">
+                            <div>
+                              <!-- <input type="file" class="form-control" formControlName="court_file" /> -->
+                              <input type="file" class="col-12 form-control" formControlName="recon_file">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-
               </mat-expansion-panel>
             </div>
             <div class="row col-7" style="margin-top: 5px;">
@@ -1189,171 +1197,121 @@
         <div class="d-flex justify-content-end">
           <button mat-button matStepperPrevious class="border">Previous</button>
           <button mat-button matStepperNext style="background-color: #3FB8DE;color: white;" class="ms-2">Next</button>
-
-
         </div>
       </mat-step>
 
-      <mat-step [stepControl]="awardInfoFormGroup">
-        <mat-accordion>
-          <mat-expansion-panel [expanded]="isPanel1Expanded" (opened)="togglePanel1()" (closed)="togglePanel1()">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="fw-bold">Left over Between LPS and 4(1)</mat-panel-title>
-            </mat-expansion-panel-header>
+      <mat-step [stepControl]="panelOneForm">
+        <ng-template matStepLabel>Left over</ng-template>
+        <div class="m-3">
+          <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between LPS and
+                  4(1)</label>
+                  <mat-panel-description>
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form [formGroup]="panelOneForm">
+                <div formArrayName="lpsand4oneleft">
+                  <div *ngFor="let item of panelOneItems.controls; let i = index" [formGroupName]="i">
+                    <div class="displayFlex">
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Survey No</mat-label>
+                          <input matInput type="text" formControlName="v_survey_no">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Extent</mat-label>
+                          <input matInput type="text" formControlName="v_total_extent">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-icon style="color: #3FB8DE;" (click)="addFields(panelOneItems)"
+                          matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                        <mat-icon style="color: red;" *ngIf="i !== 0" (click)="removeFieldss(panelOneItems, i)"
+                          matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                      </span>
+                    </div>
+                  </div>
 
-            <form [formGroup]="awardInfoFormGroup">
-              <ng-template matStepLabel>Left over</ng-template>
-              <div class="row mb-3">
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Survey No:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
                 </div>
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <button (click)="addLeftForm1()" class="btn position-absolute bottom-0 end-0"
-                    style="width: 3rem;background-color: #3FB8DE;color: white;"><i
-                      class="bi bi-plus-circle"></i></button>
-                </div>
-              </div>
-            </form>
-
-            <form [formGroup]="awardInfoFormGroup" *ngFor="let leftForm1 of leftForms1; let i = index">
-              <div class="row mb-3">
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <div class="row d-flex justify-content-between">
-                    <button class=" col-5 btn" style="width: 3rem;background-color: #3FB8DE;color: white;">Save</button>
-                    <button (click)="removeLeftForm1(i)" class="btn"
-                      style="width: 3rem;background-color: red;color: white;"><i class="bi bi-x-circle"></i></button>
-                  </div>
-                </div>
-              </div>
-            </form>
+              </form>
             </mat-expansion-panel>
-          <mat-expansion-panel [expanded]="isPanel2Expanded" (opened)="togglePanel2()" (closed)="togglePanel2()">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="fw-bold">Left over Between 4(1) and 6DD</mat-panel-title>
-            </mat-expansion-panel-header>
+            <br>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between 4(1)
+                  and 6DD</label>
+              </mat-expansion-panel-header>
+              <form [formGroup]="panelTwoForm">
+                <div formArrayName="fouroneand6ddleft">
+                  <div *ngFor="let item of panelTwoItems.controls; let i = index" [formGroupName]="i">
+                    <div class="displayFlex">
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Survey No</mat-label>
+                          <input matInput type="text" formControlName="v_survey_no">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Extent</mat-label>
+                          <input matInput type="text" formControlName="v_total_extent">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-icon style="color: #3FB8DE;" (click)="addFields(panelTwoItems)"
+                          matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                        <mat-icon style="color: red;" *ngIf="i !== 0" (click)="removeFieldss(panelTwoItems, i)"
+                          matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                      </span>
+                    </div>
+                  </div>
 
-            <form [formGroup]="awardInfoFormGroup">
-              <div class="row mb-3">
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Survey No:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
+                </div>
+              </form>
+            </mat-expansion-panel>
+            <br>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between 6DD and
+                  Award</label>
+              </mat-expansion-panel-header>
+              <form [formGroup]="panelThreeForm">
+                <div formArrayName="sixdandawardleft">
+                  <div *ngFor="let item of panelThreeItems.controls; let i = index" [formGroupName]="i">
+                    <div class="displayFlex">
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Survey No</mat-label>
+                          <input matInput type="text" formControlName="v_survey_no">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-form-field>
+                          <mat-label>Extent</mat-label>
+                          <input matInput type="text" formControlName="v_total_extent">
+                        </mat-form-field>
+                      </span>
+                      <span>
+                        <mat-icon style="color: #3FB8DE;" (click)="addFields(panelThreeItems)"
+                          matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                        <mat-icon style="color: red;" *ngIf="i !== 0" (click)="removeFieldss(panelThreeItems, i)"
+                          matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <button (click)="addLeftForm2()" class="btn position-absolute bottom-0 end-0"
-                    style="width: 3rem;background-color: #3FB8DE;color: white;"><i
-                      class="bi bi-plus-circle"></i></button>
-                </div>
-              </div>
-            </form>
 
-            <form [formGroup]="awardInfoFormGroup" *ngFor="let leftForm2 of leftForms2; let i = index">
-              <div class="row mb-3">
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
                 </div>
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <div class="row d-flex justify-content-between">
-                    <button class=" col-5 btn" style="width: 3rem;background-color: #3FB8DE;color: white;">Save</button>
-                    <button (click)="removeLeftForm2(i)" class="btn"
-                      style="width: 3rem;background-color: red;color: white;"><i class="bi bi-x-circle"></i></button>
-                  </div>
-                </div>
-              </div>
-            </form>
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
 
-          </mat-expansion-panel>
 
-          <mat-expansion-panel [expanded]="isPanel3Expanded" (opened)="togglePanel3()" (closed)="togglePanel3()">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="fw-bold">Left over Between 6DD and Award</mat-panel-title>
-            </mat-expansion-panel-header>
 
-            <form [formGroup]="awardInfoFormGroup">
-              <div class="row mb-3">
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Survey No:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-5">
-                  <label class="col-sm-9 col-form-label" style="font-weight: bold">Extent:<span
-                      style="color: red;">*</span></label>
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <button (click)="addLeftForm3()" class="btn position-absolute bottom-0 end-0"
-                    style="width: 3rem;background-color: #3FB8DE;color: white;"><i
-                      class="bi bi-plus-circle"></i></button>
-                </div>
-              </div>
-            </form>
-
-            <form [formGroup]="awardInfoFormGroup" *ngFor="let leftForm3 of leftForms3; let i = index">
-              <div class="row mb-3">
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-5">
-                  <div class="col">
-                    <input type="text" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="col-2 position-relative">
-                  <div class="row d-flex justify-content-between">
-                    <button class=" col-5 btn" style="width: 3rem;background-color: #3FB8DE;color: white;">Save</button>
-                    <button (click)="removeLeftForm3(i)" class="btn"
-                      style="width: 3rem;background-color: red;color: white;"><i class="bi bi-x-circle"></i></button>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-          </mat-expansion-panel>
-        </mat-accordion><br>
         <div class="d-flex justify-content-end">
           <button mat-button matStepperPrevious class="border">Previous</button>
           <button mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
