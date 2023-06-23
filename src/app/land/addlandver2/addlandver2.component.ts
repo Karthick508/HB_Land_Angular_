@@ -570,7 +570,7 @@ export class Addlandver2Component {
                   "n_FILE_ID": 1,
                   "n_UNIQUE_ID": 1234,
                   "v_COLUMN_NAME": "column1",
-                  "V_VALUE_NAME": "value1",
+                  "V_VALUE_NAME": "3rd ",
                   "mode":null,
               },
               {
@@ -666,7 +666,7 @@ export class Addlandver2Component {
                     "n_FILE_ID": 1,
                     "n_UNIQUE_ID": 1234,
                     "v_COLUMN_NAME": "column2",
-                    "V_VALUE_NAME": "value2",
+                    "V_VALUE_NAME": "4th tab",
                     "mode":null,
                 }
             ],
@@ -1054,13 +1054,13 @@ export class Addlandver2Component {
           const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
           if(!repeatedFieldsFormArray.at(i)) {
             repeatedFieldsFormArray.push(new FormGroup({
-              'field1': new FormControl(''),
-              'field2': new FormControl(''),
+              'v_COLUMN_NAME': new FormControl(''),
+              'v_VALUE_NAME': new FormControl(''),
             }))
           }
           const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
-          repeatedField.controls['field1'].setValue(apiValue_dynamicValues_group_field1);
-          repeatedField.controls['field2'].setValue(apiValue_dynamicValues_group_field2);
+          repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+          repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
         }
 
         const apiValue_fourOneDynamicFileEntity = this.fourOneTabDeatils[i].fourOneDynamicFileEntityDetails;      
@@ -1136,13 +1136,13 @@ export class Addlandver2Component {
           const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
           if(!repeatedFieldsFormArray.at(i)) {
             repeatedFieldsFormArray.push(new FormGroup({
-              'field1': new FormControl(''),
-              'field2': new FormControl(''),
+              'v_COLUMN_NAME': new FormControl(''),
+              'v_VALUE_NAME': new FormControl(''),
             }))
           }
           const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
-          repeatedField.controls['field1'].setValue(apiValue_dynamicValues_group_field1);
-          repeatedField.controls['field2'].setValue(apiValue_dynamicValues_group_field2);
+          repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+          repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
         }
 
         const apiValue_sixDDynamicFileEntity = this.sixDDDeatils[i].sixDdDynamicFileEntityValuesDetails;      

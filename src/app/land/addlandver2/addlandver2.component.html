@@ -378,8 +378,8 @@
                 <div formArrayName="repeatedFields">
                   <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
                     class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
-                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field1">
-                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="field2">
+                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="v_COLUMN_NAME">
+                    <input placeholder="" type="text" class="form-control" style="width: 45%;" formControlName="v_VALUE_NAME">
                     <button (click)="removeRepeatedField(i, j,'4(1)')" class="btn-close" aria-label="Close"
                       style="background-color: red;"></button>
                   </div>
@@ -481,6 +481,8 @@
         </form>
       </mat-step>
 
+      <!--  -->
+
       <mat-step [stepControl]="sixDDFormGroup">
         <ng-template matStepLabel>6DD</ng-template>
         <mat-accordion>
@@ -576,9 +578,9 @@
                     <div *ngFor="let field of panel.get('repeatedFields').controls; let j = index" [formGroupName]="j"
                       class="row mb-3 col-7 d-flex justify-content-between align-items-center p-2">
                       <input placeholder="" type="text" class="form-control" style="width: 45%;"
-                        formControlName="field1">
+                        formControlName="v_COLUMN_NAME">
                       <input placeholder="" type="text" class="form-control" style="width: 45%;"
-                        formControlName="field2">
+                        formControlName="v_VALUE_NAME">
                       <button (click)="removeRepeatedField(i, j,'6DD')" class="btn-close" aria-label="Close"
                         style="background-color: red;"></button>
                     </div>
