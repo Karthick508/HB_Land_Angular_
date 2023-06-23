@@ -164,6 +164,7 @@ export interface DynamicValuesDetail4 {
   n_FILE_ID: number
   n_UNIQUE_ID: number
   v_COLUMN_NAME: string
+  V_VALUE_NAME: string;
 }
 
 export interface AwardDirectPaymentEntityValuesDetail {
@@ -289,13 +290,14 @@ export class Addlandver2Component {
   lpsTabDetails : LpsTabDetail[];
   fourOneTabDeatils : FourOneTabDeatil[]
   sixDDDeatils : SixDdTabDeatil[]
+  awardDeatils : AwardTabDeatil[]
 
   allLandData: Root;
   n_UNIQUE_ID: number;
   firstTabMode = 'create' || 'edit' || 'delete';
   secondTabMode = 'create' || 'edit' || 'delete';
 
-  constructor(private builder: FormBuilder, private formBuilder: FormBuilder, 
+  constructor(private builder: FormBuilder, private formBuilder: FormBuilder,
     private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService) { }
   isLinear = true;
 
@@ -308,7 +310,7 @@ export class Addlandver2Component {
     const secondFormArray = (this.LPSFormGroup.value);
     console.log("expansionPanels second tab",secondFormArray);
 
-    
+
     if (this.firstTabMode === 'create') {
       firstTabApiPost.mode = 'create';
       firstTabApiPost.n_UNIQUE_ID = null;
@@ -325,7 +327,7 @@ export class Addlandver2Component {
 
       const fileName = secondtab.v_FILE_NAME[0].filelps;
 
-      // customFields 
+      // customFields
      const customFields : any[] = secondtab.repeatedFields
       const modifiedCustomValues = customFields.map((custom)=>{
         custom.v_COLUMN_NAME = custom.field1;
@@ -370,466 +372,466 @@ export class Addlandver2Component {
     this.firstTabMode = 'edit';
     this.secondTabMode = 'create';
 
-    const rawData = {
-      "landDigitDataEntity": {
-          "n_ID": 1,
-          "v_NAME_OF_DIVISION": "rural",
-          "v_NAME_OF_DISTRICT": "city",
-          "v_NAME_OF_CIRCLE": "chennai",
-          "v_NAME_OF_GEO_TAGGING": "geo",
-          "v_NAME_OF_SCHEME": "schema",
-          "n_UNIQUE_ID": 1234,
-          "mode":null
-      },
-      "lpsTabDetails": [
-          {
-              "lpsVillageDetails": [
-                  {
-                      "n_ID": 1,
-                      "v_NAME_OF_VILLAGE": "rama",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_EXTENT": "789",
-                      "v_SURVEY_NO": "345",
-                      "mode":null,
-                  },
-                  {
-                      "n_ID": 2,
-                      "v_NAME_OF_VILLAGE": "porur",
-                      "n_FILE_ID": 2,
-                      "n_UNIQUE_ID": 4567,
-                      "v_EXTENT": "987",
-                      "v_SURVEY_NO": "666",
-                      "mode":null,
-                  }
-              ],
-              "lpsFileDynamicValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_FILE_PATH": "",
-                      "v_FILE_NAME": "",
-                      "mode":null
-                  }
-              ],
-              "dynamicValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1",
-                      "V_VALUE_NAME": "value1",
-                      "mode":null
-                  },
-                  {
-                      "n_ID": 2,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2",
-                      "V_VALUE_NAME": "value2",
-                      "mode":null
-                  }
-              ],
-              "n_ID": 1,
-              "n_UNIQUE_ID": 1234,
-              "v_TOTAL_EXTENT": "789",
-              "v_FILE_PATH": "c:/desktop",
-              "v_FILE_NAME": "lps_1_file",
-              "v_REF_NO": "344",
-              "mode":null
-          },
-          {
-            "lpsVillageDetails": [
-                {
-                    "n_ID": 1,
-                    "v_NAME_OF_VILLAGE": "rama",
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_EXTENT": "789",
-                    "v_SURVEY_NO": "345",
-                    "mode":null,
-                },
-                {
-                    "n_ID": 2,
-                    "v_NAME_OF_VILLAGE": "porur",
-                    "n_FILE_ID": 2,
-                    "n_UNIQUE_ID": 4567,
-                    "v_EXTENT": "987",
-                    "v_SURVEY_NO": "666",
-                    "mode":null,
-                }
-            ],
-            "lpsFileDynamicValuesDetails": [
-                {
-                    "n_ID": 1,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_FILE_PATH": "",
-                    "v_FILE_NAME": "",
-                    "mode":null
-                }
-            ],
-            "dynamicValuesDetails": [
-                {
-                    "n_ID": 1,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_COLUMN_NAME": "column1",
-                    "V_VALUE_NAME": "value1",
-                    "mode":null
-                },
-                {
-                    "n_ID": 2,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_COLUMN_NAME": "column2",
-                    "V_VALUE_NAME": "value2",
-                    "mode":null
-                }
-            ],
-            "n_ID": 1,
-            "n_UNIQUE_ID": 1234,
-            "v_TOTAL_EXTENT": "789",
-            "v_FILE_PATH": "c:/desktop",
-            "v_FILE_NAME": "lps_1_file",
-            "v_REF_NO": "999",
-            "mode":null
-        },
-      ],
-      "fourOneTabDeatils": [
-          {
-              "fourOneDynamicFileEntityDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_FILE_PATH": "",
-                      "v_FILE_NAME": "1",
-                      "v_SURVEY_NO": "GF23456",
-                      "v_SOUTH": "78901",
-                      "v_WEST": "78902",
-                      "v_NAME_OF_OWNER": "RF-09876",
-                      "v_NORTH": "78903",
-                      "v_EAST": "78904",
-                      "v_EXTENT_NO": "1234",
-                  }
-              ],
-              "dynamicValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1",
-                      "V_VALUE_NAME": "value1",
-                      "mode":null,
-                  },
-                  {
-                      "n_ID": 2,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2",
-                      "V_VALUE_NAME": "value2",
-                      "mode":null,
-                  }
-              ],
-              "n_ID": 1,
-              "d_DATE_OF_4_ONE_GO": "16/06/2021",
-              "v_FILE_1_FILENAME": "",
-              "v_FILE_1_FILEPATH": "",
-              "d_DATE_OF_LOCALITY": "16/06/2022",
-              "v_FILE_2_FILEPATH": "",
-              "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
-              "v_FILE_2_FILENAME": "",
-              "v_4_ONE_GO_REF_NO": "RF-908",
-              "v_GAZETTE_REF_NO": "GF23456",
-              "n_UNIQUE_ID": 1234,
-              "v_TOTAL_EXTENT": "78900",
-              "v_REF_NO": "RF-09876"
-          },
-          {
-            "fourOneDynamicFileEntityDetails": [
-                {
-                  "n_ID": 1,
-                  "n_FILE_ID": 1,
-                  "n_UNIQUE_ID": 1234,
-                  "v_FILE_PATH": "",
-                  "v_FILE_NAME": "1",
-                  "v_SURVEY_NO": "GF23456",
-                  "v_SOUTH": "88901",
-                  "v_WEST": "88902",
-                  "v_NAME_OF_OWNER": "RF-09876",
-                  "v_NORTH": "88903",
-                  "v_EAST": "88904",
-                  "v_EXTENT_NO": "1234",
-              }
-            ],
-            "dynamicValuesDetails": [
-              {
-                  "n_ID": 1,
-                  "n_FILE_ID": 1,
-                  "n_UNIQUE_ID": 1234,
-                  "v_COLUMN_NAME": "column1",
-                  "V_VALUE_NAME": "3rd ",
-                  "mode":null,
-              },
-              {
-                  "n_ID": 2,
-                  "n_FILE_ID": 1,
-                  "n_UNIQUE_ID": 1234,
-                  "v_COLUMN_NAME": "column2",
-                  "V_VALUE_NAME": "value2",
-                  "mode":null,
-              }
-            ],
-            "n_ID": 1,
-            "d_DATE_OF_4_ONE_GO": "16/06/2021",
-            "v_FILE_1_FILENAME": "",
-            "v_FILE_1_FILEPATH": "",
-            "d_DATE_OF_LOCALITY": "16/06/2022",
-            "v_FILE_2_FILEPATH": "",
-            "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
-            "v_FILE_2_FILENAME": "",
-            "v_4_ONE_GO_REF_NO": "RF-908",
-            "v_GAZETTE_REF_NO": "GF23456",
-            "n_UNIQUE_ID": 1234,
-            "v_TOTAL_EXTENT": "78900",
-            "v_REF_NO": "RF-09876"
-        },
-      ],
-      "sixDdTabDeatils": [
-          {
-              "sixDdDynamicFileEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_EXTENT": null,
-                      "v_SURVEY_NO": "GF23456",
-                      "v_NAME_OF_OWNER": ""
-                  }
-              ],
-              "dynamicValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1",
-                      "V_VALUE_NAME": "value1",
-                      "mode":null,
-                  },
-                  {
-                      "n_ID": 2,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2",
-                      "V_VALUE_NAME": "value2",
-                      "mode":null,
-                  }
-              ],
-              "n_ID": 1,
-              "v_FILE_1_FILENAME": "",
-              "v_FILE_1_FILEPATH": "",
-              "d_DATE_OF_LOCALITY": "16/06/2022",
-              "v_FILE_2_FILEPATH": "",
-              "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
-              "v_FILE_2_FILENAME": "",
-              "v_GAZETTE_REF_NO": "GF23456",
-              "d_DATE_OF_6DD_GO": "16/06/2021",
-              "n_UNIQUE_ID": 1234,
-              "v_TOTAL_EXTENT": "78900",
-              "v_REF_NO": "RF-09876",
-              "v_6DD_GO_REF_NO": "RF-908"
-          },
-          {
-            "sixDdDynamicFileEntityValuesDetails": [
-                {
-                    "n_ID": 1,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_EXTENT": '1234',
-                    "v_SURVEY_NO": "GF23456",
-                    "v_NAME_OF_OWNER": ""
-                }
-            ],
-            "dynamicValuesDetails": [
-                {
-                    "n_ID": 1,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_COLUMN_NAME": "column1",
-                    "V_VALUE_NAME": "value1",
-                    "mode":null,
-                },
-                {
-                    "n_ID": 2,
-                    "n_FILE_ID": 1,
-                    "n_UNIQUE_ID": 1234,
-                    "v_COLUMN_NAME": "column2",
-                    "V_VALUE_NAME": "4th tab",
-                    "mode":null,
-                }
-            ],
-            "n_ID": 1,
-            "v_FILE_1_FILENAME": "",
-            "v_FILE_1_FILEPATH": "",
-            "d_DATE_OF_LOCALITY": "16/06/2022",
-            "v_FILE_2_FILEPATH": "",
-            "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
-            "v_FILE_2_FILENAME": "",
-            "v_GAZETTE_REF_NO": "GF23456",
-            "d_DATE_OF_6DD_GO": "16/06/2021",
-            "n_UNIQUE_ID": 1234,
-            "v_TOTAL_EXTENT": "78900",
-            "v_REF_NO": "RF-09876",
-            "v_6DD_GO_REF_NO": "RF-908"
-        }
-      ],
-      "awardTabDeatils": [
-          {
-              "awardOtherFileEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "v_LEGAL_PROCEEDING": "yes",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_FILE_PATH": "",
-                      "v_FILE_NAME": "",
-                      "v_EXTENT": "1"
-                  }
-              ],
-              "dynamicValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column1"
-                  },
-                  {
-                      "n_ID": 2,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_COLUMN_NAME": "column2"
-                  }
-              ],
-              "awardDirectPaymentEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "v_NOTIFIED_PERSON": "Yaz",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  },
-                  {
-                      "n_ID": 2,
-                      "v_NOTIFIED_PERSON": "gokul",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  }
-              ],
-              "awardRevenuePaymentEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "v_NOTIFIED_PERSON": "Yaz",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  },
-                  {
-                      "n_ID": 2,
-                      "v_NOTIFIED_PERSON": "gokul",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  }
-              ],
-              "awardCourtDepositPaymentEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "v_NOTIFIED_PERSON": "Yaz",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  },
-                  {
-                      "n_ID": 2,
-                      "v_NOTIFIED_PERSON": "gokul",
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_AMOUNT": 1000.0
-                  }
-              ],
-              "awardPossessionTakenOverEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_TOTAL_EXTENT": "KISHORE",
-                      "v_SURVEY_NO": "5678"
-                  }
-              ],
-              "awardPossessionNotTakenOverEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_TOTAL_EXTENT": "KISHORE",
-                      "v_SURVEY_NO": "5678"
-                  }
-              ],
-              "awardPossessionExtentAvailableEntityValuesDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_FILE_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_TOTAL_EXTENT": "KISHORE",
-                      "v_SURVEY_NO": "5678"
-                  }
-              ],
-              "n_ID": 1,
-              "v_PHO_SCHEME_TOTAL_EXTENT": "987",
-              "v_PHO_TOTAL_EXTENT": "123",
-              "v_PNHO_TOTAL_EXTENT": "768",
-              "n_TOTAL_AWARD_AMOUNT": 45678.0,
-              "n_UNIQUE_ID": 1234,
-              "v_TOTAL_EXTENT": "7890",
-              "v_FILE_PATH": "",
-              "v_AWARD_NO": "7890",
-              "v_FILE_NAME": "",
-              "d_AWARD_DATE": "16/06/2018"
-          }
-      ],
-      "leftoverTabDeatils": [
-          {
-              "left4One6DDEntityDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_EXTENT": "5678",
-                      "v_SURVEY_NO": "5678"
-                  }
-              ],
-              "left6DDAwardRepoEntityDetails": [
-                  {
-                      "n_ID": 1,
-                      "n_UNIQUE_ID": 1234,
-                      "v_EXTENT": "146665",
-                      "v_SURVEY_NO": "4567"
-                  }
-              ],
-              "n_ID": 1,
-              "n_UNIQUE_ID": 1234,
-              "v_EXTENT": "4567",
-              "v_SURVEY_NO": "45678"
-          }
-      ]
-  
-    }
+    // const rawData = {
+    //   "landDigitDataEntity": {
+    //       "n_ID": 1,
+    //       "v_NAME_OF_DIVISION": "rural",
+    //       "v_NAME_OF_DISTRICT": "city",
+    //       "v_NAME_OF_CIRCLE": "chennai",
+    //       "v_NAME_OF_GEO_TAGGING": "geo",
+    //       "v_NAME_OF_SCHEME": "schema",
+    //       "n_UNIQUE_ID": 1234,
+    //       "mode":null
+    //   },
+    //   "lpsTabDetails": [
+    //       {
+    //           "lpsVillageDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "v_NAME_OF_VILLAGE": "rama",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_EXTENT": "789",
+    //                   "v_SURVEY_NO": "345",
+    //                   "mode":null,
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "v_NAME_OF_VILLAGE": "porur",
+    //                   "n_FILE_ID": 2,
+    //                   "n_UNIQUE_ID": 4567,
+    //                   "v_EXTENT": "987",
+    //                   "v_SURVEY_NO": "666",
+    //                   "mode":null,
+    //               }
+    //           ],
+    //           "lpsFileDynamicValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_FILE_PATH": "",
+    //                   "v_FILE_NAME": "",
+    //                   "mode":null
+    //               }
+    //           ],
+    //           "dynamicValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column1",
+    //                   "V_VALUE_NAME": "value1",
+    //                   "mode":null
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column2",
+    //                   "V_VALUE_NAME": "value2",
+    //                   "mode":null
+    //               }
+    //           ],
+    //           "n_ID": 1,
+    //           "n_UNIQUE_ID": 1234,
+    //           "v_TOTAL_EXTENT": "789",
+    //           "v_FILE_PATH": "c:/desktop",
+    //           "v_FILE_NAME": "lps_1_file",
+    //           "v_REF_NO": "344",
+    //           "mode":null
+    //       },
+    //       {
+    //         "lpsVillageDetails": [
+    //             {
+    //                 "n_ID": 1,
+    //                 "v_NAME_OF_VILLAGE": "rama",
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_EXTENT": "789",
+    //                 "v_SURVEY_NO": "345",
+    //                 "mode":null,
+    //             },
+    //             {
+    //                 "n_ID": 2,
+    //                 "v_NAME_OF_VILLAGE": "porur",
+    //                 "n_FILE_ID": 2,
+    //                 "n_UNIQUE_ID": 4567,
+    //                 "v_EXTENT": "987",
+    //                 "v_SURVEY_NO": "666",
+    //                 "mode":null,
+    //             }
+    //         ],
+    //         "lpsFileDynamicValuesDetails": [
+    //             {
+    //                 "n_ID": 1,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_FILE_PATH": "",
+    //                 "v_FILE_NAME": "",
+    //                 "mode":null
+    //             }
+    //         ],
+    //         "dynamicValuesDetails": [
+    //             {
+    //                 "n_ID": 1,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_COLUMN_NAME": "column1",
+    //                 "V_VALUE_NAME": "value1",
+    //                 "mode":null
+    //             },
+    //             {
+    //                 "n_ID": 2,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_COLUMN_NAME": "column2",
+    //                 "V_VALUE_NAME": "value2",
+    //                 "mode":null
+    //             }
+    //         ],
+    //         "n_ID": 1,
+    //         "n_UNIQUE_ID": 1234,
+    //         "v_TOTAL_EXTENT": "789",
+    //         "v_FILE_PATH": "c:/desktop",
+    //         "v_FILE_NAME": "lps_1_file",
+    //         "v_REF_NO": "999",
+    //         "mode":null
+    //     },
+    //   ],
+    //   "fourOneTabDeatils": [
+    //       {
+    //           "fourOneDynamicFileEntityDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_FILE_PATH": "",
+    //                   "v_FILE_NAME": "1",
+    //                   "v_SURVEY_NO": "GF23456",
+    //                   "v_SOUTH": "78901",
+    //                   "v_WEST": "78902",
+    //                   "v_NAME_OF_OWNER": "RF-09876",
+    //                   "v_NORTH": "78903",
+    //                   "v_EAST": "78904",
+    //                   "v_EXTENT_NO": "1234",
+    //               }
+    //           ],
+    //           "dynamicValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column1",
+    //                   "V_VALUE_NAME": "value1",
+    //                   "mode":null,
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column2",
+    //                   "V_VALUE_NAME": "value2",
+    //                   "mode":null,
+    //               }
+    //           ],
+    //           "n_ID": 1,
+    //           "d_DATE_OF_4_ONE_GO": "16/06/2021",
+    //           "v_FILE_1_FILENAME": "",
+    //           "v_FILE_1_FILEPATH": "",
+    //           "d_DATE_OF_LOCALITY": "16/06/2022",
+    //           "v_FILE_2_FILEPATH": "",
+    //           "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+    //           "v_FILE_2_FILENAME": "",
+    //           "v_4_ONE_GO_REF_NO": "RF-908",
+    //           "v_GAZETTE_REF_NO": "GF23456",
+    //           "n_UNIQUE_ID": 1234,
+    //           "v_TOTAL_EXTENT": "78900",
+    //           "v_REF_NO": "RF-09876"
+    //       },
+    //       {
+    //         "fourOneDynamicFileEntityDetails": [
+    //             {
+    //               "n_ID": 1,
+    //               "n_FILE_ID": 1,
+    //               "n_UNIQUE_ID": 1234,
+    //               "v_FILE_PATH": "",
+    //               "v_FILE_NAME": "1",
+    //               "v_SURVEY_NO": "GF23456",
+    //               "v_SOUTH": "88901",
+    //               "v_WEST": "88902",
+    //               "v_NAME_OF_OWNER": "RF-09876",
+    //               "v_NORTH": "88903",
+    //               "v_EAST": "88904",
+    //               "v_EXTENT_NO": "1234",
+    //           }
+    //         ],
+    //         "dynamicValuesDetails": [
+    //           {
+    //               "n_ID": 1,
+    //               "n_FILE_ID": 1,
+    //               "n_UNIQUE_ID": 1234,
+    //               "v_COLUMN_NAME": "column1",
+    //               "V_VALUE_NAME": "3rd ",
+    //               "mode":null,
+    //           },
+    //           {
+    //               "n_ID": 2,
+    //               "n_FILE_ID": 1,
+    //               "n_UNIQUE_ID": 1234,
+    //               "v_COLUMN_NAME": "column2",
+    //               "V_VALUE_NAME": "value2",
+    //               "mode":null,
+    //           }
+    //         ],
+    //         "n_ID": 1,
+    //         "d_DATE_OF_4_ONE_GO": "16/06/2021",
+    //         "v_FILE_1_FILENAME": "",
+    //         "v_FILE_1_FILEPATH": "",
+    //         "d_DATE_OF_LOCALITY": "16/06/2022",
+    //         "v_FILE_2_FILEPATH": "",
+    //         "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+    //         "v_FILE_2_FILENAME": "",
+    //         "v_4_ONE_GO_REF_NO": "RF-908",
+    //         "v_GAZETTE_REF_NO": "GF23456",
+    //         "n_UNIQUE_ID": 1234,
+    //         "v_TOTAL_EXTENT": "78900",
+    //         "v_REF_NO": "RF-09876"
+    //     },
+    //   ],
+    //   "sixDdTabDeatils": [
+    //       {
+    //           "sixDdDynamicFileEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_EXTENT": null,
+    //                   "v_SURVEY_NO": "GF23456",
+    //                   "v_NAME_OF_OWNER": ""
+    //               }
+    //           ],
+    //           "dynamicValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column1",
+    //                   "V_VALUE_NAME": "value1",
+    //                   "mode":null,
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column2",
+    //                   "V_VALUE_NAME": "value2",
+    //                   "mode":null,
+    //               }
+    //           ],
+    //           "n_ID": 1,
+    //           "v_FILE_1_FILENAME": "",
+    //           "v_FILE_1_FILEPATH": "",
+    //           "d_DATE_OF_LOCALITY": "16/06/2022",
+    //           "v_FILE_2_FILEPATH": "",
+    //           "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+    //           "v_FILE_2_FILENAME": "",
+    //           "v_GAZETTE_REF_NO": "GF23456",
+    //           "d_DATE_OF_6DD_GO": "16/06/2021",
+    //           "n_UNIQUE_ID": 1234,
+    //           "v_TOTAL_EXTENT": "78900",
+    //           "v_REF_NO": "RF-09876",
+    //           "v_6DD_GO_REF_NO": "RF-908"
+    //       },
+    //       {
+    //         "sixDdDynamicFileEntityValuesDetails": [
+    //             {
+    //                 "n_ID": 1,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_EXTENT": '1234',
+    //                 "v_SURVEY_NO": "GF23456",
+    //                 "v_NAME_OF_OWNER": ""
+    //             }
+    //         ],
+    //         "dynamicValuesDetails": [
+    //             {
+    //                 "n_ID": 1,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_COLUMN_NAME": "column1",
+    //                 "V_VALUE_NAME": "value1",
+    //                 "mode":null,
+    //             },
+    //             {
+    //                 "n_ID": 2,
+    //                 "n_FILE_ID": 1,
+    //                 "n_UNIQUE_ID": 1234,
+    //                 "v_COLUMN_NAME": "column2",
+    //                 "V_VALUE_NAME": "4th tab",
+    //                 "mode":null,
+    //             }
+    //         ],
+    //         "n_ID": 1,
+    //         "v_FILE_1_FILENAME": "",
+    //         "v_FILE_1_FILEPATH": "",
+    //         "d_DATE_OF_LOCALITY": "16/06/2022",
+    //         "v_FILE_2_FILEPATH": "",
+    //         "d_DATE_OF_GAZETTE_NOTIFICATION": "16/06/2021",
+    //         "v_FILE_2_FILENAME": "",
+    //         "v_GAZETTE_REF_NO": "GF23456",
+    //         "d_DATE_OF_6DD_GO": "16/06/2021",
+    //         "n_UNIQUE_ID": 1234,
+    //         "v_TOTAL_EXTENT": "78900",
+    //         "v_REF_NO": "RF-09876",
+    //         "v_6DD_GO_REF_NO": "RF-908"
+    //     }
+    //   ],
+    //   "awardTabDeatils": [
+    //       {
+    //           "awardOtherFileEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "v_LEGAL_PROCEEDING": "yes",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_FILE_PATH": "",
+    //                   "v_FILE_NAME": "",
+    //                   "v_EXTENT": "1"
+    //               }
+    //           ],
+    //           "dynamicValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column1"
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_COLUMN_NAME": "column2"
+    //               }
+    //           ],
+    //           "awardDirectPaymentEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "v_NOTIFIED_PERSON": "Yaz",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "v_NOTIFIED_PERSON": "gokul",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               }
+    //           ],
+    //           "awardRevenuePaymentEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "v_NOTIFIED_PERSON": "Yaz",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "v_NOTIFIED_PERSON": "gokul",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               }
+    //           ],
+    //           "awardCourtDepositPaymentEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "v_NOTIFIED_PERSON": "Yaz",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               },
+    //               {
+    //                   "n_ID": 2,
+    //                   "v_NOTIFIED_PERSON": "gokul",
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_AMOUNT": 1000.0
+    //               }
+    //           ],
+    //           "awardPossessionTakenOverEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_TOTAL_EXTENT": "KISHORE",
+    //                   "v_SURVEY_NO": "5678"
+    //               }
+    //           ],
+    //           "awardPossessionNotTakenOverEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_TOTAL_EXTENT": "KISHORE",
+    //                   "v_SURVEY_NO": "5678"
+    //               }
+    //           ],
+    //           "awardPossessionExtentAvailableEntityValuesDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_FILE_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_TOTAL_EXTENT": "KISHORE",
+    //                   "v_SURVEY_NO": "5678"
+    //               }
+    //           ],
+    //           "n_ID": 1,
+    //           "v_PHO_SCHEME_TOTAL_EXTENT": "987",
+    //           "v_PHO_TOTAL_EXTENT": "123",
+    //           "v_PNHO_TOTAL_EXTENT": "768",
+    //           "n_TOTAL_AWARD_AMOUNT": 45678.0,
+    //           "n_UNIQUE_ID": 1234,
+    //           "v_TOTAL_EXTENT": "7890",
+    //           "v_FILE_PATH": "",
+    //           "v_AWARD_NO": "7890",
+    //           "v_FILE_NAME": "",
+    //           "d_AWARD_DATE": "16/06/2018"
+    //       }
+    //   ],
+    //   "leftoverTabDeatils": [
+    //       {
+    //           "left4One6DDEntityDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_EXTENT": "5678",
+    //                   "v_SURVEY_NO": "5678"
+    //               }
+    //           ],
+    //           "left6DDAwardRepoEntityDetails": [
+    //               {
+    //                   "n_ID": 1,
+    //                   "n_UNIQUE_ID": 1234,
+    //                   "v_EXTENT": "146665",
+    //                   "v_SURVEY_NO": "4567"
+    //               }
+    //           ],
+    //           "n_ID": 1,
+    //           "n_UNIQUE_ID": 1234,
+    //           "v_EXTENT": "4567",
+    //           "v_SURVEY_NO": "45678"
+    //       }
+    //   ]
 
-    
+    // }
+const rawData =[];
+
     console.warn("rawdata",rawData);
-   
+
     this.personalInfoFormGroup = this.formBuilder.group({
       // v_name_of_circle: ['', Validators.required],
       // v_name_of_scheme: ['', Validators.required],
@@ -894,9 +896,9 @@ export class Addlandver2Component {
 
      // !!!!!! Set First Tab Values
 
-     this.landDigitDataEntity = rawData.landDigitDataEntity;
-     console.log("first tab entity",this.landDigitDataEntity);
-     this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
+    //  this.landDigitDataEntity = rawData.landDigitDataEntity;
+    //  console.log("first tab entity",this.landDigitDataEntity);
+    //  this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
 
     //  !!!!!! Set Second tab Values
       // this.lpsTabDetails = rawData.lpsTabDetails;
@@ -925,26 +927,26 @@ export class Addlandver2Component {
       //   const lpsFormGroup = (this.expansionPanelsArray.at(i) as FormGroup);
       //   console.log('lpsFormGroup', lpsFormGroup)
 
-        
+
       //   const fileNameFormArray = (lpsFormGroup.controls['v_FILE_NAME'] as FormArray);
-  
+
       //   // Second Tab - Index 0 - field0
       //   const fileNameFormGroup = fileNameFormArray.at(0) as FormGroup;
       //   console.log('fileNameFormArray_first', fileNameFormGroup)
       //   const apiValueFilelps_0 = this.lpsTabDetails[0].v_FILE_NAME;
       //   // TO-DO
       //   // fileNameFormGroup.controls['filelps'].setValue(apiValueFilelps_0)
-  
+
       //   // Second Tab - Index 0 - field1
       //   lpsFormGroup.controls['v_REF_NO'].setValue(this.lpsTabDetails[i].v_REF_NO);
-  
+
       //   // Second Tab - Index 0 - field2
       //   lpsFormGroup.controls['v_TOTAL_EXTENT'].setValue(this.lpsTabDetails[i].v_TOTAL_EXTENT);
-  
+
       //   // Second Tab - Index 0 - field3
       //   const apiValue_customField: any[] = this.lpsTabDetails[i].dynamicValuesDetails;
-        
-  
+
+
       //   const customFieldFormArray = (lpsFormGroup.controls['repeatedFields'] as FormArray);
       //   for(let i=0; i<apiValue_customField.length; i++){
       //     const apiValue_customField_group = apiValue_customField[i];
@@ -952,7 +954,7 @@ export class Addlandver2Component {
       //     const apiValue_customField_group_first2Value = apiValue_customField_group.V_VALUE_NAME;
       //     if(customFieldFormArray.at(i)) {
       //       const firstCustomFieldFormGroup = customFieldFormArray.at(i) as FormGroup;
-  
+
       //       const field1FormControl = firstCustomFieldFormGroup.get('field1') as FormControl;
       //       if(field1FormControl){
       //         field1FormControl.setValue(apiValue_customField_group_first1Value)
@@ -960,7 +962,7 @@ export class Addlandver2Component {
       //       else{
       //         firstCustomFieldFormGroup.addControl('field1', apiValue_customField_group_first1Value)
       //       }
-  
+
       //       const field2FormControl = firstCustomFieldFormGroup.get('field2') as FormControl;
       //       if(field2FormControl){
       //         field2FormControl.setValue(apiValue_customField_group_first2Value)
@@ -977,22 +979,22 @@ export class Addlandver2Component {
       //       customFieldFormArray.push(newFormGroup);
       //     }
       //   }
-  
+
       //   // Second Tab - Index 0 - field4
-      //   const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;      
-  
+      //   const apiValue_village = this.lpsTabDetails[i].lpsVillageDetails;
+
       //   const villageFieldsFormArray = (lpsFormGroup.controls['villageFields'] as FormArray);
       //   let newFormGroup = new FormGroup({
       //     'v_name_of_village': new FormControl(apiValue_village[i].v_NAME_OF_VILLAGE),
       //     'villageNoFields': new FormArray([]),
       //   })
-        
+
       //   for(let i=0; i<apiValue_village.length; i++){
       //     const apiValue_village_group = apiValue_village[i];
       //     const apiValue_village_group_surveyNo = apiValue_village_group.v_SURVEY_NO;
       //     const apiValue_village_group_extent = apiValue_village_group.v_EXTENT
       //     if(villageFieldsFormArray.at(i)) {
-  
+
       //     }
       //     else{
       //       const villageNoFields = new FormGroup({
@@ -1005,162 +1007,162 @@ export class Addlandver2Component {
       //   villageFieldsFormArray.push(newFormGroup);
 
       // })
-      
+
 
       // Third tab
-      this.fourOneTabDeatils = rawData.fourOneTabDeatils;
-      console.error("fourOneTabDeatils",this.fourOneTabDeatils);
-      this.fourOneTabDeatils.forEach((thirdDetail, i) => {
+      // this.fourOneTabDeatils = rawData.fourOneTabDeatils;
+      // console.error("fourOneTabDeatils",this.fourOneTabDeatils);
+      // this.fourOneTabDeatils.forEach((thirdDetail, i) => {
 
-        if (!this.expansionPanelsArray4.at(i)) {
-          this.expansionPanelsArray4.push(new FormGroup({
-            'v_gazette_ref_no': new FormControl(''),
-            'v_4_one_go_ref_no': new FormControl(''),
-            'd_date_of_4_one_go': new FormControl(''),
-            'd_date_of_gazette_notification': new FormControl(''),
-            'd_date_of_locality': new FormControl(''),
-            'file': new FormControl(''),
-            'file2': new FormControl(''),
-            'v_ref_no': new FormControl(''),
-            'v_total_extent': new FormControl(''),
-            'repeatedFields': new FormArray([]),
-            'ownerFields': new FormArray([]),
-          }));
-        }
+      //   if (!this.expansionPanelsArray4.at(i)) {
+      //     this.expansionPanelsArray4.push(new FormGroup({
+      //       'v_gazette_ref_no': new FormControl(''),
+      //       'v_4_one_go_ref_no': new FormControl(''),
+      //       'd_date_of_4_one_go': new FormControl(''),
+      //       'd_date_of_gazette_notification': new FormControl(''),
+      //       'd_date_of_locality': new FormControl(''),
+      //       'file': new FormControl(''),
+      //       'file2': new FormControl(''),
+      //       'v_ref_no': new FormControl(''),
+      //       'v_total_extent': new FormControl(''),
+      //       'repeatedFields': new FormArray([]),
+      //       'ownerFields': new FormArray([]),
+      //     }));
+      //   }
 
-        this.changeDetectorRef.detectChanges();
+      //   this.changeDetectorRef.detectChanges();
 
-        const fourOneFormGroup = (this.expansionPanelsArray4.at(i) as FormGroup);
-        console.log('fourOneFormGroup', fourOneFormGroup)
+      //   const fourOneFormGroup = (this.expansionPanelsArray4.at(i) as FormGroup);
+      //   console.log('fourOneFormGroup', fourOneFormGroup)
 
-        fourOneFormGroup.controls['v_gazette_ref_no'].setValue(this.fourOneTabDeatils[i].v_GAZETTE_REF_NO);
-        fourOneFormGroup.controls['v_4_one_go_ref_no'].setValue(this.fourOneTabDeatils[i].v_4_ONE_GO_REF_NO);
-        const d_DATE_OF_4_ONE_GO_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_4_ONE_GO)
-        const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
-        const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_LOCALITY)
-        fourOneFormGroup.controls['d_date_of_4_one_go'].setValue(d_DATE_OF_4_ONE_GO_format);
-        fourOneFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
-        fourOneFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
-        // fourOneFormGroup.controls['file'].setValue(this.fourOneTabDeatils[i].v_FILE_1_FILENAME);
-        // fourOneFormGroup.controls['file2'].setValue(this.fourOneTabDeatils[i].v_FILE_2_FILENAME);
-        fourOneFormGroup.controls['v_ref_no'].setValue(this.fourOneTabDeatils[i].v_REF_NO);
-        fourOneFormGroup.controls['v_total_extent'].setValue(this.fourOneTabDeatils[i].v_TOTAL_EXTENT);
+      //   fourOneFormGroup.controls['v_gazette_ref_no'].setValue(this.fourOneTabDeatils[i].v_GAZETTE_REF_NO);
+      //   fourOneFormGroup.controls['v_4_one_go_ref_no'].setValue(this.fourOneTabDeatils[i].v_4_ONE_GO_REF_NO);
+      //   const d_DATE_OF_4_ONE_GO_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_4_ONE_GO)
+      //   const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+      //   const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_LOCALITY)
+      //   fourOneFormGroup.controls['d_date_of_4_one_go'].setValue(d_DATE_OF_4_ONE_GO_format);
+      //   fourOneFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+      //   fourOneFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+      //   // fourOneFormGroup.controls['file'].setValue(this.fourOneTabDeatils[i].v_FILE_1_FILENAME);
+      //   // fourOneFormGroup.controls['file2'].setValue(this.fourOneTabDeatils[i].v_FILE_2_FILENAME);
+      //   fourOneFormGroup.controls['v_ref_no'].setValue(this.fourOneTabDeatils[i].v_REF_NO);
+      //   fourOneFormGroup.controls['v_total_extent'].setValue(this.fourOneTabDeatils[i].v_TOTAL_EXTENT);
 
-        const apiValue_dynamicValuesDetails = this.fourOneTabDeatils[i].dynamicValuesDetails;      
-        const repeatedFieldsFormArray = (fourOneFormGroup.controls['repeatedFields'] as FormArray);
-        for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
-          const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
-          const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
-          if(!repeatedFieldsFormArray.at(i)) {
-            repeatedFieldsFormArray.push(new FormGroup({
-              'v_COLUMN_NAME': new FormControl(''),
-              'v_VALUE_NAME': new FormControl(''),
-            }))
-          }
-          const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
-          repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
-          repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
-        }
+      //   const apiValue_dynamicValuesDetails = this.fourOneTabDeatils[i].dynamicValuesDetails;
+      //   const repeatedFieldsFormArray = (fourOneFormGroup.controls['repeatedFields'] as FormArray);
+      //   for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+      //     const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+      //     const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+      //     if(!repeatedFieldsFormArray.at(i)) {
+      //       repeatedFieldsFormArray.push(new FormGroup({
+      //         'v_COLUMN_NAME': new FormControl(''),
+      //         'v_VALUE_NAME': new FormControl(''),
+      //       }))
+      //     }
+      //     const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+      //     repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+      //     repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
+      //   }
 
-        const apiValue_fourOneDynamicFileEntity = this.fourOneTabDeatils[i].fourOneDynamicFileEntityDetails;      
-        const ownerFieldsFormArray = (fourOneFormGroup.controls['ownerFields'] as FormArray);
-        for(let i=0; i<apiValue_fourOneDynamicFileEntity.length; i++){
-          const apiValue_fourOneDynamicFileEntity_group = apiValue_fourOneDynamicFileEntity[i];
-          if(!ownerFieldsFormArray.at(i)) {
-            ownerFieldsFormArray.push(new FormGroup({
-              'v_survey_no': new FormControl(''),
-              'v_extent': new FormControl(''),
-              'v_name_of_owner': new FormControl(''),
-              'v_east': new FormControl(''),
-              'v_west': new FormControl(''),
-              'v_north': new FormControl(''),
-              'v_south': new FormControl(''),
-            }))
-          }
-          const ownerField = ownerFieldsFormArray.at(i) as FormGroup;
-          ownerField.controls['v_survey_no'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SURVEY_NO);
-          ownerField.controls['v_extent'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EXTENT_NO);
-          ownerField.controls['v_name_of_owner'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NAME_OF_OWNER);
-          ownerField.controls['v_east'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EAST);
-          ownerField.controls['v_west'].setValue(apiValue_fourOneDynamicFileEntity_group.v_WEST);
-          ownerField.controls['v_north'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NORTH);
-          ownerField.controls['v_south'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SOUTH);
-        }
-      })
+      //   const apiValue_fourOneDynamicFileEntity = this.fourOneTabDeatils[i].fourOneDynamicFileEntityDetails;
+      //   const ownerFieldsFormArray = (fourOneFormGroup.controls['ownerFields'] as FormArray);
+      //   for(let i=0; i<apiValue_fourOneDynamicFileEntity.length; i++){
+      //     const apiValue_fourOneDynamicFileEntity_group = apiValue_fourOneDynamicFileEntity[i];
+      //     if(!ownerFieldsFormArray.at(i)) {
+      //       ownerFieldsFormArray.push(new FormGroup({
+      //         'v_survey_no': new FormControl(''),
+      //         'v_extent': new FormControl(''),
+      //         'v_name_of_owner': new FormControl(''),
+      //         'v_east': new FormControl(''),
+      //         'v_west': new FormControl(''),
+      //         'v_north': new FormControl(''),
+      //         'v_south': new FormControl(''),
+      //       }))
+      //     }
+      //     const ownerField = ownerFieldsFormArray.at(i) as FormGroup;
+      //     ownerField.controls['v_survey_no'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SURVEY_NO);
+      //     ownerField.controls['v_extent'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EXTENT_NO);
+      //     ownerField.controls['v_name_of_owner'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NAME_OF_OWNER);
+      //     ownerField.controls['v_east'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EAST);
+      //     ownerField.controls['v_west'].setValue(apiValue_fourOneDynamicFileEntity_group.v_WEST);
+      //     ownerField.controls['v_north'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NORTH);
+      //     ownerField.controls['v_south'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SOUTH);
+      //   }
+      // })
 
 
       // Fourth tab
-      this.sixDDDeatils = rawData.sixDdTabDeatils;
-      console.error("sixDDDeatils",this.sixDDDeatils);
-      this.sixDDDeatils.forEach((fourthDetail, i) => {
-        if (!this.expansionPanelsSixDD.at(i)) {
-          this.expansionPanelsSixDD.push(new FormGroup({
-            'v_gazette_ref_no': new FormControl(''),
-            'v_6dd_go_ref_no': new FormControl(''),
-            'd_date_of_6dd_go': new FormControl(''),
-            'd_date_of_gazette_notification': new FormControl(''),
-            'd_date_of_locality': new FormControl(''),
-            'file': new FormControl(''),
-            'file2': new FormControl(''),
-            'v_ref_no': new FormControl(''),
-            'v_total_extent': new FormControl(''),
-            'repeatedFields': new FormArray([]),
-            'sixddFields': new FormArray([]),
-          }));
-        }
+      // this.sixDDDeatils = rawData.sixDdTabDeatils;
+      // console.error("sixDDDeatils",this.sixDDDeatils);
+      // this.sixDDDeatils.forEach((fourthDetail, i) => {
+      //   if (!this.expansionPanelsSixDD.at(i)) {
+      //     this.expansionPanelsSixDD.push(new FormGroup({
+      //       'v_gazette_ref_no': new FormControl(''),
+      //       'v_6dd_go_ref_no': new FormControl(''),
+      //       'd_date_of_6dd_go': new FormControl(''),
+      //       'd_date_of_gazette_notification': new FormControl(''),
+      //       'd_date_of_locality': new FormControl(''),
+      //       'file': new FormControl(''),
+      //       'file2': new FormControl(''),
+      //       'v_ref_no': new FormControl(''),
+      //       'v_total_extent': new FormControl(''),
+      //       'repeatedFields': new FormArray([]),
+      //       'sixddFields': new FormArray([]),
+      //     }));
+      //   }
 
-        this.changeDetectorRef.detectChanges();
+      //   this.changeDetectorRef.detectChanges();
 
-        const sixDDFormGroup = (this.expansionPanelsSixDD.at(i) as FormGroup);
-        console.log('sixDDFormGroup', sixDDFormGroup)
+      //   const sixDDFormGroup = (this.expansionPanelsSixDD.at(i) as FormGroup);
+      //   console.log('sixDDFormGroup', sixDDFormGroup)
 
-        sixDDFormGroup.controls['v_gazette_ref_no'].setValue(this.sixDDDeatils[i].v_GAZETTE_REF_NO);
-        sixDDFormGroup.controls['v_6dd_go_ref_no'].setValue(this.sixDDDeatils[i].v_6DD_GO_REF_NO);
-        const d_DATE_OF_6DD_GO_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_6DD_GO)
-        const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
-        const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_LOCALITY)
-        sixDDFormGroup.controls['d_date_of_6dd_go'].setValue(d_DATE_OF_6DD_GO_format);
-        sixDDFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
-        sixDDFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
-        // sixDDFormGroup.controls['file'].setValue(this.sixDDDeatils[i].v_FILE_1_FILENAME);
-        // sixDDFormGroup.controls['file2'].setValue(this.sixDDDeatils[i].v_FILE_2_FILENAME);
-        sixDDFormGroup.controls['v_ref_no'].setValue(this.sixDDDeatils[i].v_REF_NO);
-        sixDDFormGroup.controls['v_total_extent'].setValue(this.sixDDDeatils[i].v_TOTAL_EXTENT);
+      //   sixDDFormGroup.controls['v_gazette_ref_no'].setValue(this.sixDDDeatils[i].v_GAZETTE_REF_NO);
+      //   sixDDFormGroup.controls['v_6dd_go_ref_no'].setValue(this.sixDDDeatils[i].v_6DD_GO_REF_NO);
+      //   const d_DATE_OF_6DD_GO_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_6DD_GO)
+      //   const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+      //   const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_LOCALITY)
+      //   sixDDFormGroup.controls['d_date_of_6dd_go'].setValue(d_DATE_OF_6DD_GO_format);
+      //   sixDDFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+      //   sixDDFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+      //   // sixDDFormGroup.controls['file'].setValue(this.sixDDDeatils[i].v_FILE_1_FILENAME);
+      //   // sixDDFormGroup.controls['file2'].setValue(this.sixDDDeatils[i].v_FILE_2_FILENAME);
+      //   sixDDFormGroup.controls['v_ref_no'].setValue(this.sixDDDeatils[i].v_REF_NO);
+      //   sixDDFormGroup.controls['v_total_extent'].setValue(this.sixDDDeatils[i].v_TOTAL_EXTENT);
 
-        const apiValue_dynamicValuesDetails = this.sixDDDeatils[i].dynamicValuesDetails;      
-        const repeatedFieldsFormArray = (sixDDFormGroup.controls['repeatedFields'] as FormArray);
-        for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
-          const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
-          const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
-          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
-          if(!repeatedFieldsFormArray.at(i)) {
-            repeatedFieldsFormArray.push(new FormGroup({
-              'v_COLUMN_NAME': new FormControl(''),
-              'v_VALUE_NAME': new FormControl(''),
-            }))
-          }
-          const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
-          repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
-          repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
-        }
+      //   const apiValue_dynamicValuesDetails = this.sixDDDeatils[i].dynamicValuesDetails;
+      //   const repeatedFieldsFormArray = (sixDDFormGroup.controls['repeatedFields'] as FormArray);
+      //   for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+      //     const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+      //     const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+      //     const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+      //     if(!repeatedFieldsFormArray.at(i)) {
+      //       repeatedFieldsFormArray.push(new FormGroup({
+      //         'v_COLUMN_NAME': new FormControl(''),
+      //         'v_VALUE_NAME': new FormControl(''),
+      //       }))
+      //     }
+      //     const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+      //     repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+      //     repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
+      //   }
 
-        const apiValue_sixDDynamicFileEntity = this.sixDDDeatils[i].sixDdDynamicFileEntityValuesDetails;      
-        const sixddFieldsFormArray = (sixDDFormGroup.controls['sixddFields'] as FormArray);
-        for(let i=0; i<apiValue_sixDDynamicFileEntity.length; i++){
-          const apiValue_sixDDynamicFileEntity_group = apiValue_sixDDynamicFileEntity[i];
-          if(!sixddFieldsFormArray.at(i)) {
-            sixddFieldsFormArray.push(new FormGroup({
-              'v_survey_no': new FormControl(''),
-              'v_extent': new FormControl(''),
-            }))
-          }
-          const sixddField = sixddFieldsFormArray.at(i) as FormGroup;
-          sixddField.controls['v_survey_no'].setValue(apiValue_sixDDynamicFileEntity_group.v_SURVEY_NO);
-          sixddField.controls['v_extent'].setValue(apiValue_sixDDynamicFileEntity_group.v_EXTENT);
-        }
+      //   const apiValue_sixDDynamicFileEntity = this.sixDDDeatils[i].sixDdDynamicFileEntityValuesDetails;
+      //   const sixddFieldsFormArray = (sixDDFormGroup.controls['sixddFields'] as FormArray);
+      //   for(let i=0; i<apiValue_sixDDynamicFileEntity.length; i++){
+      //     const apiValue_sixDDynamicFileEntity_group = apiValue_sixDDynamicFileEntity[i];
+      //     if(!sixddFieldsFormArray.at(i)) {
+      //       sixddFieldsFormArray.push(new FormGroup({
+      //         'v_survey_no': new FormControl(''),
+      //         'v_extent': new FormControl(''),
+      //       }))
+      //     }
+      //     const sixddField = sixddFieldsFormArray.at(i) as FormGroup;
+      //     sixddField.controls['v_survey_no'].setValue(apiValue_sixDDynamicFileEntity_group.v_SURVEY_NO);
+      //     sixddField.controls['v_extent'].setValue(apiValue_sixDDynamicFileEntity_group.v_EXTENT);
+      //   }
 
-      });
+      // });
 
   }
 
@@ -1168,29 +1170,29 @@ export class Addlandver2Component {
     console.warn("First-Tab",this.personalInfoFormGroup.value);
    // if FormGroupValueChanges mode = 'edit'
    }
- 
+
    checkSecondTab(){
- 
+
    }
 
    callApi() {
 
     const apiBodyMain = {
-      "id": Number(1234)
+      "id": Number(5678)
     }
     this.commonService.apiPostCall(apiBodyMain, 'getAllLandDigitDatas').subscribe((mainApiData) => {
       console.log("MainData", mainApiData);
       this.allLandData = mainApiData.data;
       console.warn("this.allLandData", this.allLandData)
       if (this.allLandData) {
-        // api data 
+        // api data
         this.landDigitDataEntity = mainApiData.data.landDigitDataEntity;
         console.log("Api First Tab Data", this.landDigitDataEntity);
         this.n_UNIQUE_ID = this.landDigitDataEntity.n_UNIQUE_ID;
         this.personalInfoFormGroup.patchValue(this.landDigitDataEntity);
 
 
-        // lps data 
+        // lps data
         this.lpsTabDetails = mainApiData.data.lpsTabDetails;
         console.error("secondTab Api data",mainApiData.data.lpsTabDetails)
         // Second Tab - Index 0
@@ -1298,10 +1300,424 @@ export class Addlandver2Component {
       }
       villageFieldsFormArray.push(newFormGroup);
 
+
     })
+
+
+
+    // 4(1) data
+    this.fourOneTabDeatils = mainApiData.data.fourOneTabDeatils;
+    console.error("fourthTab Api data",mainApiData.data.fourOneTabDeatils)
+    // Second Tab - Index 0
+
+      this.fourOneTabDeatils.forEach((thirdDetail, i) => {
+
+        if (!this.expansionPanelsArray4.at(i)) {
+          this.expansionPanelsArray4.push(new FormGroup({
+            'v_gazette_ref_no': new FormControl(''),
+            'v_4_one_go_ref_no': new FormControl(''),
+            'd_date_of_4_one_go': new FormControl(''),
+            'd_date_of_gazette_notification': new FormControl(''),
+            'd_date_of_locality': new FormControl(''),
+            'file': new FormControl(''),
+            'file2': new FormControl(''),
+            'v_ref_no': new FormControl(''),
+            'v_total_extent': new FormControl(''),
+            'repeatedFields': new FormArray([]),
+            'ownerFields': new FormArray([]),
+          }));
+        }
+
+        this.changeDetectorRef.detectChanges();
+
+        const fourOneFormGroup = (this.expansionPanelsArray4.at(i) as FormGroup);
+        console.log('fourOneFormGroup', fourOneFormGroup)
+
+        fourOneFormGroup.controls['v_gazette_ref_no'].setValue(this.fourOneTabDeatils[i].v_GAZETTE_REF_NO);
+        fourOneFormGroup.controls['v_4_one_go_ref_no'].setValue(this.fourOneTabDeatils[i].v_4_ONE_GO_REF_NO);
+        const d_DATE_OF_4_ONE_GO_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_4_ONE_GO)
+        const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+        const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.fourOneTabDeatils[i].d_DATE_OF_LOCALITY)
+        fourOneFormGroup.controls['d_date_of_4_one_go'].setValue(d_DATE_OF_4_ONE_GO_format);
+        fourOneFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+        fourOneFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+        // fourOneFormGroup.controls['file'].setValue(this.fourOneTabDeatils[i].v_FILE_1_FILENAME);
+        // fourOneFormGroup.controls['file2'].setValue(this.fourOneTabDeatils[i].v_FILE_2_FILENAME);
+        fourOneFormGroup.controls['v_ref_no'].setValue(this.fourOneTabDeatils[i].v_REF_NO);
+        fourOneFormGroup.controls['v_total_extent'].setValue(this.fourOneTabDeatils[i].v_TOTAL_EXTENT);
+
+        const apiValue_dynamicValuesDetails = this.fourOneTabDeatils[i].dynamicValuesDetails;
+        const repeatedFieldsFormArray = (fourOneFormGroup.controls['repeatedFields'] as FormArray);
+        for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+          const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+          const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+          const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+          if(!repeatedFieldsFormArray.at(i)) {
+            repeatedFieldsFormArray.push(new FormGroup({
+              'v_COLUMN_NAME': new FormControl(''),
+              'v_VALUE_NAME': new FormControl(''),
+            }))
+          }
+          const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+          repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+          repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
+        }
+
+        const apiValue_fourOneDynamicFileEntity = this.fourOneTabDeatils[i].fourOneDynamicFileEntityDetails;
+        const ownerFieldsFormArray = (fourOneFormGroup.controls['ownerFields'] as FormArray);
+        for(let i=0; i<apiValue_fourOneDynamicFileEntity.length; i++){
+          const apiValue_fourOneDynamicFileEntity_group = apiValue_fourOneDynamicFileEntity[i];
+          if(!ownerFieldsFormArray.at(i)) {
+            ownerFieldsFormArray.push(new FormGroup({
+              'v_survey_no': new FormControl(''),
+              'v_extent': new FormControl(''),
+              'v_name_of_owner': new FormControl(''),
+              'v_east': new FormControl(''),
+              'v_west': new FormControl(''),
+              'v_north': new FormControl(''),
+              'v_south': new FormControl(''),
+            }))
+          }
+          const ownerField = ownerFieldsFormArray.at(i) as FormGroup;
+          ownerField.controls['v_survey_no'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SURVEY_NO);
+          ownerField.controls['v_extent'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EXTENT_NO);
+          ownerField.controls['v_name_of_owner'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NAME_OF_OWNER);
+          ownerField.controls['v_east'].setValue(apiValue_fourOneDynamicFileEntity_group.v_EAST);
+          ownerField.controls['v_west'].setValue(apiValue_fourOneDynamicFileEntity_group.v_WEST);
+          ownerField.controls['v_north'].setValue(apiValue_fourOneDynamicFileEntity_group.v_NORTH);
+          ownerField.controls['v_south'].setValue(apiValue_fourOneDynamicFileEntity_group.v_SOUTH);
+        }
+      })
+
+
+        // Fourth tab
+        this.sixDDDeatils = mainApiData.data.sixDdTabDeatils;
+        console.error("sixDDDeatils",mainApiData.data.sixDdTabDeatils);
+        this.sixDDDeatils.forEach((fourthDetail, i) => {
+          if (!this.expansionPanelsSixDD.at(i)) {
+            this.expansionPanelsSixDD.push(new FormGroup({
+              'v_gazette_ref_no': new FormControl(''),
+              'v_6dd_go_ref_no': new FormControl(''),
+              'd_date_of_6dd_go': new FormControl(''),
+              'd_date_of_gazette_notification': new FormControl(''),
+              'd_date_of_locality': new FormControl(''),
+              'file': new FormControl(''),
+              'file2': new FormControl(''),
+              'v_ref_no': new FormControl(''),
+              'v_total_extent': new FormControl(''),
+              'repeatedFields': new FormArray([]),
+              'sixddFields': new FormArray([]),
+            }));
+          }
+
+          this.changeDetectorRef.detectChanges();
+
+          const sixDDFormGroup = (this.expansionPanelsSixDD.at(i) as FormGroup);
+          console.log('sixDDFormGroup', sixDDFormGroup)
+
+          sixDDFormGroup.controls['v_gazette_ref_no'].setValue(this.sixDDDeatils[i].v_GAZETTE_REF_NO);
+          sixDDFormGroup.controls['v_6dd_go_ref_no'].setValue(this.sixDDDeatils[i].v_6DD_GO_REF_NO);
+          const d_DATE_OF_6DD_GO_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_6DD_GO)
+          const d_DATE_OF_GAZETTE_NOTIFICATION_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_GAZETTE_NOTIFICATION)
+          const d_DATE_OF_LOCALITY_format = this.getFormattedStringForDateInput(this.sixDDDeatils[i].d_DATE_OF_LOCALITY)
+          sixDDFormGroup.controls['d_date_of_6dd_go'].setValue(d_DATE_OF_6DD_GO_format);
+          sixDDFormGroup.controls['d_date_of_gazette_notification'].setValue(d_DATE_OF_GAZETTE_NOTIFICATION_format);
+          sixDDFormGroup.controls['d_date_of_locality'].setValue(d_DATE_OF_LOCALITY_format);
+          // sixDDFormGroup.controls['file'].setValue(this.sixDDDeatils[i].v_FILE_1_FILENAME);
+          // sixDDFormGroup.controls['file2'].setValue(this.sixDDDeatils[i].v_FILE_2_FILENAME);
+          sixDDFormGroup.controls['v_ref_no'].setValue(this.sixDDDeatils[i].v_REF_NO);
+          sixDDFormGroup.controls['v_total_extent'].setValue(this.sixDDDeatils[i].v_TOTAL_EXTENT);
+
+          const apiValue_dynamicValuesDetails = this.sixDDDeatils[i].dynamicValuesDetails;
+          const repeatedFieldsFormArray = (sixDDFormGroup.controls['repeatedFields'] as FormArray);
+          for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+            const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+            const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+            const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+            if(!repeatedFieldsFormArray.at(i)) {
+              repeatedFieldsFormArray.push(new FormGroup({
+                'v_COLUMN_NAME': new FormControl(''),
+                'v_VALUE_NAME': new FormControl(''),
+              }))
+            }
+            const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+            repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+            repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
+          }
+
+          const apiValue_sixDDynamicFileEntity = this.sixDDDeatils[i].sixDdDynamicFileEntityValuesDetails;
+          const sixddFieldsFormArray = (sixDDFormGroup.controls['sixddFields'] as FormArray);
+          for(let i=0; i<apiValue_sixDDynamicFileEntity.length; i++){
+            const apiValue_sixDDynamicFileEntity_group = apiValue_sixDDynamicFileEntity[i];
+            if(!sixddFieldsFormArray.at(i)) {
+              sixddFieldsFormArray.push(new FormGroup({
+                'v_survey_no': new FormControl(''),
+                'v_extent': new FormControl(''),
+              }))
+            }
+            const sixddField = sixddFieldsFormArray.at(i) as FormGroup;
+            sixddField.controls['v_survey_no'].setValue(apiValue_sixDDynamicFileEntity_group.v_SURVEY_NO);
+            sixddField.controls['v_extent'].setValue(apiValue_sixDDynamicFileEntity_group.v_EXTENT);
+          }
+
+        })
+
+
+
+            // Sixth tab
+            this.awardDeatils = mainApiData.data.awardTabDeatils;
+            console.error("awardDeatils",mainApiData.data.awardTabDeatils);
+
+            this.awardDeatils.forEach((awardDetail, i) => {
+              if (!this.expansionPanelsAward.at(i)) {
+                this.expansionPanelsAward.push(new FormGroup({
+                  'v_award_no': new FormControl(''),
+                  'd_award_date': new FormControl(''),
+                  'v_total_extent': new FormControl(''),
+                  'n_total_award_amount': new FormControl(''),
+                  'pho_v_total_extent': new FormControl(''),
+                  'pnho_v_total_extent': new FormControl(''),
+                  'phoschme_v_total_extent': new FormControl(''),
+                  'court_v_extent': new FormControl(''),
+                  'court_v_legal_proceeding': new FormControl(''),
+                  'road_v_extent': new FormControl(''),
+                  'road_v_legal_proceeding': new FormControl(''),
+                  'enchro_v_extent': new FormControl(''),
+                  'enchro_v_legal_proceeding': new FormControl(''),
+                  'scatt_v_extent': new FormControl(''),
+                  'scatt_v_legal_proceeding': new FormControl(''),
+                  'quash_v_extent': new FormControl(''),
+                  'quash_v_legal_proceeding': new FormControl(''),
+                  'recon_v_extent': new FormControl(''),
+                  'recon_v_legal_proceeding': new FormControl(''),
+                  'noc_v_extent': new FormControl(''),
+                  'noc_v_legal_proceeding': new FormControl(''),
+                  'pnho_court_v_extent': new FormControl(''),
+                  'pnho_court_v_legal_proceeding': new FormControl(''),
+                  'pnho_enchro_v_extent': new FormControl(''),
+                  'pnho_enchro_v_legal_proceeding': new FormControl(''),
+                  'pnho_quash_v_extent': new FormControl(''),
+                  'pnho_quash_v_legal_proceeding': new FormControl(''),
+                  'pnho_encumbr_v_extent': new FormControl(''),
+                  'pnho_encumbr_v_legal_proceeding': new FormControl(''),
+                  'repeatedFields': new FormArray([]),
+                  'directpayFields': new FormArray([]),
+                  'revenuepayFields': new FormArray([]),
+                  'civilpayFields': new FormArray([]),
+                  'phoFields': new FormArray([]),
+                  'phoschemeFields': new FormArray([]),
+                  'pnhoFields': new FormArray([]),
+
+                }));
+              }
+
+              this.changeDetectorRef.detectChanges();
+
+              const awardFormGroup = (this.expansionPanelsAward.at(i) as FormGroup);
+              console.log('awardFormGroup', awardFormGroup)
+
+              awardFormGroup.controls['v_award_no'].setValue(this.awardDeatils[i].v_AWARD_NO);
+              awardFormGroup.controls['v_total_extent'].setValue(this.awardDeatils[i].v_TOTAL_EXTENT);
+              const d_d_award_date_format = this.getFormattedStringForDateInput(this.awardDeatils[i].d_AWARD_DATE)
+              awardFormGroup.controls['d_award_date'].setValue(d_d_award_date_format);
+              // sixDDFormGroup.controls['file'].setValue(this.sixDDDeatils[i].v_FILE_1_FILENAME);
+              awardFormGroup.controls['n_total_award_amount'].setValue(this.awardDeatils[i].n_TOTAL_AWARD_AMOUNT);
+              awardFormGroup.controls['v_total_extent'].setValue(this.awardDeatils[i].v_TOTAL_EXTENT);
+
+              const apiValue_dynamicValuesDetails = this.awardDeatils[i].dynamicValuesDetails;
+              const repeatedFieldsFormArray = (awardFormGroup.controls['repeatedFields'] as FormArray);
+              for(let i=0; i<apiValue_dynamicValuesDetails.length; i++){
+                const apiValue_dynamicValues_group = apiValue_dynamicValuesDetails[i];
+                const apiValue_dynamicValues_group_field1 = apiValue_dynamicValues_group.v_COLUMN_NAME;
+                const apiValue_dynamicValues_group_field2 = apiValue_dynamicValues_group.V_VALUE_NAME;
+                if(!repeatedFieldsFormArray.at(i)) {
+                  repeatedFieldsFormArray.push(new FormGroup({
+                    'v_COLUMN_NAME': new FormControl(''),
+                    'v_VALUE_NAME': new FormControl(''),
+                  }))
+                }
+                const repeatedField = repeatedFieldsFormArray.at(i) as FormGroup;
+                repeatedField.controls['v_COLUMN_NAME'].setValue(apiValue_dynamicValues_group_field1);
+                repeatedField.controls['v_VALUE_NAME'].setValue(apiValue_dynamicValues_group_field2);
+              }
+
+
+
+             const apiValue_directpayFields = this.awardDeatils[i].awardDirectPaymentEntityValuesDetails;
+              const awardFieldsDirectFormArray = (awardFormGroup.controls['directpayFields'] as FormArray);
+              for(let i=0; i<apiValue_directpayFields.length; i++){
+                const apiValue_awardDirect_group = apiValue_directpayFields[i];
+                if(!awardFieldsDirectFormArray.at(i)) {
+                  awardFieldsDirectFormArray.push(new FormGroup({
+                    'v_amount': new FormControl(''),
+                    'v_notified_person': new FormControl(''),
+                  }))
+                }
+                const awarddirectpayField = awardFieldsDirectFormArray.at(i) as FormGroup;
+                awarddirectpayField.controls['v_amount'].setValue(apiValue_awardDirect_group.v_AMOUNT);
+                awarddirectpayField.controls['v_notified_person'].setValue(apiValue_awardDirect_group.v_NOTIFIED_PERSON);
+              }
+
+              const apiValue_revenuepayFields = this.awardDeatils[i].awardRevenuePaymentEntityValuesDetails;
+              const awardFieldsRevenueFormArray = (awardFormGroup.controls['revenuepayFields'] as FormArray);
+              for(let i=0; i<apiValue_revenuepayFields.length; i++){
+                const apiValue_awardRevenue_group = apiValue_revenuepayFields[i];
+                if(!awardFieldsRevenueFormArray.at(i)) {
+                  awardFieldsRevenueFormArray.push(new FormGroup({
+                    'v_amount': new FormControl(''),
+                    'v_notified_person': new FormControl(''),
+                  }))
+                }
+                const awardrevenuepayField = awardFieldsRevenueFormArray.at(i) as FormGroup;
+                awardrevenuepayField.controls['v_amount'].setValue(apiValue_awardRevenue_group.v_AMOUNT);
+                awardrevenuepayField.controls['v_notified_person'].setValue(apiValue_awardRevenue_group.v_NOTIFIED_PERSON);
+              }
+
+              const apiValue_courtpayFields = this.awardDeatils[i].awardCourtDepositPaymentEntityValuesDetails;
+              const awardFieldsCourtFormArray = (awardFormGroup.controls['civilpayFields'] as FormArray);
+              for(let i=0; i<apiValue_courtpayFields.length; i++){
+                const apiValue_awardCourt_group = apiValue_courtpayFields[i];
+                if(!awardFieldsCourtFormArray.at(i)) {
+                  awardFieldsCourtFormArray.push(new FormGroup({
+                    'v_amount': new FormControl(''),
+                    'v_notified_person': new FormControl(''),
+                  }))
+                }
+                const awardcourtpayField = awardFieldsCourtFormArray.at(i) as FormGroup;
+                awardcourtpayField.controls['v_amount'].setValue(apiValue_awardCourt_group.v_AMOUNT);
+                awardcourtpayField.controls['v_notified_person'].setValue(apiValue_awardCourt_group.v_NOTIFIED_PERSON);
+              }
+
+              awardFormGroup.controls['pho_v_total_extent'].setValue(this.awardDeatils[i].v_PHO_TOTAL_EXTENT);
+              awardFormGroup.controls['pnho_v_total_extent'].setValue(this.awardDeatils[i].v_PNHO_TOTAL_EXTENT);
+              awardFormGroup.controls['phoschme_v_total_extent'].setValue(this.awardDeatils[i].v_PHO_SCHEME_TOTAL_EXTENT);
+
+
+
+              const apiValue_dynamicphoFields = this.awardDeatils[i].awardPossessionTakenOverEntityValuesDetails;
+              const awardFieldsdynamicphoFormArray = (awardFormGroup.controls['phoFields'] as FormArray);
+              for(let i=0; i<apiValue_dynamicphoFields.length; i++){
+                const apiValue_awarddynamicpho_group = apiValue_dynamicphoFields[i];
+                if(!awardFieldsdynamicphoFormArray.at(i)) {
+                  awardFieldsdynamicphoFormArray.push(new FormGroup({
+                    'v_survey_no': new FormControl(''),
+                    'v_total_extent': new FormControl(''),
+                  }))
+                }
+                const awarddynamicphoField = awardFieldsdynamicphoFormArray.at(i) as FormGroup;
+                awarddynamicphoField.controls['v_survey_no'].setValue(apiValue_awarddynamicpho_group.v_SURVEY_NO);
+                awarddynamicphoField.controls['v_total_extent'].setValue(apiValue_awarddynamicpho_group.v_TOTAL_EXTENT);
+              }
+
+
+              const apiValue_dynamicpnhoFields = this.awardDeatils[i].awardPossessionNotTakenOverEntityValuesDetails;
+              const awardFieldsdynamicpnhoFormArray = (awardFormGroup.controls['pnhoFields'] as FormArray);
+              for(let i=0; i<apiValue_dynamicpnhoFields.length; i++){
+                const apiValue_awarddynamicpnho_group = apiValue_dynamicpnhoFields[i];
+                if(!awardFieldsdynamicpnhoFormArray.at(i)) {
+                  awardFieldsdynamicpnhoFormArray.push(new FormGroup({
+                    'v_survey_no': new FormControl(''),
+                    'v_total_extent': new FormControl(''),
+                  }))
+                }
+                const awarddynamicpnhoField = awardFieldsdynamicpnhoFormArray.at(i) as FormGroup;
+                awarddynamicpnhoField.controls['v_survey_no'].setValue(apiValue_awarddynamicpnho_group.v_SURVEY_NO);
+                awarddynamicpnhoField.controls['v_total_extent'].setValue(apiValue_awarddynamicpnho_group.v_TOTAL_EXTENT);
+              }
+
+
+              const apiValue_dynamicphoschemeFields = this.awardDeatils[i].awardPossessionExtentAvailableEntityValuesDetails;
+              const awardFieldsdynamicphoschemeFormArray = (awardFormGroup.controls['phoschemeFields'] as FormArray);
+              for(let i=0; i<apiValue_dynamicphoschemeFields.length; i++){
+                const apiValue_awarddynamicphoscheme_group = apiValue_dynamicphoschemeFields[i];
+                if(!awardFieldsdynamicphoschemeFormArray.at(i)) {
+                  awardFieldsdynamicphoschemeFormArray.push(new FormGroup({
+                    'v_survey_no': new FormControl(''),
+                    'v_total_extent': new FormControl(''),
+                  }))
+                }
+                const awarddynamicphoschemeField = awardFieldsdynamicphoschemeFormArray.at(i) as FormGroup;
+                awarddynamicphoschemeField.controls['v_survey_no'].setValue(apiValue_awarddynamicphoscheme_group.v_SURVEY_NO);
+                awarddynamicphoschemeField.controls['v_total_extent'].setValue(apiValue_awarddynamicphoscheme_group.v_TOTAL_EXTENT);
+              }
+
+              const apiValue_awardOtherFiles = this.awardDeatils[i].awardOtherFileEntityValuesDetails;
+              console.log(apiValue_awardOtherFiles)
+
+
+
+              for (let i = 0; i < apiValue_awardOtherFiles.length; i++) {
+                var filename = apiValue_awardOtherFiles[i].v_FILE_NAME;
+
+                const extent = apiValue_awardOtherFiles[i].v_EXTENT;
+                 const legalProceeding = apiValue_awardOtherFiles[i].v_LEGAL_PROCEEDING;
+
+                switch (filename) {
+                  case 'award_pho_courtcase_file':
+                    awardFormGroup.controls['court_v_extent'].setValue(extent);
+                    awardFormGroup.controls['court_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_road_file':
+                    awardFormGroup.controls['road_v_extent'].setValue(extent);
+                    awardFormGroup.controls['road_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_enchro_file':
+                    awardFormGroup.controls['enchro_v_extent'].setValue(extent);
+                    awardFormGroup.controls['enchro_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_scatt_file':
+                    awardFormGroup.controls['scatt_v_extent'].setValue(extent);
+                    awardFormGroup.controls['scatt_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_quash_file':
+                    awardFormGroup.controls['quash_v_extent'].setValue(extent);
+                    awardFormGroup.controls['quash_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_recon_file':
+                    awardFormGroup.controls['recon_v_extent'].setValue(extent);
+                    awardFormGroup.controls['recon_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pho_noc_file':
+                    awardFormGroup.controls['noc_v_extent'].setValue(extent);
+                    awardFormGroup.controls['noc_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pnho_courtcase_file':
+                    awardFormGroup.controls['pnho_court_v_extent'].setValue(extent);
+                    awardFormGroup.controls['pnho_court_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pnho_enchro_file':
+                    awardFormGroup.controls['pnho_enchro_v_extent'].setValue(extent);
+                    awardFormGroup.controls['pnho_enchro_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pnho_quash_file':
+                    awardFormGroup.controls['pnho_quash_v_extent'].setValue(extent);
+                    awardFormGroup.controls['pnho_quash_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  case 'award_pnho_encumbr_file':
+                    awardFormGroup.controls['pnho_encumbr_v_extent'].setValue(extent);
+                    awardFormGroup.controls['pnho_encumbr_v_legal_proceeding'].setValue(legalProceeding);
+                    break;
+                  default:
+                    // Handle any other cases or ignore them
+                    break;
+                }
+              }
+
+            })
+
+
+
       }
     });
+
+
+
+
+
   }
+
+
+
 
   // saveApi() {
 
@@ -1310,7 +1726,7 @@ export class Addlandver2Component {
   //   const secondFormArray = (this.LPSFormGroup.value);
   //   console.log("expansionPanels second tab",secondFormArray);
 
-    
+
   //   if (this.firstTabMode === 'create') {
   //     firstTabApiPost.mode = 'create';
   //     firstTabApiPost.n_UNIQUE_ID = null;
@@ -1593,7 +2009,7 @@ export class Addlandver2Component {
     const villageField = this.formBuilder.group({
       v_name_of_village: [''],
       villageNoFields:this.formBuilder.array([this.createVillageNoField()]),
-     
+
     });
     villageFieldsArray.push(villageField);
   }
@@ -1610,19 +2026,19 @@ export class Addlandver2Component {
     const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
     const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
     const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
-  
+
     villageNoFieldsArray.push(this.createVillageNoField());
   }
-  
+
   removeVillageNoField(expansionPanelIndex: number, villageFieldIndex: number, villageNoFieldIndex: number) {
     const expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
     const villageFieldsArray = expansionPanel.get('villageFields') as FormArray;
     const villageField = villageFieldsArray.at(villageFieldIndex) as FormGroup;
     const villageNoFieldsArray = villageField.get('villageNoFields') as FormArray;
-  
+
     villageNoFieldsArray.removeAt(villageNoFieldIndex);
   }
-  
+
 
   addOwner4one(expansionPanelIndex: number) {
     const expansionPanel = this.expansionPanelsArray4.at(expansionPanelIndex) as FormGroup;
@@ -1660,7 +2076,7 @@ export class Addlandver2Component {
     if (type === 'lps') {
       expansionPanel = this.expansionPanelsArray.at(expansionPanelIndex) as FormGroup;
       filesArray = expansionPanel.get('files') as FormArray;
-    } 
+    }
     filesArray.removeAt(repeatedFieldIndex);
 
   }
@@ -1902,7 +2318,7 @@ export class Addlandver2Component {
 
   adds: any[] = [];
 
- 
+
 
   removeSurvey(index: number) {
     this.adds.splice(index, 1);

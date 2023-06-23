@@ -6,7 +6,7 @@
 
       <!-- First Tab Rendering Done - Edit - Update Todo -->
 
-      
+
 
       <mat-step [stepControl]="personalInfoFormGroup">
         <form [formGroup]="personalInfoFormGroup">
@@ -18,9 +18,9 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the Circle:</mat-label>
                   <mat-select formControlName="v_NAME_OF_CIRCLE">
-                    <mat-option value="chennai">Chennai</mat-option>
-                    <mat-option value="trichy">Trichy</mat-option>
-                    <mat-option value="madurai">Madurai</mat-option>
+                    <mat-option value="Thanjavur">Thanjavur</mat-option>
+                    <mat-option value="Trichy">Trichy</mat-option>
+                    <mat-option value="Vellore">Vellore</mat-option>
                   </mat-select>
                   <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_CIRCLE'].errors?.required">
                     Circle is <strong>required</strong>
@@ -44,9 +44,9 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the Division:</mat-label>
                   <mat-select formControlName="v_NAME_OF_DIVISION">
-                    <mat-option value="city">Anna Nagar</mat-option>
-                    <mat-option value="rural">JJ Nagar</mat-option>
-                    <mat-option value="rural">Besant Nagar</mat-option>
+                    <mat-option value="Thanjavur">Thanjavur</mat-option>
+                    <mat-option value="Trichy">Trichy</mat-option>
+                    <mat-option value="Vellore">Vellore</mat-option>
                   </mat-select>
                   <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_DIVISION'].errors?.required">
                     Division is <strong>required</strong>
@@ -68,9 +68,9 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Name of the District:</mat-label>
                   <mat-select formControlName="v_NAME_OF_DISTRICT">
-                    <mat-option value="city">Ramapuram</mat-option>
-                    <mat-option value="rural">Porur</mat-option>
-                    <mat-option value="rural">Valasaravakkam</mat-option>
+                    <mat-option value="Thanjavur">Thanjavur</mat-option>
+                    <mat-option value="Karur">Karur</mat-option>
+                    <mat-option value="Vellore">Vellore</mat-option>
                   </mat-select>
                   <mat-error *ngIf="personalInfoFormGroup.controls['v_NAME_OF_DISTRICT'].errors?.required">
                     District is <strong>required</strong>
