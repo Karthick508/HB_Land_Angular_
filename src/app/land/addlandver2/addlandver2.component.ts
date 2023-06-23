@@ -5,6 +5,8 @@ import { MatStepper } from '@angular/material/stepper';
 import { CommonService } from 'src/app/services/common.service';
 import { SaveLandApiModel } from '../home/home.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SnackbarComponent } from 'src/app/shared-module/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 export interface Root {
@@ -305,7 +307,7 @@ export class Addlandver2Component {
   secondTabMode = 'create' || 'edit' || 'delete';
 
   constructor(private builder: FormBuilder, private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService,private activeRoute: ActivatedRoute, private router: Router) { 
+    private changeDetectorRef: ChangeDetectorRef, private commonService: CommonService,private activeRoute: ActivatedRoute, private router: Router,private snackbar: MatSnackBar) { 
       this.activeRoute.paramMap.subscribe(params => {
         this.landId = params.get('id');
         if (this.landId && this.router.url.includes('edit')) {
@@ -382,6 +384,9 @@ export class Addlandver2Component {
     // return;
     this.commonService.apiPostCall(saveApiBody, 'saveUpdateLandData').subscribe((saveResponse) => {
       console.log("Save Response", saveResponse);
+      this.snackbar.openFromComponent(SnackbarComponent, {
+        data:'Land details created successfully',
+      });
       this.back()
     });
   }
@@ -1891,7 +1896,6 @@ if(this.view){
   }}
 
   addExpansionPanelAward() {
-    if(!this.view){
 
     const expansionPanelAward = this.formBuilder.group({
       file: null,
@@ -1945,7 +1949,7 @@ if(this.view){
 
     });
     this.expansionPanelsAward.push(expansionPanelAward);
-  }
+  
   }
 
   addExpansionPanelLeft() {

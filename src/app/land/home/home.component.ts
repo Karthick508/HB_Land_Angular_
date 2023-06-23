@@ -373,7 +373,7 @@ export class HomeComponent implements OnInit {
         this.commonService.apiPostCall(delLoad, 'deleteV2LandData').subscribe(response => {
           // if (response.message.includes('Successfully')) {
             this.snackbar.openFromComponent(SnackbarComponent, {
-              data:'Land data deleted Successfully',
+              data:'Land data deleted successfully',
             });
             this.getLandCount();
           // }
