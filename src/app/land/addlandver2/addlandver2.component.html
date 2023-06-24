@@ -137,7 +137,7 @@
                       <div *ngFor="let field of panel.get('v_FILE_NAME').controls; let w = index" [formGroupName]="w"
                         class="row">
                         <div class="col-6">
-                          <input type="file" class="form-control mb-3 alignForm" id="inputGroupFile04"
+                          <input type="file" class="form-control mb-3 alignForm" id="inputGroupFile04"  #fileInput
                             formControlName="filelps" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         </div>
 
@@ -186,9 +186,9 @@
                             <input matInput type="text" formControlName="v_VALUE_NAME" placeholder="Ex. India">
                           </mat-form-field>
                         </span>
-                        <span >
+                        <span>
                           <mat-icon style="color: #3FB8DE;" (click)="addRepeatedField(i,'lps')"
-                            matTooltip="Add Custom Field" >add_circle</mat-icon>&nbsp;
+                            matTooltip="Add Custom Field">add_circle</mat-icon>&nbsp;
                           <mat-icon style="color: red;" (click)="removeRepeatedField(i, j,'lps')"
                             matTooltip="Remove Custom Field">cancel</mat-icon>&nbsp;&nbsp;
                         </span>
@@ -203,8 +203,8 @@
 
                   <!-- Add button for repeated fields -->
                   <div class="mb-2" *ngIf="panel.get('repeatedFields').controls.length === 0">
-                    <button [disabled]="view" (click)="addRepeatedField(i,'lps')" mat-flat-button type="button" class="btn ms-2"
-                      color="primary">Add Custom Fields</button>
+                    <button [disabled]="view" (click)="addRepeatedField(i,'lps')" mat-flat-button type="button"
+                      class="btn ms-2" color="primary">Add Custom Fields</button>
                   </div>
 
 
@@ -296,16 +296,17 @@
         <mat-accordion>
           <form [formGroup]="fourOneFormGroup">
             <ng-template matStepLabel>4(1)</ng-template>
-  
+
             <div formArrayName="expansionPanels4">
-              <mat-expansion-panel [expanded]="true" *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
+              <mat-expansion-panel [expanded]="true"
+                *ngFor="let panel of expansionPanelsArray4.controls; let i = index">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     <label class="col-6 col-form-label" style="font-weight: bold;font-size: x-large;">4(1) File - {{i +
                       1}}</label>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-  
+
                 <div [formGroup]="panel">
                   <div class="row col-7">
                     <mat-form-field class="example-full-width">
@@ -367,7 +368,7 @@
                       <input matInput type="text" formControlName="v_total_extent">
                     </mat-form-field>
                   </div>
-  
+
                   <!-- Add button for repeated fields -->
                   <div formArrayName="repeatedFields">
                     <label class="col-6 sub-header" *ngIf="panel.get('repeatedFields').controls.length > 0">Custom
@@ -401,8 +402,8 @@
                       Custom
                       Fields</button>
                   </div>
-  
-  
+
+
                   <div formArrayName="ownerFields">
                     <mat-label class="col-6 sub-header" *ngIf="panel.get('ownerFields').controls.length > 0">Owner
                       Fields
@@ -441,14 +442,14 @@
                           </mat-form-field>
                         </div>
                         <div class="col-3">
-  
+
                           <mat-form-field class="example-full-width1">
                             <mat-label>West Boundaries</mat-label>
                             <input matInput type="text" formControlName="v_west">
                           </mat-form-field>
                         </div>
                         <div class="col-3">
-  
+
                           <mat-form-field class="example-full-width1">
                             <mat-label>North Boundaries</mat-label>
                             <input matInput type="text" formControlName="v_north">
@@ -465,7 +466,7 @@
                             <input type="file" class="col-12 form-control">
                           </div>
                         </div>
-  
+
                       </div>
                     </div>
                   </div>
@@ -473,9 +474,9 @@
                     <button (click)="addOwner4one(i)" mat-flat-button type="button" color="primary">Add Owner
                       Fields</button>
                   </div>
-  
-  
-  
+
+
+
                 </div>
               </mat-expansion-panel>
             </div>
@@ -487,7 +488,7 @@
             </div>
           </form>
         </mat-accordion>
-        
+
         <div class="d-flex justify-content-end">
           <button mat-button matStepperPrevious class="border">Previous</button>
           <button mat-button matStepperNext style="background-color: #3FB8DE;color: white;" class="ms-2">Next</button>
@@ -1127,46 +1128,46 @@
                   <div class="row col-10" style="margin: 1rem 0 2px 0;">
                     <mat-label class="mb-3 sub-header1">Possession
                       Not Handed Over</mat-label>
-                      <div class="col-7 mb-2">
-                        <mat-form-field class="example-full-width1">
-                          <mat-label>Total Extent</mat-label>
-                          <input matInput type="text" formControlName="pnho_v_total_extent">
-                        </mat-form-field>
-                      </div>
-                      <div class="row col-6">
-                        <div formArrayName="pnhoFields">
-                          <label class="col-6 sub-header" *ngIf="panel.get('pnhoFields').controls.length > 0">Survey &
-                            Extend
-                            Field </label>
-                          <div *ngFor="let field of panel.get('pnhoFields').controls; let k = index" [formGroupName]="k">
-                            <div class="displayFlex">
-                              <span>
-                                <mat-form-field>
-                                  <mat-label>Survey No</mat-label>
-                                  <input matInput type="text" formControlName="v_survey_no">
-                                </mat-form-field>
-                              </span>
-                              <span>
-                                <mat-form-field>
-                                  <mat-label>Extent</mat-label>
-                                  <input matInput type="text" formControlName="v_total_extent">
-                                </mat-form-field>
-                              </span>
-                              <span>
-                                <mat-icon style="color: #3FB8DE;" (click)="addpnho(i)"
-                                  matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
-                                <mat-icon style="color: red;" (click)="removepnho(i, k)"
-                                  matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
-                              </span>
-                            </div>
-                          </div>
-                          <div class="col-6 mb-2" *ngIf="panel.get('phoFields').controls.length === 0">
-                            <button (click)="addpnho(i)" mat-flat-button type="button" color="primary">Add Survey &
-                              Extend</button>
+                    <div class="col-7 mb-2">
+                      <mat-form-field class="example-full-width1">
+                        <mat-label>Total Extent</mat-label>
+                        <input matInput type="text" formControlName="pnho_v_total_extent">
+                      </mat-form-field>
+                    </div>
+                    <div class="row col-6">
+                      <div formArrayName="pnhoFields">
+                        <label class="col-6 sub-header" *ngIf="panel.get('pnhoFields').controls.length > 0">Survey &
+                          Extend
+                          Field </label>
+                        <div *ngFor="let field of panel.get('pnhoFields').controls; let k = index" [formGroupName]="k">
+                          <div class="displayFlex">
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Survey No</mat-label>
+                                <input matInput type="text" formControlName="v_survey_no">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-form-field>
+                                <mat-label>Extent</mat-label>
+                                <input matInput type="text" formControlName="v_total_extent">
+                              </mat-form-field>
+                            </span>
+                            <span>
+                              <mat-icon style="color: #3FB8DE;" (click)="addpnho(i)"
+                                matTooltip="Add Survey & Extend">add_circle</mat-icon>&nbsp;
+                              <mat-icon style="color: red;" (click)="removepnho(i, k)"
+                                matTooltip="Remove Survey & Extend">cancel</mat-icon>&nbsp;&nbsp;
+                            </span>
                           </div>
                         </div>
-  
+                        <div class="col-6 mb-2" *ngIf="panel.get('phoFields').controls.length === 0">
+                          <button (click)="addpnho(i)" mat-flat-button type="button" color="primary">Add Survey &
+                            Extend</button>
+                        </div>
                       </div>
+
+                    </div>
                     <div class="row">
                       <div class=" col-12 mb-2" style="margin: 1rem 0 2px 0;">
                         <label class="col-12 sub-header">Extent covered by Court case:</label>
@@ -1282,9 +1283,9 @@
                       </div>
                     </div>
                   </div>
-                  
 
-               
+
+
                 </div>
 
 
@@ -1300,6 +1301,9 @@
         </div>
       </mat-step>
 
+
+
+      <!-- Left Over  -->
       <mat-step [stepControl]="panelOneForm">
         <ng-template matStepLabel>Left over</ng-template>
         <div class="m-3">
@@ -1309,6 +1313,11 @@
                 <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between LPS and
                   4(1)</label>
               </mat-expansion-panel-header>
+
+
+
+
+
               <form [formGroup]="panelOneForm">
                 <div formArrayName="lpsand4oneleft">
                   <div *ngFor="let item of panelOneItems.controls; let i = index" [formGroupName]="i">
@@ -1316,13 +1325,13 @@
                       <span>
                         <mat-form-field>
                           <mat-label>Survey No</mat-label>
-                          <input matInput type="text" formControlName="v_survey_no">
+                          <input matInput type="text" formControlName="v_SURVEY_NO">
                         </mat-form-field>
                       </span>
                       <span>
                         <mat-form-field>
                           <mat-label>Extent</mat-label>
-                          <input matInput type="text" formControlName="v_total_extent">
+                          <input matInput type="text" formControlName="v_EXTENT">
                         </mat-form-field>
                       </span>
                       <span>
@@ -1336,6 +1345,11 @@
 
                 </div>
               </form>
+
+
+
+
+
             </mat-expansion-panel>
             <br>
             <mat-expansion-panel>
@@ -1343,6 +1357,11 @@
                 <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between 4(1)
                   and 6DD</label>
               </mat-expansion-panel-header>
+
+
+
+
+
               <form [formGroup]="panelTwoForm">
                 <div formArrayName="fouroneand6ddleft">
                   <div *ngFor="let item of panelTwoItems.controls; let i = index" [formGroupName]="i">
@@ -1350,13 +1369,13 @@
                       <span>
                         <mat-form-field>
                           <mat-label>Survey No</mat-label>
-                          <input matInput type="text" formControlName="v_survey_no">
+                          <input matInput type="text" formControlName="v_SURVEY_NO">
                         </mat-form-field>
                       </span>
                       <span>
                         <mat-form-field>
                           <mat-label>Extent</mat-label>
-                          <input matInput type="text" formControlName="v_total_extent">
+                          <input matInput type="text" formControlName="v_EXTENT">
                         </mat-form-field>
                       </span>
                       <span>
@@ -1377,6 +1396,9 @@
                 <label class="col-6 col-form-label" style="font-weight: bold;font-size: large">Left over between 6DD and
                   Award</label>
               </mat-expansion-panel-header>
+
+
+
               <form [formGroup]="panelThreeForm">
                 <div formArrayName="sixdandawardleft">
                   <div *ngFor="let item of panelThreeItems.controls; let i = index" [formGroupName]="i">
@@ -1384,13 +1406,13 @@
                       <span>
                         <mat-form-field>
                           <mat-label>Survey No</mat-label>
-                          <input matInput type="text" formControlName="v_survey_no">
+                          <input matInput type="text" formControlName="v_SURVEY_NO">
                         </mat-form-field>
                       </span>
                       <span>
                         <mat-form-field>
                           <mat-label>Extent</mat-label>
-                          <input matInput type="text" formControlName="v_total_extent">
+                          <input matInput type="text" formControlName="v_EXTENT">
                         </mat-form-field>
                       </span>
                       <span>
@@ -1414,9 +1436,9 @@
           <button mat-button matStepperPrevious class="border">Previous</button>
           <button *ngIf="view" mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
             (click)="back()">Back</button>
-            <button *ngIf="edit" mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
+          <button *ngIf="edit" mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
             (click)="saveApi()">Update</button>
-            <button  *ngIf="!view && !edit" mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
+          <button *ngIf="!view && !edit" mat-button style="background-color: #3FB8DE;color: white;" class="ms-2"
             (click)="saveApi()">Submit</button>
         </div>
       </mat-step>
